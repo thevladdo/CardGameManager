@@ -3,7 +3,7 @@ package it.unicam.cs.pa.cardgamemanager109172.Model;
 /**
  * This interface will be extended by "Card" class which will represent a generic card
  */
-public interface Card {
+public interface CardInterface {
 
     /**
      * Method for setting the card suit

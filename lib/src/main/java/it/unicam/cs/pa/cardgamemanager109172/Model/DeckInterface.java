@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * This interface will be extended by the "Deck" class which will represent a deck of a generic game
  */
-public interface Deck {
+public interface DeckInterface {
 
     /**
      * This method randomly mix the order of the cards in the deck
@@ -16,13 +16,13 @@ public interface Deck {
      * This method adds a card to the deck
      * @param card the card that will be added to the deck
      */
-    void add(Card card);
+    void add(CardInterface card);
 
     /**
      * This method removes a card from the deck
      * @param card the card that will be removed from the deck
      */
-    void remove(Card card);
+    void remove(CardInterface card);
 
     /**
      * This method will sort the cards in the deck in ascending order based on their value
@@ -35,33 +35,38 @@ public interface Deck {
     void sortDescending();
 
     /**
+     * This method will sort the cards by suit
+     */
+    void sortBySuit();
+
+    /**
      * This method returns the card to the selected location
      * @param index location of the card
      * @return the card selected
      */
-    Card getCard(int index);
+    CardInterface getCard(int index);
 
     /**
      * This method returns the first card of the deck
      * @return the first card of the deck
      */
-    Card getFirstCard();
+    CardInterface getFirstCard();
 
     /**
      * This method returns the last card of the deck
      * @return the last card of the deck
      */
-    Card getLastCard();
+    CardInterface getLastCard();
 
     /**
      * This method changes the deck of cards
      * @param cards cards of the new deck
      */
-    void setDeck(ArrayList<Card> cards);
+    void setDeck(ArrayList<CardInterface> cards);
 
     /**
      * This method return the actual deck
      * @return the actual deck
      */
-    ArrayList<Card> getDeck();
+    ArrayList<CardInterface> getDeck();
 }
