@@ -28,4 +28,16 @@ public interface CardInterface {
      * @return the card value
      */
     int getValue();
+
+    /**
+     * Method for setting the card color
+     * @param color the color of the card
+     */
+    void setColor(String color);
+
+    /**
+     * Method for getting the card color
+     * @return the color of the card
+     */
+    String getColor();
 }
