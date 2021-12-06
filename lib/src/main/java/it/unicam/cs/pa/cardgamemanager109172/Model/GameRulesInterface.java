@@ -2,18 +2,29 @@ package it.unicam.cs.pa.cardgamemanager109172.Model;
 
 /**
  * This interface will be extended by "GameRules" class which will represent basic rules of a generic card game
- *  It contains all the behavior concerning the rules
+ * It contains all the behavior concerning the rules
+ * The constructor will create a Map with the cards as the key and null as the value assigned to each key
  */
 public interface GameRulesInterface {
 
     /**
-     * This method assigns or change a weight to each suit on a card
+     * This method assigns a weight to each card of the deck in a Map with card as key and the weight as value
+     * If the card isn't already present in the Map, add the suit as key and assign it the weight as the value
      * Example: the aces can be either the lowest card value, the highest, or both
-     * @param card the card whose suit will have assigned a weight in the deck
+     * @param card the card that will have assigned a weight in the deck
      * @param weight the weight
+     * @return the previous value associated with card, or null if there was no weight for the card
      */
-    void setSuitWeight(CardInterface card, int weight);
-    //TODO come aggiungo a Card ?
+    Integer setCardWeight(CardInterface card, int weight);
+    // use Map.put(card,weight)
+
+    /**
+     * This method shows the weight a card suit has
+     * @param card the card whose weight will show
+     * @return the weight of the card or null if the suit isn't present in the Map
+     */
+    Integer getCardWeight(CardInterface card);
+    // use Map.get(Object key)
 
     /**
      * This method set the minimum number of cards in the deck
@@ -44,7 +55,6 @@ public interface GameRulesInterface {
      * @param min the minimum number of cards
      */
     void setMinHandCount(int min);
-    //TODO come aggiungo a Hand ?
 
     /**
      * This method get the minimum number of cards a player must have in their hand
@@ -57,6 +67,18 @@ public interface GameRulesInterface {
      * @param max the maximum number of cards
      */
     void setMaxHandCount(int max);
+
+    /**
+     * This method set the number of cards in the hand of a player at the start of the game
+     * @param starter the number of starter cards
+     */
+    void setHandStarter(int starter);
+
+    /**
+     * This method get the number of cards in the hand of a player at the start of the game
+     * @return the number of starter cards
+     */
+    int getHandStarter();
 
     /**
      * This method the maximum number of cards a player must have in their hand

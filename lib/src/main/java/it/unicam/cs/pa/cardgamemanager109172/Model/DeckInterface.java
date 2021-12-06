@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 /**
  * This interface will be extended by the "Deck" class which will represent a deck of a generic game
+ * The constructor of the class that will implement this interface will have as argument an object of
+ * {@link GameRulesInterface} to manage the maximum and minimum number of cards that a deck can have
  */
 public interface DeckInterface {
 
