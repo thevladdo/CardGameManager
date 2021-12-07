@@ -16,15 +16,12 @@ public interface TableInterface {
     /**
      * This method add a card on the table
      * @param card the card that will be added
-     * @param cards location of the table where the card will be placed
      */
-    void addCard(CardInterface card, ArrayList<CardInterface> cards);
+    void addCard(CardInterface card);
 
     /**
      * This method remove a card on the table
      * @param card the card that will be removed
-     * @param cards location of the table where the card will be placed
      */
-    void removeCard(CardInterface card, ArrayList<CardInterface> cards);
-
+    void removeCard(CardInterface card);
 }

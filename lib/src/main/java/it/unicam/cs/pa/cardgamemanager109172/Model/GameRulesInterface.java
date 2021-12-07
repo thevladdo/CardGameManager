@@ -9,7 +9,7 @@ public interface GameRulesInterface {
 
     /**
      * This method assigns a weight to each card of the deck in a Map with card as key and the weight as value
-     * If the card isn't already present in the Map, add the suit as key and assign it the weight as the value
+     * If the card isn't already present in the Map, add the card as key and assign it the weight as the value
      * Example: the aces can be either the lowest card value, the highest, or both
      * @param card the card that will have assigned a weight in the deck
      * @param weight the weight
@@ -25,6 +25,28 @@ public interface GameRulesInterface {
      */
     Integer getCardWeight(CardInterface card);
     // use Map.get(Object key)
+
+    /**
+     * This method set the minimum assignable value of a card
+     * @param minValue the minimum assignable value
+     */
+    void setMinCardValue(int minValue);
+
+    /**
+     * This method get the minimum assignable value of a card
+     */
+    int getMinCardValue();
+
+    /**
+     * This method set the maximum assignable value of a card
+     * @param maxValue the maximum assignable value
+     */
+    void setMaxCardValue(int maxValue);
+
+    /**
+     * This method get the maximum assignable value of a card
+     */
+    int getMaxCardValue();
 
     /**
      * This method set the minimum number of cards in the deck
@@ -69,6 +91,12 @@ public interface GameRulesInterface {
     void setMaxHandCount(int max);
 
     /**
+     * This method the maximum number of cards a player must have in their hand
+     * @return maximum the maximum number of cards
+     */
+    int getMaxHandCount();
+
+    /**
      * This method set the number of cards in the hand of a player at the start of the game
      * @param starter the number of starter cards
      */
@@ -79,11 +107,4 @@ public interface GameRulesInterface {
      * @return the number of starter cards
      */
     int getHandStarter();
-
-    /**
-     * This method the maximum number of cards a player must have in their hand
-     * @return maximum the maximum number of cards
-     */
-    int getMaxHandCount();
-
 }
