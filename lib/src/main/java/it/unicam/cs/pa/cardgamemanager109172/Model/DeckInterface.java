@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * {@link ArrayList<CardInterface>} to avoid privacy leak.
  */
 public interface DeckInterface {
-    //TODO ArrayList<Card> will be final
+    //TODO ArrayList<Card> must be final
 
     /**
      * This method randomly mix the order of the cards in the deck

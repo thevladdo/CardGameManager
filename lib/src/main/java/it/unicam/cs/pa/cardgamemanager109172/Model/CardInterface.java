@@ -5,7 +5,7 @@ package it.unicam.cs.pa.cardgamemanager109172.Model;
  * The constructor of the class that extended this interface will create the Card with
  * the attributes "Suit","Values" and "Color" that will never change during the game.
  * The constructor of this class will have as argument an object of type {@link GameRulesInterface}
- * that will be used to know what will be the minimum and maximum value of a card.
+ * that will be used to know what will be the minimum and maximum value of a card and to set a weight.
  */
 public interface CardInterface {
 

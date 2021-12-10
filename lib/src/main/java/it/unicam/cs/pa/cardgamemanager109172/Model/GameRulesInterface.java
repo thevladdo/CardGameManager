@@ -1,11 +1,20 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
+import java.util.ArrayList;
+
 /**
- * This interface will be extended by "GameRules" class which will represent basic rules of a generic card game
- * It contains all the behavior concerning the rules
- * The constructor will create a Map with the cards as the key and null as the value assigned to each key
+ * This interface will be extended by "GameRules" class which will represent basic rules of a generic card game.
+ * It contains all the behavior concerning the rules.
+ * The constructor will create a Map with the cards as the key and null as the value assigned to each key.
  */
 public interface GameRulesInterface {
+
+    /**
+     * This method filter a deck, removing the cards not created by the game rules
+     * @param deckToFilter deck to filter
+     * @return the filtered deck
+     */
+    ArrayList<CardInterface> filterByRules(ArrayList<CardInterface> deckToFilter);
 
     /**
      * This method assigns a weight to each card of the deck in a Map with card as key and the weight as value
@@ -19,7 +28,7 @@ public interface GameRulesInterface {
     // use Map.put(card,weight)
 
     /**
-     * This method shows the weight a card suit has
+     * This method shows the weight a card suit has and will be user
      * @param card the card whose weight will show
      * @return the weight of the card or null if the suit isn't present in the Map
      */
@@ -49,6 +58,13 @@ public interface GameRulesInterface {
     int getMaxCardValue();
 
     /**
+     * This method control if a card is created according the game rules by checking the value
+     * @param card the card controlled
+     * @return true if the card is created according the game rules, false otherwise.
+     */
+    boolean isCardInLimit(CardInterface card);
+
+    /**
      * This method set the minimum number of cards in the deck
      * @param min the minimum number of cards
      */
@@ -71,6 +87,26 @@ public interface GameRulesInterface {
      * @return the maximum number of cards
      */
     int getDeckMax();
+
+    /**
+     * This method set the number of cards in the deck at the start of the game
+     * @param starter the number of starter cards
+     */
+    void setDeckStarter(int starter);
+
+    /**
+     * This method get the number of cards in the deck at the start of the game
+     * @return the number of starter cards
+     */
+    int getDeckStarter();
+
+    /**
+     * This method control if a deck is created according the game rules by checking the number of the cards,
+     * if the cards are legally created and if the number of cards are in rules limit during the game
+     * @param deck the deck controlled
+     * @return true if the deck is created according the game rules, false otherwise.
+     */
+    boolean isDeckInLimit(DeckInterface deck);
 
     /**
      * This method set the minimum number of cards a player must have in their hand
@@ -107,4 +143,12 @@ public interface GameRulesInterface {
      * @return the number of starter cards
      */
     int getHandStarter();
+
+    /**
+     * This method control if a hand is created according the game rules by checking the number of the cards
+     * and if the number of cards are in rules limit during the game
+     * @param hand the hand controlled
+     * @return true if the hand is created according the game rules, false otherwise.
+     */
+    boolean isHandInLimit(HandInterface hand);
 }
