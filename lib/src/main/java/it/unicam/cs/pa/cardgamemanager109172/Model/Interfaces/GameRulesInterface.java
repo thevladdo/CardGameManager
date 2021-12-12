@@ -1,31 +1,20 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
-
-import java.util.ArrayList;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
 
 /**
- * This interface will be extended by "GameRules" class which will represent basic rules of a generic card game.
+ * This interface will be implemented by "GameRules" class which will represent basic rules of a generic card game.
  * It contains all the behavior concerning the rules.
- * The constructor will create a Map with the cards as the key and null as the value assigned to each key.
+ * The constructor will create a Map to associate a card with a weight value.
  */
 public interface GameRulesInterface {
 
     /**
-     * This method filter a deck, removing the cards not created by the game rules
-     * @param deckToFilter deck to filter
-     * @return the filtered deck
-     */
-    ArrayList<CardInterface> filterByRules(ArrayList<CardInterface> deckToFilter);
-
-    /**
-     * This method assigns a weight to each card of the deck in a Map with card as key and the weight as value
-     * If the card isn't already present in the Map, add the card as key and assign it the weight as the value
-     * Example: the aces can be either the lowest card value, the highest, or both
+     * This method assigns a weight to each card of the deck in a Map with card as key and the weight as value.
+     * If the card isn't already present in the Map, add the card as key and assign it the weight as the value.
+     * Example: the aces can be either the lowest card value, the highest, or both.
      * @param card the card that will have assigned a weight in the deck
      * @param weight the weight
-     * @return the previous value associated with card, or null if there was no weight for the card
      */
-    Integer setCardWeight(CardInterface card, int weight);
-    // use Map.put(card,weight)
+    void setCardWeight(CardInterface card, int weight);
 
     /**
      * This method shows the weight a card suit has and will be user
@@ -33,7 +22,6 @@ public interface GameRulesInterface {
      * @return the weight of the card or null if the suit isn't present in the Map
      */
     Integer getCardWeight(CardInterface card);
-    // use Map.get(Object key)
 
     /**
      * This method set the minimum assignable value of a card

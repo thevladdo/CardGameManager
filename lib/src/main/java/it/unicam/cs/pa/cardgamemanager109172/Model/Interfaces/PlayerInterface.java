@@ -1,7 +1,7 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
 
 /**
- * This interface will be extended by "Player" class which will represent a player or a bot.
+ * This interface will be implemented by "Player" class which will represent a player or a bot.
  * The constructor of the class that will implement this interface will have as argument an
  * {@link HandInterface} to avoid privacy leak.
  */

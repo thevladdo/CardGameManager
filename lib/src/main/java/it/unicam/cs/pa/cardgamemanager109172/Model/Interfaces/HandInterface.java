@@ -1,6 +1,4 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
-
-import java.util.ArrayList;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
 
 /**
  * This interface will be implemented by the "Hand" class which will represent the cards in a player's hand.
@@ -9,7 +7,7 @@ import java.util.ArrayList;
  * The constructor of this class will have as argument an object of type {@link GameRulesInterface} that
  * will use to know what will be the starter number of cards a player hand at the start of the game.
  */
-public interface HandInterface{
+public interface HandInterface extends DeckInterface{
 
     /**
      * This method moves the card to the desired location in the hand
@@ -35,12 +33,6 @@ public interface HandInterface{
      * @return true if the amount of cards in the hand exceeds the maximum or minimum according the game rules
      */
     boolean isInLimit(GameRulesInterface rules);
-
-    /**
-     * This method get the actual number of cards in the hand
-     * @return the actual number of cards
-     */
-    int getCardCount();
 
     /**
      * This method get the lowest card according to suit weight

@@ -1,16 +1,15 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
 
 import java.util.ArrayList;
 
 /**
- * This interface will be extended by the "Deck" class which will represent a deck of a generic game.
+ * This interface will be implemented by the "Deck" class which will represent a deck of a generic game.
  * The constructor of the class that will implement this interface will have as argument an object of
  * {@link GameRulesInterface} to manage the maximum and minimum number of cards that a deck can have.
  * The constructor of the class that will implement this interface will have as argument an
  * {@link ArrayList<CardInterface>} to avoid privacy leak.
  */
 public interface DeckInterface {
-    //TODO ArrayList<Card> must be final
 
     /**
      * This method randomly mix the order of the cards in the deck
@@ -43,6 +42,12 @@ public interface DeckInterface {
      * This method will sort the cards by suit
      */
     void sortBySuit();
+
+    /**
+     * This method show the actual number of cards in the deck
+     * @return the actual number of cards
+     */
+    int getCardCount();
 
     /**
      * This method returns the card to the selected location
