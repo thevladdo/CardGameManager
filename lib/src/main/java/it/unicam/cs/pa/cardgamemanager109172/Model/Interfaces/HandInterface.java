@@ -2,6 +2,8 @@ package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.*;
 
+import java.util.ArrayList;
+
 /**
  * This interface will be implemented by the "Hand" class which will represent the cards in a player's hand.
  * It extends the {@link Deck} because the cards in hand represent a smaller version of a deck.
@@ -47,4 +49,10 @@ public interface HandInterface extends DeckInterface{
      * @return the highest card
      */
     Card getHighestCard();
+
+    /**
+     * This method return the actual hand
+     * @return the actual cards in the hand
+     */
+    ArrayList<Card> getHand();
 }

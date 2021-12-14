@@ -1,8 +1,8 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
-
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * This class implements {@link GameRulesInterface} and will represent basic rules of a generic card game.
@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class GameRules implements GameRulesInterface{
 
-    private final Map<CardInterface, Integer> cardWeight;
+    private final Map<Card, Integer> cardWeight;
     private int minCardValue;
     private int maxCardValue;
     private int deckMin;
@@ -22,14 +22,17 @@ public class GameRules implements GameRulesInterface{
     private int handStarter;
 
     public GameRules(){
-        this(0,0,0,0,0,0,0,0,null);
+        this(0,0,
+                0,0,0,
+                0,0,0,
+                null);
     }
 
     public GameRules(
             int minCardValue, int maxCardValue,
             int deckMin, int deckMax, int deckStarter,
             int minHand, int maxHand, int handStarter,
-            Map<CardInterface, Integer> map)
+            Map<Card, Integer> map)
     {
         this.cardWeight = map;
         this.minCardValue = minCardValue;
@@ -44,6 +47,7 @@ public class GameRules implements GameRulesInterface{
 
     @Override
     public void setCardWeight(Card card, int weight) {
+        if(card == null) throw new NullPointerException("Card object must be not null");
         this.cardWeight.put(card,weight);
     }
 
@@ -149,4 +153,31 @@ public class GameRules implements GameRulesInterface{
         int cardCount = hand.getCardCount();
         return (cardCount >= this.getMinHandCount()) && (cardCount <= this.getMaxHandCount());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) throw new NullPointerException("Object 'o' is Null");
+        if (this == o) return true;
+        if (!(o instanceof Deck)) return false;
+        GameRules rules = (GameRules) o;
+        return getMinCardValue() == rules.getMinCardValue()
+                && getMaxCardValue() == rules.getMaxCardValue()
+                && getDeckMin() == rules.getDeckMin()
+                && getDeckMax() == rules.getDeckMax()
+                && getDeckStarter() == rules.getDeckStarter()
+                && minHand == rules.minHand
+                && maxHand == rules.maxHand
+                && getHandStarter() == rules.getHandStarter()
+                && cardWeight.equals(rules.cardWeight);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                cardWeight, getMinCardValue(), getMaxCardValue(),
+                getDeckMin(), getDeckMax(), getDeckStarter(),
+                minHand, maxHand, getHandStarter());
+    }
+
+    //TODO toString
 }

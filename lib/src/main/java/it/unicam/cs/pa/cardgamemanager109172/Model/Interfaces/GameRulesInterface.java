@@ -13,7 +13,7 @@ public interface GameRulesInterface {
      * This method assigns a weight to each cardInterface of the deck in a Map with cardInterface as key and the weight as value.
      * If the cardInterface isn't already present in the Map, add the cardInterface as key and assign it the weight as the value.
      * Example: the aces can be either the lowest cardInterface value, the highest, or both.
-     * @param cardInterface the cardInterface that will have assigned a weight in the deck
+     * @param card the cardInterface that will have assigned a weight in the deck
      * @param weight the weight
      */
     void setCardWeight(Card card, int weight);
@@ -49,7 +49,7 @@ public interface GameRulesInterface {
 
     /**
      * This method control if a cardInterface is created according the game rules by checking the value
-     * @param cardInterface the cardInterface controlled
+     * @param card the cardInterface controlled
      * @return true if the cardInterface is created according the game rules, false otherwise.
      */
     boolean isCardInLimit(Card card);

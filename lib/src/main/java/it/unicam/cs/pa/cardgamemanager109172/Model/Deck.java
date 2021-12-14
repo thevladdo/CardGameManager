@@ -3,6 +3,7 @@ package it.unicam.cs.pa.cardgamemanager109172.Model;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.DeckInterface;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 /**
  * This class implements {@link DeckInterface} and will represent a deck of a generic game.
@@ -55,12 +56,13 @@ public class Deck implements DeckInterface{
 
     @Override
     public void sortBySuit() {
-
+        this.deck.sort((card1, card2) -> card1.getSuit().compareToIgnoreCase(card2.getSuit()));
     }
 
     @Override
     public int getCardCount() {
-        return 0;
+        this.deck.trimToSize();
+        return this.deck.size();
     }
 
     @Override
@@ -81,5 +83,24 @@ public class Deck implements DeckInterface{
     @Override
     public ArrayList<Card> getDeck() {
         return this.deck;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) throw new NullPointerException("Object 'o' is Null");
+        if (this == o) return true;
+        if (!(o instanceof Deck)) return false;
+        Deck deck = (Deck) o;
+        return getDeck().equals(deck.getDeck());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDeck());
+    }
+
+    @Override
+    public String toString() {
+        return "Deck: " + this.deck.toString();
     }
 }

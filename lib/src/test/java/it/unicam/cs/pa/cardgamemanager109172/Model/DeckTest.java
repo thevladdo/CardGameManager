@@ -1,6 +1,5 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.CardInterface;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ class DeckTest {
     private Deck deck;
 
     private Deck createDeck(){
-        Map<CardInterface, Integer> map = new HashMap<>(3);
+        Map<Card, Integer> map = new HashMap<>(3);
         GameRules rules = new GameRules(
                 0, 20,
                 0, 20, 3,
@@ -54,4 +53,6 @@ class DeckTest {
         deck.sortDescending();
         assertEquals(sorted,testDeck.getDeck());
     }
+
+    //TODO OtherMethods and Equals, HashCode, toString
 }
