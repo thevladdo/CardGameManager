@@ -172,7 +172,7 @@ class GameRulesTest {
     }
 
     @Test
-    void isHandInLimit() {
+    void shouldCheckIfHandIsInLimit() {
         GameRules rules = createRules();
         Card card = new Card("Joker","Red",15,rules,15);
         Card card2 = new Card("Aces","Red",1,rules,14);
@@ -185,5 +185,43 @@ class GameRulesTest {
         assertFalse(rules.isHandInLimit(hand));
     }
 
-    //TODO test Equals, HashCode, toString
+    @Test
+    void shouldBeEquals() {
+        GameRules rules = createRules();
+        GameRules sameRules = createRules();
+        GameRules otherRules = new GameRules();
+        Object o = new Object();
+        Object sameObj = rules;
+        assertThrows(NullPointerException.class, () -> rules.equals(null));
+        assertTrue(rules.equals(sameObj));
+        assertFalse(rules.equals(o));
+        assertFalse(rules.equals(otherRules));
+        assertTrue(rules.equals(sameRules));
+    }
+
+    @Test
+    void testHashCode() {
+        GameRules rules = createRules();
+        GameRules sameRules = createRules();
+        GameRules otherRules = new GameRules();
+        assertNotSame(rules,otherRules);
+        assertEquals(rules.hashCode(),sameRules.hashCode());
+        assertNotEquals(rules.hashCode(),otherRules.hashCode());
+    }
+
+    @Test
+    void testToString() {
+        GameRules rules = createRules();
+        String expected = "GAME RULES: " +
+                "\nCard Weight = {}" +
+                "\n Minimum Card Value = " + rules.getMinCardValue() +
+                "\n Maximum Card Value = " + rules.getMaxCardValue() +
+                "\n Minimum Cards number in Deck = " + rules.getDeckMin() +
+                "\n Maximum Cards number in Deck = " + rules.getDeckMax() +
+                "\n Starter number of Cards in Deck = " + rules.getDeckStarter() +
+                "\n Minimum Cards number in Hand = " + rules.getMinHandCount() +
+                "\n Maximum Cards number in Hand = " + rules.getMaxHandCount() +
+                "\n Starter number of Cards in Hand = " + rules.getHandStarter();
+        assertEquals(expected,rules.toString());
+    }
 }

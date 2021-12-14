@@ -20,7 +20,6 @@ public class Hand extends Deck implements HandInterface {
         } else throw new IllegalArgumentException("The new deck must be in rule's limits");
     }
 
-    //TODO Implement Methods
     @Override
     public void moveTo(Card card, int index) {
 

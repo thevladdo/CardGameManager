@@ -17,10 +17,10 @@ public class Card implements CardInterface, Comparable<Card>{
     private final int value;
 
     public Card(GameRules gameRules){
-        this.suit = null;
-        this.color = null;
+        this.suit = "";
+        this.color = "";
         this.value = gameRules.getMinCardValue();
-        gameRules.setCardWeight(this,0);
+        gameRules.setCardWeight(this,-1);
     }
 
     public Card(String suit, String color, int value, GameRules gameRules, int weight){
@@ -54,8 +54,7 @@ public class Card implements CardInterface, Comparable<Card>{
     public boolean equals(Object o) {
         if (o == null) throw new NullPointerException("Object 'o' is Null");
         if (this == o) return true;
-        if (!(o instanceof Card)) return false;
-        Card card = (Card) o;
+        if (!(o instanceof Card card)) return false;
         return this.getValue() == card.getValue() &&
                 this.getSuit().equals(card.getSuit()) &&
                 this.getColor().equals(card.getColor());
@@ -68,10 +67,10 @@ public class Card implements CardInterface, Comparable<Card>{
 
     @Override
     public String toString() {
-        return "CARD: " +
-                "\nSuit = '" + this.suit + "'\n" +
-                "Color = '" + this.color + "'\n" +
-                "Value = '" + this.value + '\'';
+        return "\nCARD: " +
+                "\nSuit = " + this.suit +
+                "\nColor = " + this.color +
+                "\nValue = " + this.value;
     }
 
     @Override

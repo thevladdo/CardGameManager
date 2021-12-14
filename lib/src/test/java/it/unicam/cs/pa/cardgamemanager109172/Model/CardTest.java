@@ -44,18 +44,18 @@ class CardTest {
         Card otherCard = initCard("Heart","Red",10,1);
         assertThrows(NullPointerException.class, () -> card.equals(null));
         assertFalse(card.equals(o));
-        assertTrue(card.equals(card));
         assertTrue(card.equals(sameCard));
+        assertTrue(card.equals(card));
         assertFalse(card.equals(otherCard));
     }
 
     @Test
     void testHashCode() {
         Card card = initCard("Heart","Red",5,5);
-        Card card2 = initCard("Heart","Red",5,5);
+        Card sameCard = initCard("Heart","Red",5,5);
         Card card3 = initCard("Queen","Red",5,5);
-        assertNotSame(card, card2);
-        assertEquals(card.hashCode(), card2.hashCode());
+        assertNotSame(card, sameCard);
+        assertEquals(card.hashCode(), sameCard.hashCode());
         assertNotEquals(card.hashCode(),card3.hashCode());
     }
 
@@ -71,7 +71,7 @@ class CardTest {
     }
 
     @Test
-    void compareTo() {
+    void testCompareTo() {
         Card card = initCard("Heart","Red",5,5);
         Card card2 = initCard("Heart","Red",5,5);
         Card card3 = initCard("Heart","Red",6,5);

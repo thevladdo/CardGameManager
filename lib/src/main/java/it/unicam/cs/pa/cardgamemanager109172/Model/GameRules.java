@@ -158,8 +158,7 @@ public class GameRules implements GameRulesInterface{
     public boolean equals(Object o) {
         if (o == null) throw new NullPointerException("Object 'o' is Null");
         if (this == o) return true;
-        if (!(o instanceof Deck)) return false;
-        GameRules rules = (GameRules) o;
+        if (!(o instanceof GameRules rules)) return false;
         return getMinCardValue() == rules.getMinCardValue()
                 && getMaxCardValue() == rules.getMaxCardValue()
                 && getDeckMin() == rules.getDeckMin()
@@ -179,5 +178,17 @@ public class GameRules implements GameRulesInterface{
                 minHand, maxHand, getHandStarter());
     }
 
-    //TODO toString
+    @Override
+    public String toString() {
+        return "\nGAME RULES: " +
+                "\nCard Weight = " + cardWeight.toString() +
+                "\n Minimum Card Value = " + minCardValue +
+                "\n Maximum Card Value = " + maxCardValue +
+                "\n Minimum Cards number in Deck = " + deckMin +
+                "\n Maximum Cards number in Deck = " + deckMax +
+                "\n Starter number of Cards in Deck = " + deckStarter +
+                "\n Minimum Cards number in Hand = " + minHand +
+                "\n Maximum Cards number in Hand = " + maxHand +
+                "\n Starter number of Cards in Hand = " + handStarter;
+    }
 }

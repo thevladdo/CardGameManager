@@ -24,8 +24,7 @@ public class Deck implements DeckInterface{
         if(deck.size() >= gameRules.getDeckMin()
                 && deck.size() <= gameRules.getDeckMax()
                 && deck.size() == gameRules.getDeckStarter()) {
-            this.deck = new ArrayList<>(deck.size());
-            this.deck.addAll(deck);
+            this.deck = new ArrayList<>(deck);
         } else throw new IllegalArgumentException("The new deck must be in rule's limits");
     }
 
@@ -67,17 +66,17 @@ public class Deck implements DeckInterface{
 
     @Override
     public Card getCard(int index) {
-        return null;
+        return this.deck.get(index);
     }
 
     @Override
     public Card getFirstCard() {
-        return null;
+        return getCard(0);
     }
 
     @Override
     public Card getLastCard() {
-        return null;
+        return getCard(this.deck.size()-1);
     }
 
     @Override
@@ -89,8 +88,7 @@ public class Deck implements DeckInterface{
     public boolean equals(Object o) {
         if (o == null) throw new NullPointerException("Object 'o' is Null");
         if (this == o) return true;
-        if (!(o instanceof Deck)) return false;
-        Deck deck = (Deck) o;
+        if (!(o instanceof Deck deck)) return false;
         return getDeck().equals(deck.getDeck());
     }
 
@@ -101,6 +99,6 @@ public class Deck implements DeckInterface{
 
     @Override
     public String toString() {
-        return "Deck: " + this.deck.toString();
+        return "\nDeck: " + this.deck.toString();
     }
 }
