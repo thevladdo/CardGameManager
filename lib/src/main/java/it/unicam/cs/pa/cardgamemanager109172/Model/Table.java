@@ -1,34 +1,32 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.CardInterface;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.PlayerInterface;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.TableInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
 
 import java.util.ArrayList;
 
 public class Table implements TableInterface {
     @Override
-    public ArrayList<CardInterface> getOnTableCards() {
+    public ArrayList<Card> getOnTableCards() {
         return null;
     }
 
     @Override
-    public void addCard(CardInterface card) {
+    public void addCard(Card card) {
 
     }
 
     @Override
-    public void removeCard(CardInterface card) {
+    public void removeCard(Card card) {
 
     }
 
     @Override
-    public ArrayList<PlayerInterface> getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return null;
     }
 
     @Override
-    public PlayerInterface getPlayer(int position) {
+    public Player getPlayer(int position) {
         return null;
     }
 }

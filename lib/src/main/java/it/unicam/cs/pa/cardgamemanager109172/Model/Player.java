@@ -4,17 +4,17 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
 
 public class Player implements PlayerInterface {
     @Override
-    public void drawCard(DeckInterface deck, int position) {
+    public void drawCard(Deck deck, int position) {
 
     }
 
     @Override
-    public void placeCard(int position, TableInterface table) {
+    public void placeCard(int position, Table table) {
 
     }
 
     @Override
-    public CardInterface showCard(int position) {
+    public Card showCard(int position) {
         return null;
     }
 
@@ -54,7 +54,7 @@ public class Player implements PlayerInterface {
     }
 
     @Override
-    public HandInterface getHand() {
+    public Hand getHand() {
         return null;
     }
 }

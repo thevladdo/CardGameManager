@@ -1,9 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.CardInterface;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.DeckInterface;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.GameRulesInterface;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.HandInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
 
 import java.util.Map;
 
@@ -14,7 +11,7 @@ import java.util.Map;
  */
 public class GameRules implements GameRulesInterface{
 
-    private final Map<CardInterface,Integer> cardWeight;
+    private final Map<CardInterface, Integer> cardWeight;
     private int minCardValue;
     private int maxCardValue;
     private int deckMin;
@@ -32,7 +29,7 @@ public class GameRules implements GameRulesInterface{
             int minCardValue, int maxCardValue,
             int deckMin, int deckMax, int deckStarter,
             int minHand, int maxHand, int handStarter,
-            Map<CardInterface,Integer> map)
+            Map<CardInterface, Integer> map)
     {
         this.cardWeight = map;
         this.minCardValue = minCardValue;
@@ -46,12 +43,12 @@ public class GameRules implements GameRulesInterface{
     }
 
     @Override
-    public void setCardWeight(CardInterface card, int weight) {
+    public void setCardWeight(Card card, int weight) {
         this.cardWeight.put(card,weight);
     }
 
     @Override
-    public Integer getCardWeight(CardInterface card) {
+    public Integer getCardWeight(Card card) {
         return this.cardWeight.get(card);
     }
 
@@ -76,7 +73,7 @@ public class GameRules implements GameRulesInterface{
     }
 
     @Override
-    public boolean isCardInLimit(CardInterface card) {
+    public boolean isCardInLimit(Card card) {
         int cardValue = card.getValue();
         return (cardValue >= this.getMinCardValue()) && (cardValue <= this.getMaxCardValue());
     }
@@ -112,7 +109,7 @@ public class GameRules implements GameRulesInterface{
     }
 
     @Override
-    public boolean isDeckInLimit(DeckInterface deck) {
+    public boolean isDeckInLimit(Deck deck) {
         int cardCount = deck.getCardCount();
         return (cardCount >= this.getDeckMin()) && (cardCount <= this.getDeckMax());
     }
@@ -148,7 +145,7 @@ public class GameRules implements GameRulesInterface{
     }
 
     @Override
-    public boolean isHandInLimit(HandInterface hand) {
+    public boolean isHandInLimit(Hand hand) {
         int cardCount = hand.getCardCount();
         return (cardCount >= this.getMinHandCount()) && (cardCount <= this.getMaxHandCount());
     }

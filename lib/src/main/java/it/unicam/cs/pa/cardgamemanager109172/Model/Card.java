@@ -1,7 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.CardInterface;
 import java.util.Objects;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.CardInterface;
 
 /**
  * This class implements {@link CardInterface} and will represent a generic card.
@@ -49,19 +49,30 @@ public class Card implements CardInterface, Comparable<Card>{
         return this.color;
     }
 
-    //TODO Da rivedere
+
     @Override
     public boolean equals(Object o) {
         if (o == null) throw new NullPointerException("Object 'o' is Null");
         if (!(o instanceof Card)) return false;
         if (this == o) return true;
         Card card = (Card) o;
-        return getValue() == card.getValue() && getSuit().equals(card.getSuit()) && getColor().equals(card.getColor());
+        return this.getValue() == card.getValue() &&
+                this.getSuit().equals(card.getSuit()) &&
+                this.getColor().equals(card.getColor());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getSuit(), getColor(), getValue());
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "suit='" + suit + '\'' +
+                ", color='" + color + '\'' +
+                ", value=" + value +
+                '}';
     }
 
     @Override

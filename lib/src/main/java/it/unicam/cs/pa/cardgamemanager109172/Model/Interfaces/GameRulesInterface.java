@@ -1,5 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.*;
+
 /**
  * This interface will be implemented by "GameRules" class which will represent basic rules of a generic card game.
  * It contains all the behavior concerning the rules.
@@ -8,20 +10,20 @@ package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
 public interface GameRulesInterface {
 
     /**
-     * This method assigns a weight to each card of the deck in a Map with card as key and the weight as value.
-     * If the card isn't already present in the Map, add the card as key and assign it the weight as the value.
-     * Example: the aces can be either the lowest card value, the highest, or both.
-     * @param card the card that will have assigned a weight in the deck
+     * This method assigns a weight to each cardInterface of the deck in a Map with cardInterface as key and the weight as value.
+     * If the cardInterface isn't already present in the Map, add the cardInterface as key and assign it the weight as the value.
+     * Example: the aces can be either the lowest cardInterface value, the highest, or both.
+     * @param cardInterface the cardInterface that will have assigned a weight in the deck
      * @param weight the weight
      */
-    void setCardWeight(CardInterface card, int weight);
+    void setCardWeight(Card card, int weight);
 
     /**
-     * This method shows the weight a card suit has and will be user
-     * @param card the card whose weight will show
-     * @return the weight of the card or null if the suit isn't present in the Map
+     * This method shows the weight a cardInterface suit has and will be user
+     * @param card the cardInterface whose weight will show
+     * @return the weight of the cardInterface or null if the suit isn't present in the Map
      */
-    Integer getCardWeight(CardInterface card);
+    Integer getCardWeight(Card card);
 
     /**
      * This method set the minimum assignable value of a card
@@ -46,11 +48,11 @@ public interface GameRulesInterface {
     int getMaxCardValue();
 
     /**
-     * This method control if a card is created according the game rules by checking the value
-     * @param card the card controlled
-     * @return true if the card is created according the game rules, false otherwise.
+     * This method control if a cardInterface is created according the game rules by checking the value
+     * @param cardInterface the cardInterface controlled
+     * @return true if the cardInterface is created according the game rules, false otherwise.
      */
-    boolean isCardInLimit(CardInterface card);
+    boolean isCardInLimit(Card card);
 
     /**
      * This method set the minimum number of cards in the deck
@@ -94,7 +96,7 @@ public interface GameRulesInterface {
      * @param deck the deck controlled
      * @return true if the deck is created according the game rules, false otherwise.
      */
-    boolean isDeckInLimit(DeckInterface deck);
+    boolean isDeckInLimit(Deck deck);
 
     /**
      * This method set the minimum number of cards a player must have in their hand
@@ -138,5 +140,5 @@ public interface GameRulesInterface {
      * @param hand the hand controlled
      * @return true if the hand is created according the game rules, false otherwise.
      */
-    boolean isHandInLimit(HandInterface hand);
+    boolean isHandInLimit(Hand hand);
 }

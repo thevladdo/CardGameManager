@@ -1,9 +1,11 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.*;
+
 /**
  * This interface will be implemented by "Player" class which will represent a player or a bot.
  * The constructor of the class that will implement this interface will have as argument an
- * {@link HandInterface} to avoid privacy leak.
+ * {@link Hand} to avoid privacy leak.
  */
 public interface PlayerInterface {
 
@@ -12,16 +14,16 @@ public interface PlayerInterface {
      * Use isInLimit() to control if the new number of card in the hand complies with the rules of the game.
      * @param position the position in the hand of the card that will be placed
      */
-    void drawCard(DeckInterface deck, int position);
+    void drawCard(Deck deck, int position);
 
     /**
      * This method places a card from the hand down on the table and removes it in the player's hand.
-     * Use {@link HandInterface} isInLimit() method to control if the new number of card in the hand complies
+     * Use {@link Hand} isInLimit() method to control if the new number of card in the hand complies
      * with the rules of the game.
      * @param position the position in the hand of the card that will be placed
      * @param table the table where the card will be placed
      */
-    void placeCard(int position, TableInterface table);
+    void placeCard(int position, Table table);
     //richiama showCard();
 
     /**
@@ -29,7 +31,7 @@ public interface PlayerInterface {
      * @param position the position in the hand of the card that will be showed
      * @return the card
      */
-    CardInterface showCard(int position);
+    Card showCard(int position);
 
     /**
      * This method set the Name of the player
@@ -76,5 +78,5 @@ public interface PlayerInterface {
      * This method get the cards in the player's hand
      * @return the Hand
      */
-    HandInterface getHand();
+    Hand getHand();
 }

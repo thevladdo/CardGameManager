@@ -1,10 +1,8 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.CardInterface;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.DeckInterface;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.DeckInterface;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * This class implements {@link DeckInterface} and will represent a deck of a generic game.
@@ -36,13 +34,13 @@ public class Deck implements DeckInterface{
     }
 
     @Override
-    public void add(CardInterface card) {
-        this.deck.add((Card) card);
+    public void add(Card card) {
+        this.deck.add(card);
     }
 
     @Override
-    public void remove(CardInterface card) {
-        this.deck.remove((Card) card);
+    public void remove(Card card) {
+        this.deck.remove(card);
     }
 
     @Override
@@ -52,7 +50,7 @@ public class Deck implements DeckInterface{
 
     @Override
     public void sortDescending() {
-        this.deck.sort((card1, card2) -> Integer.compare(card2.getValue(), card1.getValue()));
+        this.deck.sort(Collections.reverseOrder());
     }
 
     @Override
@@ -66,22 +64,22 @@ public class Deck implements DeckInterface{
     }
 
     @Override
-    public CardInterface getCard(int index) {
+    public Card getCard(int index) {
         return null;
     }
 
     @Override
-    public CardInterface getFirstCard() {
+    public Card getFirstCard() {
         return null;
     }
 
     @Override
-    public CardInterface getLastCard() {
+    public Card getLastCard() {
         return null;
     }
 
     @Override
-    public ArrayList<CardInterface> getDeck() {
-        return null;
+    public ArrayList<Card> getDeck() {
+        return this.deck;
     }
 }

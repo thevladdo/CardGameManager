@@ -1,13 +1,11 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.CardInterface;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.GameRulesInterface;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.HandInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
 
 public class Hand extends Deck implements HandInterface {
 
     @Override
-    public void moveTo(CardInterface card, int index) {
+    public void moveTo(Card card, int index) {
 
     }
 
@@ -17,22 +15,22 @@ public class Hand extends Deck implements HandInterface {
     }
 
     @Override
-    public void discard(CardInterface card) {
+    public void discard(Card card) {
 
     }
 
     @Override
-    public boolean isInLimit(GameRulesInterface rules) {
+    public boolean isInLimit(GameRules rules) {
         return false;
     }
 
     @Override
-    public CardInterface getLowestCard() {
+    public Card getLowestCard() {
         return null;
     }
 
     @Override
-    public CardInterface getHighestCard() {
+    public Card getHighestCard() {
         return null;
     }
 }
