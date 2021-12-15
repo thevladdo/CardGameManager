@@ -1,11 +1,9 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameRulesTest {
@@ -16,8 +14,8 @@ class GameRulesTest {
         this.map = new HashMap<>(1);
         return new GameRules(
                 0,15,
-                0,52,1,
-                1,10,2,map);
+                0,52,0,
+                1,10,map);
     }
 
     @Test
@@ -106,24 +104,31 @@ class GameRulesTest {
     @Test
     void shouldSetDeckStarter() {
         GameRules rules = createRules();
-        assertEquals(1,rules.getDeckStarter());
-        rules.setDeckStarter(2);
-        assertEquals(2,rules.getDeckStarter());
+        assertEquals(0,rules.getDeckStarter());
+        rules.setDeckStarter(3);
+        assertEquals(3,rules.getDeckStarter());
     }
 
     @Test
     void shouldGetDeckStarter() {
         GameRules rules = createRules();
-        assertEquals(1,rules.getDeckStarter());
+        assertEquals(0,rules.getDeckStarter());
+        ArrayList<Card> deckCards = new ArrayList<>(4);
+        deckCards.add(new Card("Joker","Red",15,rules,15));
+        deckCards.add(new Card("Queen","Black",12,rules,12));
+        deckCards.add(new Card("King","Red",13,rules,13));
+        deckCards.add(new Card("Queen","Red",12,rules,12));
+        Deck deck = new Deck(rules,deckCards,4);
+        assertEquals(4,rules.getDeckStarter());
     }
 
     @Test
     void shouldCheckIfDeckIsInLimit() {
         GameRules rules = createRules();
-        Card card = new Card("Joker","Red",15,rules,15);
         ArrayList<Card> deckCards = new ArrayList<>(1);
-        deckCards.add(card);
-        Deck deck = new Deck(rules,deckCards);
+        deckCards.add(new Card("Joker","Red",15,rules,15));
+        deckCards.add(new Card("Queen","Black",12,rules,12));
+        Deck deck = new Deck(rules,deckCards,2);
         assertTrue(rules.isDeckInLimit(deck));
         rules.setDeckMin(5);
         assertFalse(rules.isDeckInLimit(deck));
@@ -158,20 +163,6 @@ class GameRulesTest {
     }
 
     @Test
-    void shouldSetHandStarter() {
-        GameRules rules = createRules();
-        assertEquals(2,rules.getHandStarter());
-        rules.setHandStarter(1);
-        assertEquals(1,rules.getHandStarter());
-    }
-
-    @Test
-    void shouldGetHandStarter() {
-        GameRules rules = createRules();
-        assertEquals(2,rules.getHandStarter());
-    }
-
-    @Test
     void shouldCheckIfHandIsInLimit() {
         GameRules rules = createRules();
         Card card = new Card("Joker","Red",15,rules,15);
@@ -179,7 +170,7 @@ class GameRulesTest {
         ArrayList<Card> handCards = new ArrayList<>(2);
         handCards.add(card);
         handCards.add(card2);
-        Hand hand = new Hand(rules,handCards);
+        Hand hand = new Hand(rules,handCards,2);
         assertTrue(rules.isHandInLimit(hand));
         rules.setMinHandCount(5);
         assertFalse(rules.isHandInLimit(hand));
@@ -212,7 +203,7 @@ class GameRulesTest {
     @Test
     void testToString() {
         GameRules rules = createRules();
-        String expected = "GAME RULES: " +
+        String expected = "\nGAME RULES: " +
                 "\nCard Weight = {}" +
                 "\n Minimum Card Value = " + rules.getMinCardValue() +
                 "\n Maximum Card Value = " + rules.getMaxCardValue() +
@@ -220,8 +211,7 @@ class GameRulesTest {
                 "\n Maximum Cards number in Deck = " + rules.getDeckMax() +
                 "\n Starter number of Cards in Deck = " + rules.getDeckStarter() +
                 "\n Minimum Cards number in Hand = " + rules.getMinHandCount() +
-                "\n Maximum Cards number in Hand = " + rules.getMaxHandCount() +
-                "\n Starter number of Cards in Hand = " + rules.getHandStarter();
+                "\n Maximum Cards number in Hand = " + rules.getMaxHandCount();
         assertEquals(expected,rules.toString());
     }
 }

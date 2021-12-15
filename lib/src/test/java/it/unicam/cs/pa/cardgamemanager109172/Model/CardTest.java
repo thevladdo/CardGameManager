@@ -13,8 +13,8 @@ class CardTest {
         Map<Card, Integer> map = new HashMap<>(1);
         GameRules rules = new GameRules(
                 0, 20,
-                0, 20, 3,
-                0, 10, 0, map);
+                0, 20,0,
+                0, 10, map);
         return new Card(suit,name,value,rules,weight);
     }
 
@@ -63,10 +63,11 @@ class CardTest {
     void testToString() {
         Card card = initCard("Queen","Red",5,5);
         String expected = """
+                
                 CARD:\s
-                Suit = 'Queen'
-                Color = 'Red'
-                Value = '5'""";
+                Suit = Queen
+                Color = Red
+                Value = 5""";
         assertEquals(expected,card.toString());
     }
 

@@ -18,16 +18,22 @@ public interface DeckInterface {
     void shuffle();
 
     /**
-     * This method adds a cardInterface to the deck
-     * @param card the cardInterface that will be added to the deck
+     * This method adds a card to the deck
+     * @param card the card that will be added to the deck
      */
     void add(Card card);
 
     /**
-     * This method removes a cardInterface from the deck
-     * @param card the cardInterface that will be removed from the deck
+     * This method removes a card from the deck
+     * @param card the card that will be removed from the deck
      */
     void remove(Card card);
+
+    /**
+     * This method removes a card from the deck
+     * @param index the index if the card that will be removed from the deck
+     */
+    void remove(int index);
 
     /**
      * This method will sort the cards in the deck in ascending order based on their value

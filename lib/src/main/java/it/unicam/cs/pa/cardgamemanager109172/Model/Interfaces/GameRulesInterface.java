@@ -123,18 +123,6 @@ public interface GameRulesInterface {
     int getMaxHandCount();
 
     /**
-     * This method set the number of cards in the hand of a player at the start of the game
-     * @param starter the number of starter cards
-     */
-    void setHandStarter(int starter);
-
-    /**
-     * This method get the number of cards in the hand of a player at the start of the game
-     * @return the number of starter cards
-     */
-    int getHandStarter();
-
-    /**
      * This method control if a hand is created according the game rules by checking the number of the cards
      * and if the number of cards are in rules limit during the game
      * @param hand the hand controlled

@@ -19,19 +19,18 @@ public class GameRules implements GameRulesInterface{
     private int deckStarter;
     private int minHand;
     private int maxHand;
-    private int handStarter;
 
     public GameRules(){
         this(0,0,
                 0,0,0,
-                0,0,0,
+                0,0,
                 null);
     }
 
     public GameRules(
             int minCardValue, int maxCardValue,
             int deckMin, int deckMax, int deckStarter,
-            int minHand, int maxHand, int handStarter,
+            int minHand, int maxHand,
             Map<Card, Integer> map)
     {
         this.cardWeight = map;
@@ -42,7 +41,6 @@ public class GameRules implements GameRulesInterface{
         this.deckStarter = deckStarter;
         this.minHand = minHand;
         this.maxHand = maxHand;
-        this.handStarter = handStarter;
     }
 
     @Override
@@ -139,16 +137,6 @@ public class GameRules implements GameRulesInterface{
     }
 
     @Override
-    public void setHandStarter(int starter) {
-        this.handStarter = starter;
-    }
-
-    @Override
-    public int getHandStarter() {
-        return this.handStarter;
-    }
-
-    @Override
     public boolean isHandInLimit(Hand hand) {
         int cardCount = hand.getCardCount();
         return (cardCount >= this.getMinHandCount()) && (cardCount <= this.getMaxHandCount());
@@ -166,7 +154,6 @@ public class GameRules implements GameRulesInterface{
                 && getDeckStarter() == rules.getDeckStarter()
                 && minHand == rules.minHand
                 && maxHand == rules.maxHand
-                && getHandStarter() == rules.getHandStarter()
                 && cardWeight.equals(rules.cardWeight);
     }
 
@@ -175,7 +162,7 @@ public class GameRules implements GameRulesInterface{
         return Objects.hash(
                 cardWeight, getMinCardValue(), getMaxCardValue(),
                 getDeckMin(), getDeckMax(), getDeckStarter(),
-                minHand, maxHand, getHandStarter());
+                minHand, maxHand);
     }
 
     @Override
@@ -188,7 +175,6 @@ public class GameRules implements GameRulesInterface{
                 "\n Maximum Cards number in Deck = " + deckMax +
                 "\n Starter number of Cards in Deck = " + deckStarter +
                 "\n Minimum Cards number in Hand = " + minHand +
-                "\n Maximum Cards number in Hand = " + maxHand +
-                "\n Starter number of Cards in Hand = " + handStarter;
+                "\n Maximum Cards number in Hand = " + maxHand;
     }
 }

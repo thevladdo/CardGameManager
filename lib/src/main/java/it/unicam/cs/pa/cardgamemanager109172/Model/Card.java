@@ -15,6 +15,7 @@ public class Card implements CardInterface, Comparable<Card>{
     private final String suit;
     private final String color;
     private final int value;
+    //TODO create GameRules for weight in equals
 
     public Card(GameRules gameRules){
         this.suit = "";
@@ -50,6 +51,7 @@ public class Card implements CardInterface, Comparable<Card>{
     }
 
 
+    //TODO equals weight
     @Override
     public boolean equals(Object o) {
         if (o == null) throw new NullPointerException("Object 'o' is Null");

@@ -15,8 +15,8 @@ class DeckTest {
         Map<Card, Integer> map = new HashMap<>(3);
         rules = new GameRules(
                 0, 20,
-                0, 20, 3,
-                0, 10, 0, map);
+                0, 20,0,
+                0, 10, map);
         card1 = new Card("Hearts","Red",5, rules,5);
         card2 = new Card("Hearts","Red",6, rules,6);
         card3 = new Card("Hearts","Red",11, rules,11);
@@ -24,7 +24,7 @@ class DeckTest {
         deckCards.add(card2);
         deckCards.add(card1);
         deckCards.add(card3);
-        return new Deck(rules, deckCards);
+        return new Deck(rules, deckCards,3);
     }
 
     /**
@@ -51,10 +51,18 @@ class DeckTest {
     }
 
     @Test
-    void shouldRemove() {
+    void shouldRemoveObject() {
         Deck testDeck = createDeck();
         assertEquals(3,testDeck.getCardCount());
         testDeck.remove(this.card3);
+        assertEquals(2,testDeck.getCardCount());
+    }
+
+    @Test
+    void shouldRemoveByIndex() {
+        Deck testDeck = createDeck();
+        assertEquals(3,testDeck.getCardCount());
+        testDeck.remove(2);
         assertEquals(2,testDeck.getCardCount());
     }
 
@@ -152,7 +160,7 @@ class DeckTest {
         secondDeckCards.add(new Card(this.rules));
         secondDeckCards.add(new Card(this.rules));
         secondDeckCards.add(new Card(this.rules));
-        Deck secondDeck = new Deck(rules,secondDeckCards);
+        Deck secondDeck = new Deck(rules,secondDeckCards,3);
         assertNotSame(firstDeck, sameDeck);
         assertEquals(firstDeck.hashCode(), sameDeck.hashCode());
         assertNotEquals(firstDeck.hashCode(), secondDeck.hashCode());
@@ -177,5 +185,22 @@ class DeckTest {
                 Color = Red
                 Value = 11]""";
         assertEquals(expected,testDeck.toString());
+    }
+
+
+    @Test
+    void shouldCompareTo() {
+        Deck testDeck = createDeck();
+        Deck sameDeck = createDeck();
+        ArrayList<Card> otherDeckCards = new ArrayList<>(3);
+        otherDeckCards.add(new Card("Heart","Red",6,rules,5));
+        otherDeckCards.add(new Card("Heart","Red",2,rules,5));
+        otherDeckCards.add(new Card("Heart","Red",5,rules,5));
+        Deck otherDeck = new Deck(rules,otherDeckCards,3);
+        otherDeck.add(new Card("Aces","Black",1,rules,14));
+        assertEquals(0,testDeck.compareTo(sameDeck));
+        assertEquals(-1,testDeck.compareTo(otherDeck));
+        sameDeck.remove(card1);
+        assertEquals(+1,testDeck.compareTo(sameDeck));
     }
 }

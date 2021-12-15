@@ -12,7 +12,7 @@ import java.util.Objects;
  * The constructor of the class that will implement this interface will have as argument an
  * {@link ArrayList<Card>} to avoid privacy leak.
  */
-public class Deck implements DeckInterface{
+public class Deck implements DeckInterface, Comparable<Deck>{
 
     private final ArrayList<Card> deck;
 
@@ -20,7 +20,8 @@ public class Deck implements DeckInterface{
         this.deck = null;
     }
 
-    public Deck(GameRules gameRules, ArrayList<Card> deck){
+    public Deck(GameRules gameRules, ArrayList<Card> deck, int starter){
+        gameRules.setDeckStarter(starter);
         if(deck.size() >= gameRules.getDeckMin()
                 && deck.size() <= gameRules.getDeckMax()
                 && deck.size() == gameRules.getDeckStarter()) {
@@ -41,6 +42,11 @@ public class Deck implements DeckInterface{
     @Override
     public void remove(Card card) {
         this.deck.remove(card);
+    }
+
+    @Override
+    public void remove(int index) {
+        this.deck.remove(index);
     }
 
     @Override
@@ -100,5 +106,11 @@ public class Deck implements DeckInterface{
     @Override
     public String toString() {
         return "\nDeck: " + this.deck.toString();
+    }
+
+
+    @Override
+    public int compareTo(Deck toCompare) {
+        return Integer.compare(this.getCardCount(), toCompare.getCardCount());
     }
 }

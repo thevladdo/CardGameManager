@@ -2,62 +2,61 @@ package it.unicam.cs.pa.cardgamemanager109172.Model;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
 
 public class Hand extends Deck implements HandInterface {
 
-    private final ArrayList<Card> hand;
-
     public Hand(){
-        this.hand = null;
+        super();
     }
 
-    public Hand(GameRules gameRules, ArrayList<Card> hand){
-        if(hand.size() >= gameRules.getMinHandCount()
-                && hand.size() <= gameRules.getMaxHandCount()
-                && hand.size() == gameRules.getHandStarter()) {
-            this.hand = new ArrayList<>(hand.size());
-            this.hand.addAll(hand);
-        } else throw new IllegalArgumentException("The new deck must be in rule's limits");
+    public Hand(GameRules gameRules, ArrayList<Card> hand, int starter){
+        super(gameRules,hand,starter);
     }
 
     @Override
     public void moveTo(Card card, int index) {
-
+        super.getDeck().remove(card);
+        super.getDeck().add(index,card);
     }
 
     @Override
     public void clear() {
-
-    }
-
-    @Override
-    public void discard(Card card) {
-
-    }
-
-    @Override
-    public int getCardCount(){
-        this.hand.trimToSize();
-        return this.hand.size();
-    }
-
-    @Override
-    public boolean isInLimit(GameRules rules) {
-        return false;
+        super.getDeck().clear();
     }
 
     @Override
     public Card getLowestCard() {
-        return null;
+        return Collections.min(super.getDeck());
     }
 
     @Override
     public Card getHighestCard() {
-        return null;
+        return Collections.max(super.getDeck());
     }
 
     @Override
     public ArrayList<Card> getHand(){
-        return this.hand;
+        return super.getDeck();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) throw new NullPointerException("Object 'o' is Null");
+        if (this == o) return true;
+        if (!(o instanceof Hand hand)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(getHand(), hand.getHand());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getHand());
+    }
+
+    @Override
+    public String toString() {
+        return "\nHAND: " + super.getDeck().toString();
     }
 }
