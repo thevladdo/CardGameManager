@@ -15,7 +15,7 @@ public class Card implements CardInterface, Comparable<Card>{
     private final String suit;
     private final String color;
     private final int value;
-    //TODO create GameRules for weight in equals
+    //TODO create GameRules for weight in equals with Singleton
 
     public Card(GameRules gameRules){
         this.suit = "";

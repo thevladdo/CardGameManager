@@ -6,7 +6,7 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.*;
 /**
  * This interface will be implemented by the "Table" class which will represent the table in a generic card game.
  * The constructor of the class that will implement this interface will have as argument an {@link ArrayList<Player>}
- * {@link Player} to avoid privacy leak.
+ * to avoid privacy leak.
  */
 public interface TableInterface {
 
@@ -29,10 +29,34 @@ public interface TableInterface {
     void removeCard(Card card);
 
     /**
+     * This method show the discarded cards from the table
+     * @return the cards discarded from the table
+     */
+    ArrayList<Card> getDiscardedCards();
+
+    /**
      * This method show a list of players that are playing at this moment
      * @return a list of players
      */
     ArrayList<Player> getPlayers();
+
+    /**
+     * This method add a {@link Player} at the table
+     * @param player the player that will be added
+     */
+    void addPlayer(Player player);
+
+    /**
+     * This method remove a {@link Player} from the table
+     * @param player the player that will be removed
+     */
+    void removePlayer(Player player);
+
+    /**
+     * This method remove a {@link Player} from the table
+     * @param position the player's position that will be removed
+     */
+    void removePlayer(int position);
 
     /**
      * This method show the player that is playing at this moment
