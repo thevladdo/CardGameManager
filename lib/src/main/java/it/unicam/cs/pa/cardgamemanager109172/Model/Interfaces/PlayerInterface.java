@@ -12,19 +12,15 @@ public interface PlayerInterface {
     /**
      * This method draws a card from the deck and adds it to the player's hand.
      * Use isInLimit() to control if the new number of card in the hand complies with the rules of the game.
-     * @param position the position in the hand of the card that will be placed
      */
-    void drawCard(Deck deck, int position);
+    void drawCard(Deck deck);
 
     /**
      * This method places a card from the hand down on the table and removes it in the player's hand.
-     * Use {@link Hand} isInLimit() method to control if the new number of card in the hand complies
-     * with the rules of the game.
      * @param position the position in the hand of the card that will be placed
      * @param table the table where the card will be placed
      */
     void placeCard(int position, Table table);
-    //richiama showCard();
 
     /**
      * This method show a card from the hand without discarding or placing it on the table
@@ -36,7 +32,7 @@ public interface PlayerInterface {
     /**
      * This method set the Name of the player
      */
-    void setName();
+    void setName(String newName);
 
     /**
      * This method get the Name of the player
@@ -46,15 +42,15 @@ public interface PlayerInterface {
 
     /**
      * This method set the unique ID of the player
-     * @param newID the ID
+     * @param newId the ID
      */
-    void setID(int newID);
+    void setID(int newId);
 
     /**
      * This method get the unique ID of the player
      * @return the ID
      */
-    int getID();
+    int getId();
 
     /**
      * This method add a determinate amount of points to the total points reached by the player

@@ -55,6 +55,11 @@ public class GameRules implements GameRulesInterface{
     }
 
     @Override
+    public Map<Card, Integer> getCardWeight() {
+        return this.cardWeight;
+    }
+
+    @Override
     public void setMinCardValue(int minValue) {
         this.minCardValue = minValue;
     }
@@ -152,17 +157,17 @@ public class GameRules implements GameRulesInterface{
                 && getDeckMin() == rules.getDeckMin()
                 && getDeckMax() == rules.getDeckMax()
                 && getDeckStarter() == rules.getDeckStarter()
-                && minHand == rules.minHand
-                && maxHand == rules.maxHand
-                && cardWeight.equals(rules.cardWeight);
+                && getMinHandCount() == rules.getMinHandCount()
+                && getMaxHandCount() == rules.getMaxHandCount()
+                && getCardWeight().equals(rules.getCardWeight());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                cardWeight, getMinCardValue(), getMaxCardValue(),
+                getCardWeight(), getMinCardValue(), getMaxCardValue(),
                 getDeckMin(), getDeckMax(), getDeckStarter(),
-                minHand, maxHand);
+                getMinHandCount(), getMaxHandCount());
     }
 
     @Override

@@ -17,14 +17,14 @@ public interface TableInterface {
     ArrayList<Card> getOnTableCards();
 
     /**
-     * This method add a cardInterface on the table
-     * @param card the cardInterface that will be added
+     * This method add a card on the table
+     * @param card the card that will be added
      */
     void addCard(Card card);
 
     /**
-     * This method remove a cardInterface on the table
-     * @param card the cardInterface that will be removed
+     * This method remove a card on the table
+     * @param card the card that will be removed
      */
     void removeCard(Card card);
 
