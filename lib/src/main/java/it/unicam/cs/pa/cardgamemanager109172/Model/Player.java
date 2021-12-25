@@ -20,6 +20,7 @@ public class Player implements PlayerInterface {
 
     public Player(Hand hand, String name, int id){
         this.playerHand = hand;
+        this.name = name;
         this.id = id;
         this.points = 0;
     }

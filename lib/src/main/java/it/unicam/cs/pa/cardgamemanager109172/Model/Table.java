@@ -39,8 +39,8 @@ public class Table implements TableInterface {
 
     @Override
     public void removeCard(Card card) {
+        this.discarded.add(card);
         this.tableCards.remove(card);
-
     }
 
     @Override
