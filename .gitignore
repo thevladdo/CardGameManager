@@ -7,8 +7,56 @@
 # BlueJ files
 *.ctxt
 
+# IntelliJ
+.idea/**/contentModel.xml
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+out/
+
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+
+# MacOS
+**/.DS_Store
+*.DS_Store
+.DS_Store
+.DS_Store?
+._*
+ehthumbs.db
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+#Gradle
+.gradle
+**/build/
+!src/**/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
 
 # Package Files #
 *.jar
