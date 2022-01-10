@@ -1,8 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -119,14 +117,14 @@ class TableTest {
     }
 
     @Test
-    void getPlayer() {
+    void shouldGetPlayer() {
         Table table = createTable();
         Player expected = player1;
         assertEquals(expected,table.getPlayer(0));
     }
 
     @Test
-    void testEquals() {
+    void shouldBeEquals() {
         Table firstTable = createTable();
         Table sameTable = createTable();
         Object o = new Object();

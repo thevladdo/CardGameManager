@@ -74,5 +74,5 @@ public interface PlayerInterface {
      * This method get the cards in the player's hand
      * @return the Hand
      */
-    Hand getHand();
+    Hand getPlayerHand();
 }

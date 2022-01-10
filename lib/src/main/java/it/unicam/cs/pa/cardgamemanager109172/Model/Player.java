@@ -1,7 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
-
 import java.util.Objects;
 
 /**
@@ -79,7 +78,7 @@ public class Player implements PlayerInterface {
     }
 
     @Override
-    public Hand getHand() {
+    public Hand getPlayerHand() {
         return this.playerHand;
     }
 
@@ -90,13 +89,13 @@ public class Player implements PlayerInterface {
         if (!(o instanceof Player player)) return false;
         return getId() == player.getId()
                 && getPoints() == player.getPoints()
-                && getHand().equals(player.getHand())
+                && getPlayerHand().equals(player.getPlayerHand())
                 && getName().equals(player.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getHand(), getName(), getId(), getPoints());
+        return Objects.hash(getPlayerHand(), getName(), getId(), getPoints());
     }
 
     @Override

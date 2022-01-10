@@ -20,12 +20,12 @@ public class Deck implements DeckInterface, Comparable<Deck>{
         this.deck = null;
     }
 
-    public Deck(GameRules gameRules, ArrayList<Card> deck, int starter){
+    public Deck(GameRules gameRules, ArrayList<Card> newDeck, int starter){
         gameRules.setDeckStarter(starter);
-        if(deck.size() >= gameRules.getDeckMin()
-                && deck.size() <= gameRules.getDeckMax()
-                && deck.size() == gameRules.getDeckStarter()) {
-            this.deck = new ArrayList<>(deck);
+        if(newDeck.size() >= gameRules.getDeckMin()
+                && newDeck.size() <= gameRules.getDeckMax()
+                && newDeck.size() == gameRules.getDeckStarter()) {
+            this.deck = new ArrayList<>(newDeck);
         } else throw new IllegalArgumentException("The new deck must be in rule's limits");
     }
 
