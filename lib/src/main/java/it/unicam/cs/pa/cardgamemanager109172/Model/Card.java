@@ -1,6 +1,8 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.CardInterface;
+
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Objects;
  * The constructor of this class will have as argument an object of type {@link GameRules}
  * that will be used to know what will be the minimum and maximum value of a card and to set a weight.
  */
-public class Card implements CardInterface, Comparable<Card>{
+public class Card implements CardInterface, Comparable<Card>, Serializable {
 
     private final String suit;
     private final String color;

@@ -39,7 +39,7 @@ class PlayerTest {
     }
 
     @Test
-    void drawCard() {
+    void drawCard(){
         Player player = createPlayer();
         Card drawed = deck.getCard(0);
         assertEquals(drawed,card3);

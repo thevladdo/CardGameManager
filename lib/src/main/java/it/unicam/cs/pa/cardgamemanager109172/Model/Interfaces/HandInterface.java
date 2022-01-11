@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * This interface will be implemented by the {@link Hand} class which will represent the cards in a player's hand.
- * It extends the {@link Deck} because the cards in hand represent a smaller version of a deck.
+ * It extends the {@link Deck} class because the cards in hand represent a smaller version of a deck.
  * Use {@link GameRules} to find out what is the maximum or minimum number of cards a hand can have.
  * The constructor of this class will have as argument an object of type {@link GameRules} that
  * will use to know what will be the starter number of cards a player hand at the start of the game.

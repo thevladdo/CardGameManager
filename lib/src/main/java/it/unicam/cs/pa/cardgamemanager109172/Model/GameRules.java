@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
  * It contains all the behavior concerning the rules.
  * The constructor will create a Map to associate a card with a weight value.
  */
-public class GameRules implements GameRulesInterface{
+public class GameRules implements GameRulesInterface, Serializable {
 
     private final Map<Card, Integer> cardWeight;
     private int minCardValue;

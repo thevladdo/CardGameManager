@@ -1,6 +1,8 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.DeckInterface;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
@@ -12,7 +14,7 @@ import java.util.Objects;
  * The constructor of the class that will implement this interface will have as argument an
  * {@link ArrayList<Card>} to avoid privacy leak.
  */
-public class Deck implements DeckInterface, Comparable<Deck>{
+public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
 
     private final ArrayList<Card> deck;
 

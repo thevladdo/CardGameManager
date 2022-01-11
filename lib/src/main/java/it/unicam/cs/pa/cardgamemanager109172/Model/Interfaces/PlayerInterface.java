@@ -11,7 +11,6 @@ public interface PlayerInterface {
 
     /**
      * This method draws a card from the deck and adds it to the player's hand.
-     * Use isInLimit() to control if the new number of card in the hand complies with the rules of the game.
      */
     void drawCard(Deck deck);
 
