@@ -110,7 +110,6 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
         return "\nDeck: " + this.deck.toString();
     }
 
-
     @Override
     public int compareTo(Deck toCompare) {
         return Integer.compare(this.getCardCount(), toCompare.getCardCount());

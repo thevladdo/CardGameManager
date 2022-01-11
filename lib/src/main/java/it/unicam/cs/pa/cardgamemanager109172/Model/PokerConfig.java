@@ -81,7 +81,7 @@ public class PokerConfig {
         Deck pokerDeck = new Deck(rules,deck, rules.getDeckStarter());
 
         //CONFIGURATION FILES CREATOR
-        File outputDeckFile = new File("/Users/thevladdo/Desktop/PokerConfig");
+        File outputDeckFile = new File("/Users/thevladdo/Desktop/PokerDeck");
         File outputRulesFile = new File("/Users/thevladdo/Desktop/PokerRules");
         FileOutputStream deckFileOut;
         FileOutputStream rulesFileOut;
@@ -98,5 +98,15 @@ public class PokerConfig {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        /*
+        File outputMY = new File("/Users/thevladdo/Desktop/PokerDeckMY");
+        ConfigGenerator configGenerator = new ConfigGenerator(outputMY);
+        configGenerator.generateConfig(pokerDeck);
+
+        Deck my = (Deck) configGenerator.loadConfig();
+
+        System.out.println(pokerDeck.equals(my));
+         */
     }
 }
