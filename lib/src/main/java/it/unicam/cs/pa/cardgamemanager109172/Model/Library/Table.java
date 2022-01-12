@@ -1,6 +1,6 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.TableInterface;
 import java.util.ArrayList;
 import java.util.Objects;
 

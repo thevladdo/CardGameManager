@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
 /**
  * This interface will be implemented by "Card" class which will represent a generic card.

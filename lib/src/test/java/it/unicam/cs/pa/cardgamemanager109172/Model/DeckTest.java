@@ -1,5 +1,8 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Deck;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;

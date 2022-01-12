@@ -1,11 +1,13 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.HandInterface;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
 public class Hand extends Deck implements HandInterface {
+
+    private GameRules rules;
 
     public Hand(){
         super();
@@ -13,6 +15,25 @@ public class Hand extends Deck implements HandInterface {
 
     public Hand(GameRules gameRules, ArrayList<Card> hand, int starter){
         super(gameRules,hand,starter);
+        this.rules = gameRules;
+    }
+
+    public void add(Card card) {
+        if(this.getHand().size()+1 < this.rules.getMaxHandCount()){
+            this.getHand().add(card);
+        }
+    }
+
+    public void remove(Card card) {
+        if(this.getHand().size()-1 > this.rules.getMinHandCount()){
+            this.getHand().remove(card);
+        }
+    }
+
+    public void remove(int index) {
+        if(this.getHand().size()-1 > this.rules.getMinHandCount()){
+            this.getHand().remove(index);
+        }
     }
 
     @Override

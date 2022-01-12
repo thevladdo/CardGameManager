@@ -1,6 +1,9 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.*;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Deck;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Hand;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Table;
 
 /**
  * This interface will be implemented by "Player" class which will represent a player or a bot.

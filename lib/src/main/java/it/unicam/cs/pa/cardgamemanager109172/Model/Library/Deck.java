@@ -1,7 +1,6 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.DeckInterface;
-
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.DeckInterface;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,12 +16,14 @@ import java.util.Objects;
 public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
 
     private final ArrayList<Card> deck;
+    private GameRules rules;
 
     public Deck(){
         this.deck = null;
     }
 
     public Deck(GameRules gameRules, ArrayList<Card> newDeck, int starter){
+        this.rules = gameRules;
         gameRules.setDeckStarter(starter);
         if(newDeck.size() >= gameRules.getDeckMin()
                 && newDeck.size() <= gameRules.getDeckMax()
@@ -38,17 +39,23 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
 
     @Override
     public void add(Card card) {
-        this.deck.add(card);
+        if(this.getDeck().size()+1 < this.rules.getDeckMax()){
+            this.deck.add(card);
+        }
     }
 
     @Override
     public void remove(Card card) {
-        this.deck.remove(card);
+        if(this.getDeck().size()-1 > this.rules.getDeckMin()){
+            this.deck.remove(card);
+        }
     }
 
     @Override
     public void remove(int index) {
-        this.deck.remove(index);
+        if(this.getDeck().size()-1 > this.rules.getDeckMin()){
+            this.deck.remove(index);
+        }
     }
 
     @Override

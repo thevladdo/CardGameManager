@@ -1,6 +1,7 @@
-package it.unicam.cs.pa.rubamazzetto109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.rubamazzetto109172;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.*;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class Rubamazzetto {
                 
                 INIZIAMO !
                 """);
+                newGame();
             case 2:
                 System.exit(0);
         }
@@ -38,8 +40,11 @@ public class Rubamazzetto {
     }
 
     private static void newGame(){
+
+        //SOLO QUESTO
+
         Scanner user = new Scanner(System.in);
-        File deckConfig = new File("lib/src/test/gameConfigurations/ItalianDeck/ItalianDeck");
+        File deckConfig = new File("lib/src/main/java/it/unicam/cs/pa/gameConfigurations/ItalianDeck/ItalianDeck");
         ConfigGenerator deckLoader = new ConfigGenerator(deckConfig);
 
         //RULES
@@ -47,18 +52,20 @@ public class Rubamazzetto {
         GameRules rules = new GameRules(
                 1,10,
                 0,40,40,
-                0,0,weights);
+                0,3,weights);
 
-        //DECK
+        //DECKS
         Deck deck = (Deck) deckLoader.loadConfig();
+        Deck bounchOne = new Deck(rules,new ArrayList<>(1),0);
+        Deck bounchTwo = new Deck(rules,new ArrayList<>(1),0);
 
         //PLAYERS
         System.out.println("Insert your name:");
-        user.close();
         Player playerOne = new Player(
                 new Hand(rules,new ArrayList<>(1),0), user.nextLine(),1);
         Player playerTwo = new Player(
-                new Hand(rules,new ArrayList<>(1),0), user.nextLine(),1);
+                new Hand(rules,new ArrayList<>(1),0), "BotMan",1);
+        user.close();
 
         //TABLE
         ArrayList<Player> players = new ArrayList<>(2);

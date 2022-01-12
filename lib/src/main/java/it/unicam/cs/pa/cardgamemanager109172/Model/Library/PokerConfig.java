@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -66,6 +66,7 @@ public class PokerConfig {
         Deck pokerDeck = new Deck(rules,deck, rules.getDeckStarter());
 
         //CONFIGURATION FILES CREATOR
+        /*
         File outputDeckFile = new File("/Users/thevladdo/Desktop/ItalianDeck");
         File outputRulesFile = new File("/Users/thevladdo/Desktop/ItalianRules");
         FileOutputStream deckFileOut;
@@ -83,6 +84,26 @@ public class PokerConfig {
         } catch (IOException e) {
             e.printStackTrace();
         }
+         */
+
+
+        File pippo = new File("lib/src/test/gameConfigurations/ItalianDeck/ItalianDeck");
+        ConfigGenerator configGenerator = new ConfigGenerator(pippo);
+        FileInputStream fileInputStream;
+        ObjectInputStream objectInputStream;
+        Deck mio = null;
+        try {
+            fileInputStream = new FileInputStream(pippo);
+            objectInputStream = new ObjectInputStream(fileInputStream);
+            mio = (Deck) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
+        System.out.println(pokerDeck.equals(mio));
+
 
         /*
         File outputMY = new File("/Users/thevladdo/Desktop/PokerDeckMY");
