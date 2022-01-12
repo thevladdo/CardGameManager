@@ -79,12 +79,16 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
 
     @Override
     public Card getFirstCard() {
-        return getCard(0);
+        Card firstCard = getCard(0);
+        this.remove(getCard(0));
+        return firstCard;
     }
 
     @Override
     public Card getLastCard() {
-        return getCard(this.deck.size()-1);
+        Card lastCard = getCard(this.deck.size()-1);
+        this.remove(getCard(this.deck.size()-1));
+        return lastCard;
     }
 
     @Override
