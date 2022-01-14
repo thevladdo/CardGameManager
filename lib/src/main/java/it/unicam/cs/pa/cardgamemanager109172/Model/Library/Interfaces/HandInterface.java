@@ -41,8 +41,8 @@ public interface HandInterface extends DeckInterface{
     Card getHighestCard();
 
     /**
-     * This method return the actual hand
+     * This method return the actual hand cards
      * @return the actual cards in the hand
      */
-    ArrayList<Card> getHand();
+    ArrayList<Card> getCards();
 }

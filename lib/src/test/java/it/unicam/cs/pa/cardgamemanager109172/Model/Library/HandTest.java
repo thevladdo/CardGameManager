@@ -1,9 +1,5 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Deck;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Hand;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,16 +37,16 @@ class HandTest {
         expected.add(card1);
         expected.add(card3);
         hand.moveTo(card1,1);
-        assertEquals(expected,hand.getHand());
+        assertEquals(expected,hand.getCards());
     }
 
     @Test
     void clear() {
         Hand hand = createHand();
         ArrayList<Card> expected = new ArrayList<>(0);
-        assertNotEquals(expected,hand.getHand());
+        assertNotEquals(expected,hand.getCards());
         hand.clear();
-        assertEquals(expected,hand.getHand());
+        assertEquals(expected,hand.getCards());
     }
 
     @Test
@@ -71,7 +67,7 @@ class HandTest {
         ArrayList<Card> expected = new ArrayList<>(3);
         expected.add(card1);
         expected.add(card2);
-        assertEquals(expected,hand.getHand());
+        assertEquals(expected,hand.getCards());
     }
 
     @Test
@@ -116,11 +112,13 @@ class HandTest {
                 CARD:\s
                 Suit = Hearts
                 Color = Red
-                Value = 5,\s
+                Value = 5
+                Weight = 5,\s
                 CARD:\s
                 Suit = Aces
                 Color = Black
-                Value = 1]""";
+                Value = 1
+                Weight = 14]""";
         assertEquals(expected,hand.toString());
     }
 }

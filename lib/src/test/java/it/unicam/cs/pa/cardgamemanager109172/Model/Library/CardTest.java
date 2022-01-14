@@ -1,12 +1,8 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {

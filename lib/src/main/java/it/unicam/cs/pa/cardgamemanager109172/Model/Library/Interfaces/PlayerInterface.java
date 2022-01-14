@@ -1,9 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Deck;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Hand;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Table;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
+import java.util.ArrayList;
 
 /**
  * This interface will be implemented by "Player" class which will represent a player or a bot.
@@ -73,7 +71,7 @@ public interface PlayerInterface {
     int getPoints();
 
     /**
-     * This method get the cards in the player's hand
+     * This method get the hand of the player
      * @return the Hand
      */
     Hand getPlayerHand();

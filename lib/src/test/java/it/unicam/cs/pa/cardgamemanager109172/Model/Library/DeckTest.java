@@ -1,8 +1,5 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Deck;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -178,15 +175,18 @@ class DeckTest {
                 CARD:\s
                 Suit = Hearts
                 Color = Red
-                Value = 6,\s
+                Value = 6
+                Weight = 6,\s
                 CARD:\s
                 Suit = Hearts
                 Color = Red
-                Value = 5,\s
+                Value = 5
+                Weight = 5,\s
                 CARD:\s
                 Suit = Hearts
                 Color = Red
-                Value = 11]""";
+                Value = 11
+                Weight = 11]""";
         assertEquals(expected,testDeck.toString());
     }
 

@@ -19,20 +19,20 @@ public class Hand extends Deck implements HandInterface {
     }
 
     public void add(Card card) {
-        if(this.getHand().size()+1 < this.rules.getMaxHandCount()){
-            this.getHand().add(card);
+        if(this.getCards().size()+1 < this.rules.getMaxHandCount()){
+            this.getCards().add(card);
         }
     }
 
     public void remove(Card card) {
-        if(this.getHand().size()-1 > this.rules.getMinHandCount()){
-            this.getHand().remove(card);
+        if(this.getCards().size()-1 > this.rules.getMinHandCount()){
+            this.getCards().remove(card);
         }
     }
 
     public void remove(int index) {
-        if(this.getHand().size()-1 > this.rules.getMinHandCount()){
-            this.getHand().remove(index);
+        if(this.getCards().size()-1 > this.rules.getMinHandCount()){
+            this.getCards().remove(index);
         }
     }
 
@@ -58,7 +58,7 @@ public class Hand extends Deck implements HandInterface {
     }
 
     @Override
-    public ArrayList<Card> getHand(){
+    public ArrayList<Card> getCards(){
         return super.getDeck();
     }
 
@@ -68,12 +68,12 @@ public class Hand extends Deck implements HandInterface {
         if (this == o) return true;
         if (!(o instanceof Hand hand)) return false;
         if (!super.equals(o)) return false;
-        return Objects.equals(getHand(), hand.getHand());
+        return Objects.equals(getCards(), hand.getCards());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getHand());
+        return Objects.hash(super.hashCode(), getCards());
     }
 
     @Override

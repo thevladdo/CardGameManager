@@ -1,6 +1,5 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -160,7 +159,8 @@ class TableTest {
                 CARD:\s
                 Suit = Hearts
                 Color = Red
-                Value = 5]
+                Value = 5
+                Weight = 5]
                 Discarded cards = []
                 Players = [
                 PLAYER :
@@ -171,7 +171,8 @@ class TableTest {
                 CARD:\s
                 Suit = Aces
                 Color = Black
-                Value = 1]
+                Value = 1
+                Weight = 14]
                 Points = 0,\s
                 PLAYER :
                 Name = Frank'
@@ -181,7 +182,8 @@ class TableTest {
                 CARD:\s
                 Suit = Aces
                 Color = Black
-                Value = 1]
+                Value = 1
+                Weight = 14]
                 Points = 0]""";
         assertEquals(expected,table.toString());
     }
