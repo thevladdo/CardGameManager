@@ -53,7 +53,7 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
 
     @Override
     public void remove(int index) {
-        if(this.getDeck().size()-1 > this.rules.getDeckMin()){
+        if(this.getDeck().size() > this.rules.getDeckMin()){
             this.deck.remove(index);
         }
     }

@@ -30,6 +30,7 @@ public class ConfigGenerator{
             outputStream = new ObjectOutputStream(fileOutputStream);
             outputStream.writeObject(toSave);
             outputStream.close();
+            fileOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,6 +46,8 @@ public class ConfigGenerator{
             fileInputStream = new FileInputStream(this.file);
             inputStream = new ObjectInputStream(fileInputStream);
             loaded = inputStream.readObject();
+            inputStream.close();
+            fileInputStream.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

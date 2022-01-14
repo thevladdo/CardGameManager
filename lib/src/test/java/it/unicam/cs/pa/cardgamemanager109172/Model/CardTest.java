@@ -39,6 +39,12 @@ class CardTest {
     }
 
     @Test
+    void shouldGetWeight(){
+        Card card = initCard("Joker","Red",15,50);
+        assertEquals(50,card.getWeight());
+    }
+
+    @Test
     void shouldBeEquals() {
         Card card = initCard("Heart","Red",5,5);
         Object o = new Object();
@@ -69,7 +75,8 @@ class CardTest {
                 CARD:\s
                 Suit = Queen
                 Color = Red
-                Value = 5""";
+                Value = 5
+                Weight = 5""";
         assertEquals(expected,card.toString());
     }
 

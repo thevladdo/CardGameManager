@@ -26,4 +26,10 @@ public interface CardInterface {
      * @return the color of the card
      */
     String getColor();
+
+    /**
+     * Method for getting the weight of the card according to the specific game rules
+     * @return the weight of the card
+     */
+    int getWeight();
 }

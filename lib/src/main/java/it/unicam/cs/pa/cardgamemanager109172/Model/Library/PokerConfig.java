@@ -12,59 +12,62 @@ public class PokerConfig {
         GameRules rules = new GameRules(1,10,0,40,40,0,0,weights);
 
         //POKER DECK
-        ArrayList<Card> deck = new ArrayList<>(52);
-        deck.add(new Card("Swords","-",1,rules,1));
-        deck.add(new Card("Cups","-",1,rules,1));
-        deck.add(new Card("Coins","-",1,rules,1));
-        deck.add(new Card("Batons","-",1,rules,1));
+        ArrayList<Card> deckArray = new ArrayList<>(52);
+        deckArray.add(new Card("Swords","-",1,rules,1));
+        deckArray.add(new Card("Cups","-",1,rules,1));
+        deckArray.add(new Card("Coins","-",1,rules,1));
+        deckArray.add(new Card("Batons","-",1,rules,1));
 
-        deck.add(new Card("Swords","-",2,rules,2));
-        deck.add(new Card("Cups","-",2,rules,2));
-        deck.add(new Card("Coins","-",2,rules,2));
-        deck.add(new Card("Batons","-",2,rules,2));
+        deckArray.add(new Card("Swords","-",2,rules,2));
+        deckArray.add(new Card("Cups","-",2,rules,2));
+        deckArray.add(new Card("Coins","-",2,rules,2));
+        deckArray.add(new Card("Batons","-",2,rules,2));
 
-        deck.add(new Card("Swords","-",3,rules,3));
-        deck.add(new Card("Cups","-",3,rules,3));
-        deck.add(new Card("Coins","-",3,rules,3));
-        deck.add(new Card("Batons","-",3,rules,3));
+        deckArray.add(new Card("Swords","-",3,rules,3));
+        deckArray.add(new Card("Cups","-",3,rules,3));
+        deckArray.add(new Card("Coins","-",3,rules,3));
+        deckArray.add(new Card("Batons","-",3,rules,3));
 
-        deck.add(new Card("Swords","-",4,rules,4));
-        deck.add(new Card("Cups","-",4,rules,4));
-        deck.add(new Card("Coins","-",4,rules,4));
-        deck.add(new Card("Batons","-",4,rules,4));
+        deckArray.add(new Card("Swords","-",4,rules,4));
+        deckArray.add(new Card("Cups","-",4,rules,4));
+        deckArray.add(new Card("Coins","-",4,rules,4));
+        deckArray.add(new Card("Batons","-",4,rules,4));
 
-        deck.add(new Card("Swords","-",5,rules,5));
-        deck.add(new Card("Cups","-",5,rules,5));
-        deck.add(new Card("Coins","-",5,rules,5));
-        deck.add(new Card("Batons","-",5,rules,5));
+        deckArray.add(new Card("Swords","-",5,rules,5));
+        deckArray.add(new Card("Cups","-",5,rules,5));
+        deckArray.add(new Card("Coins","-",5,rules,5));
+        deckArray.add(new Card("Batons","-",5,rules,5));
 
-        deck.add(new Card("Swords","-",6,rules,6));
-        deck.add(new Card("Cups","-",6,rules,6));
-        deck.add(new Card("Coins","-",6,rules,6));
-        deck.add(new Card("Batons","-",6,rules,6));
+        deckArray.add(new Card("Swords","-",6,rules,6));
+        deckArray.add(new Card("Cups","-",6,rules,6));
+        deckArray.add(new Card("Coins","-",6,rules,6));
+        deckArray.add(new Card("Batons","-",6,rules,6));
 
-        deck.add(new Card("Swords","-",7,rules,7));
-        deck.add(new Card("Cups","-",7,rules,7));
-        deck.add(new Card("Coins","-",7,rules,7));
-        deck.add(new Card("Batons","-",7,rules,7));
+        deckArray.add(new Card("Swords","-",7,rules,7));
+        deckArray.add(new Card("Cups","-",7,rules,7));
+        deckArray.add(new Card("Coins","-",7,rules,7));
+        deckArray.add(new Card("Batons","-",7,rules,7));
 
-        deck.add(new Card("Swords Queen","-",8,rules,8));
-        deck.add(new Card("Cups Queen","-",8,rules,8));
-        deck.add(new Card("Coins Queen","-",8,rules,8));
-        deck.add(new Card("Batons Queen","-",8,rules,8));
+        deckArray.add(new Card("Swords Queen","-",8,rules,8));
+        deckArray.add(new Card("Cups Queen","-",8,rules,8));
+        deckArray.add(new Card("Coins Queen","-",8,rules,8));
+        deckArray.add(new Card("Batons Queen","-",8,rules,8));
 
-        deck.add(new Card("Swords Knight","-",9,rules,9));
-        deck.add(new Card("Cups Knight","-",9,rules,9));
-        deck.add(new Card("Coins Knight","-",9,rules,9));
-        deck.add(new Card("Batons Knight","-",9,rules,9));
+        deckArray.add(new Card("Swords Knight","-",9,rules,9));
+        deckArray.add(new Card("Cups Knight","-",9,rules,9));
+        deckArray.add(new Card("Coins Knight","-",9,rules,9));
+        deckArray.add(new Card("Batons Knight","-",9,rules,9));
 
-        deck.add(new Card("Swords King","-",10,rules,10));
-        deck.add(new Card("Cups King","-",10,rules,10));
-        deck.add(new Card("Coins King","-",10,rules,10));
-        deck.add(new Card("Batons King","-",10,rules,10));
+        deckArray.add(new Card("Swords King","-",10,rules,10));
+        deckArray.add(new Card("Cups King","-",10,rules,10));
+        deckArray.add(new Card("Coins King","-",10,rules,10));
+        deckArray.add(new Card("Batons King","-",10,rules,10));
 
-        Deck pokerDeck = new Deck(rules,deck, rules.getDeckStarter());
+        Deck deck = new Deck(rules,deckArray, rules.getDeckStarter());
 
+
+        ConfigGenerator configGenerator = new ConfigGenerator("/Users/thevladdo/Desktop/Italian.rules");
+        configGenerator.generateConfig(rules);
         //CONFIGURATION FILES CREATOR
         /*
         File outputDeckFile = new File("/Users/thevladdo/Desktop/ItalianDeck");
@@ -87,6 +90,7 @@ public class PokerConfig {
          */
 
 
+        /*
         File pippo = new File("lib/src/test/gameConfigurations/ItalianDeck/ItalianDeck");
         ConfigGenerator configGenerator = new ConfigGenerator(pippo);
         FileInputStream fileInputStream;
@@ -104,6 +108,8 @@ public class PokerConfig {
 
         System.out.println(pokerDeck.equals(mio));
 
+         */
+
 
         /*
         File outputMY = new File("/Users/thevladdo/Desktop/PokerDeckMY");
@@ -114,5 +120,6 @@ public class PokerConfig {
 
         System.out.println(pokerDeck.equals(my));
          */
+
     }
 }

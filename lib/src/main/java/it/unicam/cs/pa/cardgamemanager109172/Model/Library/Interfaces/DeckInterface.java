@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
@@ -10,12 +11,15 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
  * The constructor of the class that will implement this interface will have as argument an object of
  * {@link GameRules} to manage the maximum and minimum number of cards that a deck can have.
  * The constructor of the class that will implement this interface will have as argument an
- * {@link ArrayList< Card >} to avoid privacy leak.
+ * {@link ArrayList<Card>} to avoid privacy leak.
  */
 public interface DeckInterface {
 
     /**
-     * This method randomly mix the order of the cards in the deck
+     * This method randomly mix the order of the cards in the deck.
+     * This method may not shuffle because the {@link Collections}'s shuffle() method
+     * has the probability to return the elements of the input in the same order.
+     * The size of the deck can proportionally increase or decrease this probability.
      */
     void shuffle();
 

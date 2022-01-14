@@ -39,8 +39,6 @@ class PlayerTest {
         return new Player(hand,"Alfred", 5);
     }
 
-    //TODO
-    /*
     @Test
     void drawCard(){
         Player player = createPlayer();
@@ -50,7 +48,6 @@ class PlayerTest {
         assertEquals(0,deck.getDeck().size());
         assertEquals(drawed,player.getPlayerHand().getCard(2));
     }
-     */
 
     @Test
     void placeCard() {

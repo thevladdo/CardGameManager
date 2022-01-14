@@ -7,7 +7,7 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Player;
 
 /**
  * This interface will be implemented by the "Table" class which will represent the table in a generic card game.
- * The constructor of the class that will implement this interface will have as argument an {@link ArrayList< Player >}
+ * The constructor of the class that will implement this interface will have as argument an {@link ArrayList<Player>}
  * to avoid privacy leak.
  */
 public interface TableInterface {

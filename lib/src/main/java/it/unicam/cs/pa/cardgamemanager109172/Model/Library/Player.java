@@ -26,7 +26,7 @@ public class Player implements PlayerInterface {
 
     @Override
     public void drawCard(Deck deck) {
-        Card drawnCard = deck.getCard(0);
+        Card drawnCard = deck.getCard(deck.getDeck().size()-1);
         deck.remove(deck.getDeck().size()-1);
         this.playerHand.add(drawnCard);
     }
