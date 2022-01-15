@@ -39,6 +39,12 @@ public interface RubamazzettoInterface {
     void newGame();
 
     /**
+     * This method finish the actual game
+     * @return the winner name
+     */
+    String finishGame();
+
+    /**
      * This method return the actual turn
      * @return the actual turn number
      */
@@ -68,10 +74,23 @@ public interface RubamazzettoInterface {
     Deck getBounchTwo();
 
     /**
+     * This method return the bounch of card of the specified player
+     * @param player the player
+     * @return his bounch of cards
+     */
+    Deck getPlayerBounch(Player player);
+
+    /**
      * This method return the first {@link Player}
      * @return the first player
      */
     Player getPlayerOne();
+
+    /**
+     * This method return the bot player
+     * @return the bot player
+     */
+    Player getBot();
 
     /**
      * This method return the {@link Table}

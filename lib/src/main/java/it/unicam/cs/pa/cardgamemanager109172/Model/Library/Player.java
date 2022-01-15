@@ -34,14 +34,14 @@ public class Player implements PlayerInterface {
     }
 
     @Override
-    public void placeCard(int position, Table table) {
-        table.addCard(showCard(position));
-        this.playerHand.remove(position);
+    public void placeCard(int handPosition, Table table) {
+        table.addCard(showCard(handPosition));
+        this.playerHand.remove(handPosition);
     }
 
     @Override
-    public Card showCard(int position) {
-        return this.playerHand.getCard(position);
+    public Card showCard(int handPosition) {
+        return this.playerHand.getCard(handPosition);
     }
 
     @Override
