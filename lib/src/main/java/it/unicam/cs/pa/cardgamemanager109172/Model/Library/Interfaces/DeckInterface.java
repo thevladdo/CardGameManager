@@ -1,7 +1,9 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
 import java.util.ArrayList;
-import it.unicam.cs.pa.cardgamemanager109172.Model.*;
+import java.util.Collections;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
 
 /**
  * This interface will be implemented by the "Deck" class which will represent a deck of a generic game.
@@ -13,7 +15,10 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.*;
 public interface DeckInterface {
 
     /**
-     * This method randomly mix the order of the cards in the deck
+     * This method randomly mix the order of the cards in the deck.
+     * This method may not shuffle because the {@link Collections}'s shuffle() method
+     * has the probability to return the elements of the input in the same order.
+     * The size of the deck can proportionally increase or decrease this probability.
      */
     void shuffle();
 
@@ -79,5 +84,5 @@ public interface DeckInterface {
      * This method return the actual deck
      * @return the actual cards in the deck
      */
-    ArrayList<Card> getDeck();
+    ArrayList<Card> getDeckCards();
 }

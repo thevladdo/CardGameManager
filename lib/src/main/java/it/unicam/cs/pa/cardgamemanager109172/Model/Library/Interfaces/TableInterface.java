@@ -1,7 +1,9 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
 import java.util.ArrayList;
-import it.unicam.cs.pa.cardgamemanager109172.Model.*;
+
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Player;
 
 /**
  * This interface will be implemented by the "Table" class which will represent the table in a generic card game.

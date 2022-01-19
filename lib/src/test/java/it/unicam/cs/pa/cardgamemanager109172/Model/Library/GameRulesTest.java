@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -113,13 +113,8 @@ class GameRulesTest {
     void shouldGetDeckStarter() {
         GameRules rules = createRules();
         assertEquals(0,rules.getDeckStarter());
-        ArrayList<Card> deckCards = new ArrayList<>(4);
-        deckCards.add(new Card("Joker","Red",15,rules,15));
-        deckCards.add(new Card("Queen","Black",12,rules,12));
-        deckCards.add(new Card("King","Red",13,rules,13));
-        deckCards.add(new Card("Queen","Red",12,rules,12));
-        Deck deck = new Deck(rules,deckCards,4);
-        assertEquals(4,rules.getDeckStarter());
+        rules.setDeckStarter(5);
+        assertEquals(5,rules.getDeckStarter());
     }
 
     @Test
@@ -213,5 +208,14 @@ class GameRulesTest {
                 "\n Minimum Cards number in Hand = " + rules.getMinHandCount() +
                 "\n Maximum Cards number in Hand = " + rules.getMaxHandCount();
         assertEquals(expected,rules.toString());
+    }
+
+    @Test
+    void shouldClone() {
+        GameRules rules = createRules();
+        GameRules cloned = rules.clone();
+        assertEquals(rules,cloned);
+        rules.setDeckMin(5);
+        assertNotEquals(rules,cloned);
     }
 }

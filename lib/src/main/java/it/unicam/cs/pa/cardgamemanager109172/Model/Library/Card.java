@@ -1,6 +1,7 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -10,27 +11,32 @@ import java.util.Objects;
  * The constructor of this class will have as argument an object of type {@link GameRules}
  * that will be used to know what will be the minimum and maximum value of a card and to set a weight.
  */
-public class Card implements CardInterface, Comparable<Card>{
+public class Card implements CardInterface, Comparable<Card>, Serializable {
 
+    private final GameRules rules;
     private final String suit;
     private final String color;
     private final int value;
-    //TODO create GameRules for weight in equals with Singleton
+    private final int weight;
 
     public Card(GameRules gameRules){
+        this.rules = gameRules;
         this.suit = "";
         this.color = "";
         this.value = gameRules.getMinCardValue();
-        gameRules.setCardWeight(this,-1);
+        this.weight = -1;
+        this.rules.setCardWeight(this,this.weight);
     }
 
     public Card(String suit, String color, int value, GameRules gameRules, int weight){
-        if(gameRules.getMinCardValue() <= value && gameRules.getMaxCardValue() >= value){
+        this.rules = gameRules;
+        if(this.rules.getMinCardValue() <= value && this.rules.getMaxCardValue() >= value){
             this.value = value;
         } else throw new IllegalArgumentException("The value of the card must be in rule's limits");
         this.suit = suit;
         this.color = color;
-        gameRules.setCardWeight(this,weight);
+        this.weight = weight;
+        this.rules.setCardWeight(this,this.weight);
     }
 
     @Override
@@ -50,8 +56,11 @@ public class Card implements CardInterface, Comparable<Card>{
         return this.color;
     }
 
+    @Override
+    public int getWeight(){
+        return this.weight;
+    }
 
-    //TODO equals weight
     @Override
     public boolean equals(Object o) {
         if (o == null) throw new NullPointerException("Object 'o' is Null");
@@ -59,12 +68,13 @@ public class Card implements CardInterface, Comparable<Card>{
         if (!(o instanceof Card card)) return false;
         return this.getValue() == card.getValue() &&
                 this.getSuit().equals(card.getSuit()) &&
-                this.getColor().equals(card.getColor());
+                this.getColor().equals(card.getColor()) &&
+                this.getWeight() == card.getWeight();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSuit(), getColor(), getValue());
+        return Objects.hash(getSuit(), getColor(), getValue(), getWeight());
     }
 
     @Override
@@ -72,7 +82,8 @@ public class Card implements CardInterface, Comparable<Card>{
         return "\nCARD: " +
                 "\nSuit = " + this.suit +
                 "\nColor = " + this.color +
-                "\nValue = " + this.value;
+                "\nValue = " + this.value +
+                "\nWeight = " + this.weight;
     }
 
     @Override

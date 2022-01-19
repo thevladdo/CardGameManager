@@ -1,6 +1,7 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.*;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
+import java.util.ArrayList;
 
 /**
  * This interface will be implemented by "Player" class which will represent a player or a bot.
@@ -11,7 +12,6 @@ public interface PlayerInterface {
 
     /**
      * This method draws a card from the deck and adds it to the player's hand.
-     * Use isInLimit() to control if the new number of card in the hand complies with the rules of the game.
      */
     void drawCard(Deck deck);
 
@@ -71,7 +71,7 @@ public interface PlayerInterface {
     int getPoints();
 
     /**
-     * This method get the cards in the player's hand
+     * This method get the hand of the player
      * @return the Hand
      */
     Hand getPlayerHand();

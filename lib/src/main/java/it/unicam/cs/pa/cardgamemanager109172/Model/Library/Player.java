@@ -1,6 +1,7 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.*;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.PlayerInterface;
+
 import java.util.Objects;
 
 /**
@@ -26,20 +27,20 @@ public class Player implements PlayerInterface {
 
     @Override
     public void drawCard(Deck deck) {
-        Card drawnCard = deck.getCard(0);
-        deck.remove(deck.getDeck().size()-1);
+        Card drawnCard = deck.getCard(deck.getDeckCards().size()-1);
+        deck.remove(deck.getDeckCards().size()-1);
         this.playerHand.add(drawnCard);
     }
 
     @Override
-    public void placeCard(int position, Table table) {
-        table.addCard(showCard(position));
-        this.playerHand.remove(position);
+    public void placeCard(int handPosition, Table table) {
+        table.addCard(showCard(handPosition));
+        this.playerHand.remove(handPosition);
     }
 
     @Override
-    public Card showCard(int position) {
-        return this.playerHand.getCard(position);
+    public Card showCard(int handPosition) {
+        return this.playerHand.getCard(handPosition);
     }
 
     @Override

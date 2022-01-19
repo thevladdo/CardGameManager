@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
 /**
  * This interface will be implemented by "Card" class which will represent a generic card.
@@ -26,4 +26,10 @@ public interface CardInterface {
      * @return the color of the card
      */
     String getColor();
+
+    /**
+     * Method for getting the weight of the card according to the specific game rules
+     * @return the weight of the card
+     */
+    int getWeight();
 }

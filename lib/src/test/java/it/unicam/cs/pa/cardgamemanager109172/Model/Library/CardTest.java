@@ -1,10 +1,8 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {
@@ -34,6 +32,12 @@ class CardTest {
     void shouldGetColor() {
         Card card = initCard("Aces","Red",1,14);
         assertEquals("Red",card.getColor());
+    }
+
+    @Test
+    void shouldGetWeight(){
+        Card card = initCard("Joker","Red",15,50);
+        assertEquals(50,card.getWeight());
     }
 
     @Test
@@ -67,7 +71,8 @@ class CardTest {
                 CARD:\s
                 Suit = Queen
                 Color = Red
-                Value = 5""";
+                Value = 5
+                Weight = 5""";
         assertEquals(expected,card.toString());
     }
 

@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
 import org.junit.jupiter.api.Test;
 import java.util.*;
@@ -35,10 +35,10 @@ class DeckTest {
     @Test
     void shouldShuffle() {
         Deck toShuffle = createDeck();
-        ArrayList<Card> toShuffleDeck = new ArrayList<>(toShuffle.getDeck());
-        assertEquals(toShuffleDeck,toShuffle.getDeck());
+        ArrayList<Card> toShuffleDeck = new ArrayList<>(toShuffle.getDeckCards());
+        assertEquals(toShuffleDeck,toShuffle.getDeckCards());
         toShuffle.shuffle();
-        assertNotEquals(toShuffleDeck,toShuffle.getDeck());
+        assertNotEquals(toShuffleDeck,toShuffle.getDeckCards());
     }
 
     @Test
@@ -77,7 +77,7 @@ class DeckTest {
         expected.add(card1);
         expected.add(card3);
         testDeck.sortBySuit();
-        assertEquals(expected,testDeck.getDeck());
+        assertEquals(expected,testDeck.getDeckCards());
     }
 
     @Test
@@ -88,7 +88,7 @@ class DeckTest {
         sorted.add(card2);
         sorted.add(card3);
         testDeck.sortAscending();
-        assertEquals(sorted,testDeck.getDeck());
+        assertEquals(sorted,testDeck.getDeckCards());
     }
 
     @Test
@@ -99,7 +99,7 @@ class DeckTest {
         sorted.add(card2);
         sorted.add(card1);
         testDeck.sortDescending();
-        assertEquals(sorted,testDeck.getDeck());
+        assertEquals(sorted,testDeck.getDeckCards());
     }
 
     @Test
@@ -136,7 +136,7 @@ class DeckTest {
         expected.add(new Card("Hearts","Red",6, rules,6));
         expected.add(new Card("Hearts","Red",5, rules,5));
         expected.add(new Card("Hearts","Red",11, rules,11));
-        assertEquals(expected,testDeck.getDeck());
+        assertEquals(expected,testDeck.getDeckCards());
     }
 
     @Test
@@ -175,15 +175,18 @@ class DeckTest {
                 CARD:\s
                 Suit = Hearts
                 Color = Red
-                Value = 6,\s
+                Value = 6
+                Weight = 6,\s
                 CARD:\s
                 Suit = Hearts
                 Color = Red
-                Value = 5,\s
+                Value = 5
+                Weight = 5,\s
                 CARD:\s
                 Suit = Hearts
                 Color = Red
-                Value = 11]""";
+                Value = 11
+                Weight = 11]""";
         assertEquals(expected,testDeck.toString());
     }
 

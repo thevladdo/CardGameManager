@@ -1,6 +1,7 @@
-package it.unicam.cs.pa.cardgamemanager109172.Model;
+package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Interfaces.DeckInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.DeckInterface;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
@@ -12,19 +13,21 @@ import java.util.Objects;
  * The constructor of the class that will implement this interface will have as argument an
  * {@link ArrayList<Card>} to avoid privacy leak.
  */
-public class Deck implements DeckInterface, Comparable<Deck>{
+public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
 
     private final ArrayList<Card> deck;
+    private GameRules rules;
 
     public Deck(){
         this.deck = null;
     }
 
     public Deck(GameRules gameRules, ArrayList<Card> newDeck, int starter){
-        gameRules.setDeckStarter(starter);
-        if(newDeck.size() >= gameRules.getDeckMin()
-                && newDeck.size() <= gameRules.getDeckMax()
-                && newDeck.size() == gameRules.getDeckStarter()) {
+        this.rules = gameRules.clone();
+        this.rules.setDeckStarter(starter);
+        if(newDeck.size() >= this.rules.getDeckMin()
+                && newDeck.size() <= this.rules.getDeckMax()
+                && newDeck.size() == this.rules.getDeckStarter()) {
             this.deck = new ArrayList<>(newDeck);
         } else throw new IllegalArgumentException("The new deck must be in rule's limits");
     }
@@ -36,17 +39,23 @@ public class Deck implements DeckInterface, Comparable<Deck>{
 
     @Override
     public void add(Card card) {
-        this.deck.add(card);
+        if(this.getDeckCards().size()+1 <= this.rules.getDeckMax()){
+            this.deck.add(card);
+        }
     }
 
     @Override
     public void remove(Card card) {
-        this.deck.remove(card);
+        if(this.getDeckCards().size()-1 >= this.rules.getDeckMin()){
+            this.deck.remove(card);
+        }
     }
 
     @Override
     public void remove(int index) {
-        this.deck.remove(index);
+        if(this.getDeckCards().size() > this.rules.getDeckMin()){
+            this.deck.remove(index);
+        }
     }
 
     @Override
@@ -77,16 +86,20 @@ public class Deck implements DeckInterface, Comparable<Deck>{
 
     @Override
     public Card getFirstCard() {
-        return getCard(0);
+        Card firstCard = getCard(0);
+        //this.remove(getCard(0));
+        return firstCard;
     }
 
     @Override
     public Card getLastCard() {
-        return getCard(this.deck.size()-1);
+        Card lastCard = getCard(this.deck.size()-1);
+        //this.remove(getCard(this.deck.size()-1));
+        return lastCard;
     }
 
     @Override
-    public ArrayList<Card> getDeck() {
+    public ArrayList<Card> getDeckCards() {
         return this.deck;
     }
 
@@ -95,19 +108,18 @@ public class Deck implements DeckInterface, Comparable<Deck>{
         if (o == null) throw new NullPointerException("Object 'o' is Null");
         if (this == o) return true;
         if (!(o instanceof Deck deck)) return false;
-        return getDeck().equals(deck.getDeck());
+        return getDeckCards().equals(deck.getDeckCards());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDeck());
+        return Objects.hash(getDeckCards());
     }
 
     @Override
     public String toString() {
         return "\nDeck: " + this.deck.toString();
     }
-
 
     @Override
     public int compareTo(Deck toCompare) {
