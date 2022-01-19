@@ -2,7 +2,6 @@ package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
 
@@ -85,5 +84,5 @@ public interface DeckInterface {
      * This method return the actual deck
      * @return the actual cards in the deck
      */
-    ArrayList<Card> getDeck();
+    ArrayList<Card> getDeckCards();
 }

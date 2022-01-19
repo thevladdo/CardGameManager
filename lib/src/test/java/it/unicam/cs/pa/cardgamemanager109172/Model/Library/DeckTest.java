@@ -35,10 +35,10 @@ class DeckTest {
     @Test
     void shouldShuffle() {
         Deck toShuffle = createDeck();
-        ArrayList<Card> toShuffleDeck = new ArrayList<>(toShuffle.getDeck());
-        assertEquals(toShuffleDeck,toShuffle.getDeck());
+        ArrayList<Card> toShuffleDeck = new ArrayList<>(toShuffle.getDeckCards());
+        assertEquals(toShuffleDeck,toShuffle.getDeckCards());
         toShuffle.shuffle();
-        assertNotEquals(toShuffleDeck,toShuffle.getDeck());
+        assertNotEquals(toShuffleDeck,toShuffle.getDeckCards());
     }
 
     @Test
@@ -77,7 +77,7 @@ class DeckTest {
         expected.add(card1);
         expected.add(card3);
         testDeck.sortBySuit();
-        assertEquals(expected,testDeck.getDeck());
+        assertEquals(expected,testDeck.getDeckCards());
     }
 
     @Test
@@ -88,7 +88,7 @@ class DeckTest {
         sorted.add(card2);
         sorted.add(card3);
         testDeck.sortAscending();
-        assertEquals(sorted,testDeck.getDeck());
+        assertEquals(sorted,testDeck.getDeckCards());
     }
 
     @Test
@@ -99,7 +99,7 @@ class DeckTest {
         sorted.add(card2);
         sorted.add(card1);
         testDeck.sortDescending();
-        assertEquals(sorted,testDeck.getDeck());
+        assertEquals(sorted,testDeck.getDeckCards());
     }
 
     @Test
@@ -136,7 +136,7 @@ class DeckTest {
         expected.add(new Card("Hearts","Red",6, rules,6));
         expected.add(new Card("Hearts","Red",5, rules,5));
         expected.add(new Card("Hearts","Red",11, rules,11));
-        assertEquals(expected,testDeck.getDeck());
+        assertEquals(expected,testDeck.getDeckCards());
     }
 
     @Test

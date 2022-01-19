@@ -45,6 +45,12 @@ public interface RubamazzettoInterface {
     String finishGame();
 
     /**
+     * This method choose who is the starter player of a new game
+     * @return the starter player
+     */
+    Player defineStarter();
+
+    /**
      * This method return the actual turn
      * @return the actual turn number
      */

@@ -19,47 +19,47 @@ public class Hand extends Deck implements HandInterface {
     }
 
     public void add(Card card) {
-        if(this.getCards().size()+1 < this.rules.getMaxHandCount()){
+        if(this.getCards().size()+1 <= this.rules.getMaxHandCount()){
             this.getCards().add(card);
         }
     }
 
     public void remove(Card card) {
-        if(this.getCards().size()-1 > this.rules.getMinHandCount()){
+        if(this.getCards().size()-1 >= this.rules.getMinHandCount()){
             this.getCards().remove(card);
         }
     }
 
     public void remove(int index) {
-        if(this.getCards().size()-1 > this.rules.getMinHandCount()){
+        if(this.getCards().size()-1 >= this.rules.getMinHandCount()){
             this.getCards().remove(index);
         }
     }
 
     @Override
     public void moveTo(Card card, int index) {
-        super.getDeck().remove(card);
-        super.getDeck().add(index,card);
+        super.getDeckCards().remove(card);
+        super.getDeckCards().add(index,card);
     }
 
     @Override
     public void clear() {
-        super.getDeck().clear();
+        super.getDeckCards().clear();
     }
 
     @Override
     public Card getLowestCard() {
-        return Collections.min(super.getDeck());
+        return Collections.min(super.getDeckCards());
     }
 
     @Override
     public Card getHighestCard() {
-        return Collections.max(super.getDeck());
+        return Collections.max(super.getDeckCards());
     }
 
     @Override
     public ArrayList<Card> getCards(){
-        return super.getDeck();
+        return super.getDeckCards();
     }
 
     @Override
@@ -78,6 +78,6 @@ public class Hand extends Deck implements HandInterface {
 
     @Override
     public String toString() {
-        return "\nHAND: " + super.getDeck().toString();
+        return "\nHAND: " + super.getDeckCards().toString();
     }
 }

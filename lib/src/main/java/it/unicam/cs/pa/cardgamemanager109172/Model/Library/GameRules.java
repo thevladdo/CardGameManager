@@ -10,7 +10,7 @@ import java.util.Objects;
  * It contains all the behavior concerning the rules.
  * The constructor will create a Map to associate a card with a weight value.
  */
-public class GameRules implements GameRulesInterface, Serializable {
+public class GameRules implements GameRulesInterface,Cloneable ,Serializable {
 
     private final Map<Card, Integer> cardWeight;
     private int minCardValue;
@@ -182,5 +182,22 @@ public class GameRules implements GameRulesInterface, Serializable {
                 "\n Starter number of Cards in Deck = " + deckStarter +
                 "\n Minimum Cards number in Hand = " + minHand +
                 "\n Maximum Cards number in Hand = " + maxHand;
+    }
+
+    @Override
+    public GameRules clone() {
+        try {
+            GameRules clone = (GameRules) super.clone();
+            clone.setMinCardValue(this.getMinCardValue());
+            clone.setMaxCardValue(this.getMaxCardValue());
+            clone.setDeckMin(this.getDeckMin());
+            clone.setDeckMax(this.getDeckMax());
+            clone.setDeckStarter(this.getDeckStarter());
+            clone.setMinHandCount(this.getMinHandCount());
+            clone.setMaxCardValue(this.getMaxCardValue());
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

@@ -23,11 +23,11 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
     }
 
     public Deck(GameRules gameRules, ArrayList<Card> newDeck, int starter){
-        this.rules = gameRules;
-        gameRules.setDeckStarter(starter);
-        if(newDeck.size() >= gameRules.getDeckMin()
-                && newDeck.size() <= gameRules.getDeckMax()
-                && newDeck.size() == gameRules.getDeckStarter()) {
+        this.rules = gameRules.clone();
+        this.rules.setDeckStarter(starter);
+        if(newDeck.size() >= this.rules.getDeckMin()
+                && newDeck.size() <= this.rules.getDeckMax()
+                && newDeck.size() == this.rules.getDeckStarter()) {
             this.deck = new ArrayList<>(newDeck);
         } else throw new IllegalArgumentException("The new deck must be in rule's limits");
     }
@@ -39,21 +39,21 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
 
     @Override
     public void add(Card card) {
-        if(this.getDeck().size()+1 < this.rules.getDeckMax()){
+        if(this.getDeckCards().size()+1 <= this.rules.getDeckMax()){
             this.deck.add(card);
         }
     }
 
     @Override
     public void remove(Card card) {
-        if(this.getDeck().size()-1 > this.rules.getDeckMin()){
+        if(this.getDeckCards().size()-1 >= this.rules.getDeckMin()){
             this.deck.remove(card);
         }
     }
 
     @Override
     public void remove(int index) {
-        if(this.getDeck().size() > this.rules.getDeckMin()){
+        if(this.getDeckCards().size() > this.rules.getDeckMin()){
             this.deck.remove(index);
         }
     }
@@ -87,19 +87,19 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
     @Override
     public Card getFirstCard() {
         Card firstCard = getCard(0);
-        this.remove(getCard(0));
+        //this.remove(getCard(0));
         return firstCard;
     }
 
     @Override
     public Card getLastCard() {
         Card lastCard = getCard(this.deck.size()-1);
-        this.remove(getCard(this.deck.size()-1));
+        //this.remove(getCard(this.deck.size()-1));
         return lastCard;
     }
 
     @Override
-    public ArrayList<Card> getDeck() {
+    public ArrayList<Card> getDeckCards() {
         return this.deck;
     }
 
@@ -108,12 +108,12 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
         if (o == null) throw new NullPointerException("Object 'o' is Null");
         if (this == o) return true;
         if (!(o instanceof Deck deck)) return false;
-        return getDeck().equals(deck.getDeck());
+        return getDeckCards().equals(deck.getDeckCards());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDeck());
+        return Objects.hash(getDeckCards());
     }
 
     @Override

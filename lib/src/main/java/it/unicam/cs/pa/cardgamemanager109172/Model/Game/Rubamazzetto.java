@@ -1,9 +1,9 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Game;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -15,6 +15,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
 
     private int turn;
     private Deck deck;
+    private GameRules rules;
     private final Deck bounchOne;
     private final Deck bounchTwo;
     private final Player playerOne;
@@ -33,21 +34,19 @@ public class Rubamazzetto implements RubamazzettoInterface {
 
     public Rubamazzetto(String playerName){
         this.turn = 0;
-        File deckConfig = new File(
-                "lib/src/main/java/it/unicam/cs/pa/gameConfigurations/Italian.deck");
-        ConfigGenerator deckLoader = new ConfigGenerator(deckConfig);
         HashMap<Card,Integer> weights = new HashMap<>(40);
-        GameRules rules = new GameRules(
+        this.rules = new GameRules(
                 1, 10,
                 0, 40, 40,
                 0, 3, weights);
-        this.deck = ((Deck) deckLoader.loadConfig());
+        DeckConfigFactory factory = new DeckConfigFactory(rules);
+        this.deck = factory.ItalianDeck();
         this.bounchOne = new Deck(rules,new ArrayList<>(1),0);
         this.bounchTwo = new Deck(rules,new ArrayList<>(1),0);
         this.playerOne = new Player(
                 new Hand(rules,new ArrayList<>(1),0), playerName,1);
         this.bot =new Player(
-                new Hand(rules,new ArrayList<>(1),0), playerName,2);
+                new Hand(rules,new ArrayList<>(1),0), "Bot",2);
         ArrayList<Player> players = new ArrayList<>(2);
         players.add(this.playerOne);
         players.add(this.bot);
@@ -57,6 +56,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
     @Override
     public void newGame(){
         resetGame();
+        this.deck.shuffle();
         dealer();
     }
 
@@ -67,6 +67,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
         return winner;
     }
 
+    @Override
     public Player defineStarter(){
         if (whoStart() == 0) return this.playerOne;
         return this.bot;
@@ -121,20 +122,25 @@ public class Rubamazzetto implements RubamazzettoInterface {
     }
 
     private void dealer(){
-        this.deck.shuffle();
-        for (Player player : this.table.getPlayers()) {
-            for (int i = 0; i < 3; i++) {
-                player.drawCard(this.deck);
+        if (this.getPlayerOne().getPlayerHand().getCards().size() == 0 &&
+                this.getBot().getPlayerHand().getCards().size() == 0){
+            for (Player player : this.table.getPlayers()) {
+                for (int i = 1; i <= 3; i++) {
+                    player.drawCard(this.deck);
+                }
             }
         }
-        for (int i = 0; i < 4; i++) {
-            this.table.addCard(this.deck.getFirstCard());
+        if (this.table.getOnTableCards().size() == 0){
+            for (int i = 1; i <= 4; i++) {
+                this.table.addCard(this.deck.getFirstCard());
+            }
         }
     }
 
     private boolean cantContinue(){
-        return ((this.deck.getDeck().size() == 0) &&
-                ((this.bounchOne.getDeck().size() == 0) || (this.bounchTwo.getDeck().size() == 0)));
+        return ((this.deck.getDeckCards().size() == 0) &&
+                ((this.getPlayerOne().getPlayerHand().getCards().size() == 0) ||
+                        (this.getBot().getPlayerHand().getCards().size() == 0)));
     }
 
     private String findWinner(){
@@ -146,13 +152,13 @@ public class Rubamazzetto implements RubamazzettoInterface {
     }
 
     private void resetGame(){
-        File deckConfig = new File(
-                "lib/src/main/java/it/unicam/cs/pa/gameConfigurations/Italian.deck");
-        ConfigGenerator deckLoader = new ConfigGenerator(deckConfig);
-        this.deck = ((Deck) deckLoader.loadConfig());
+        DeckConfigFactory factory = new DeckConfigFactory(this.rules);
+        this.deck = factory.ItalianDeck();
         this.turn = 0;
-        this.bounchOne.getDeck().clear();
-        this.bounchTwo.getDeck().clear();
+        this.bounchOne.getDeckCards().clear();
+        this.bounchTwo.getDeckCards().clear();
+        this.playerOne.getPlayerHand().clear();
+        this.bot.getPlayerHand().clear();
     }
 
     private int whoStart(){
@@ -161,7 +167,33 @@ public class Rubamazzetto implements RubamazzettoInterface {
         return rand.nextInt(upperbound);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) throw new NullPointerException("Object 'o' is Null");
+        if (this == o) return true;
+        if (!(o instanceof Rubamazzetto rm)) return false;
+        return getTurn() == rm.getTurn() &&
+                Objects.equals(getDeck(), rm.getDeck()) &&
+                Objects.equals(this.rules, rm.rules) &&
+                Objects.equals(getBounchOne(), rm.getBounchOne()) &&
+                Objects.equals(getBounchTwo(), rm.getBounchTwo()) &&
+                Objects.equals(getPlayerOne(), rm.getPlayerOne()) &&
+                Objects.equals(getBot(), rm.getBot()) &&
+                Objects.equals(getTable(), rm.getTable());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTurn(), getDeck(), this.rules, getBounchOne(),
+                getBounchTwo(), getPlayerOne(), getBot(), getTable());
+    }
+
+    //TODO separatore di classi
+
+
+    /**
+     * This inner class encompasses the actions the game can have.
+     */
     public class Actions {
 
         /**
@@ -173,13 +205,10 @@ public class Rubamazzetto implements RubamazzettoInterface {
             Card handCard = checkOtherBunch(turner);
             if (handCard != null){
                 switch (turner.getId()) {
-                    case 1 -> {
-                        unifyBounch(getBounchTwo(), getBounchOne(), handCard);
-                        getPlayerOne().getPlayerHand().remove(handCard);}
-                    case 2 -> {
-                        unifyBounch(getBounchOne(), getBounchTwo(), handCard);
-                        getBot().getPlayerHand().remove(handCard);}
+                    case 1 -> unifyBounch(getBounchTwo(),getBounchOne(), handCard);
+                    case 2 -> unifyBounch(getBounchOne(),getBounchTwo(), handCard);
                 }
+                turner.getPlayerHand().remove(handCard);
                 nextTurn();
                 return true;
             } else return false;
@@ -198,6 +227,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
                 getPlayerBounch(turner).add(moveCards.get(0));
                 getPlayerBounch(turner).add(moveCards.get(1));
                 getTable().removeCard(moveCards.get(0));
+                turner.getPlayerHand().remove(moveCards.get(1));
                 nextTurn();
             } else placeOnTable(handCardIndex);
         }
@@ -208,24 +238,33 @@ public class Rubamazzetto implements RubamazzettoInterface {
         }
 
         private void unifyBounch(Deck toMerge, Deck merged, Card last){
-            for (Card card : toMerge.getDeck()) {
-                merged.add(card);
-            }
+            merged.getDeckCards().addAll(toMerge.getDeckCards());
+            toMerge.getDeckCards().removeAll(toMerge.getDeckCards());
             merged.add(last);
         }
 
         private Card checkOtherBunch(Player turner){
-            for (Card inHand : getPlayerBounch(turner).getDeck()) {
-                if (inHand.equals(getPlayerBounch(turner).getLastCard())) return inHand;
+            switch (turner.getId()){
+                case 1 :
+                    for (Card inHand : turner.getPlayerHand().getCards()) {
+                        if (getBounchTwo().getDeckCards().size() != 0 &&
+                                inHand.getValue() == getBounchTwo().getLastCard().getValue()) return inHand;
+                    }
+                case 2 :
+                    for (Card inHand : turner.getPlayerHand().getCards()) {
+                        if (getBounchOne().getDeckCards().size() != 0 &&
+                                inHand.getValue() == getBounchOne().getLastCard().getValue()) return inHand;
+                    }
             }
             return null;
         }
 
         private ArrayList<Card> checkIfSame(Table table){
-            ArrayList<Card> toReturn = new ArrayList<>(2);
+            ArrayList<Card> toReturn = null;
             for (Card inHand : getPlayerOne().getPlayerHand().getCards()) {
                 for (Card onTable : table.getOnTableCards()) {
                     if (inHand.getValue() == onTable.getValue()){
+                        toReturn = new ArrayList<>(2);
                         toReturn.add(onTable);
                         toReturn.add(inHand);
                     }
@@ -235,34 +274,4 @@ public class Rubamazzetto implements RubamazzettoInterface {
             return null;
         }
     }
-
-
-    /*
-    public static void main(String[] args) {
-        Scanner user = new Scanner(System.in);
-        System.out.println("""
-
-                BENVENUTO IN RUBAMAZZETTO
-                SCEGLI UNA DELLE SEGUENTI OPZIONI\040
-                DIGITANDO IL NUMERO CORRISPONDENTE:
-                1- Nuova Partita
-                2- Esci
-                """);
-        int choice = user.nextInt();
-        switch (choice){
-            case 1:
-                System.out.println("""
-
-                INIZIAMO !
-                """);
-                Rubamazzetto rubamazzetto = new Rubamazzetto("GG");
-                rubamazzetto.newGame();
-            case 2:
-                System.exit(0);
-        }
-    }
-
-     */
-
-
 }
