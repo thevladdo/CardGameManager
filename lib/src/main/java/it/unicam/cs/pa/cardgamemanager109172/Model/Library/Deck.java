@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * This class implements {@link DeckInterface} and will represent a deck of a generic game.
@@ -46,16 +47,17 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
 
     @Override
     public void remove(Card card) {
-        if(this.getDeckCards().size()-1 >= this.rules.getDeckMin()){
-            this.deck.remove(card);
-        }
+        remove(Predicate.isEqual(card));
     }
 
     @Override
     public void remove(int index) {
-        if(this.getDeckCards().size() > this.rules.getDeckMin()){
-            this.deck.remove(index);
-        }
+        remove(card -> (card == getCard(index)));
+    }
+
+    @Override
+    public void remove(Predicate<Card> p){
+        this.deck.removeIf(card -> p.test(card) && this.deck.size()-1 >= this.rules.getDeckMin());
     }
 
     @Override
@@ -86,16 +88,12 @@ public class Deck implements DeckInterface, Comparable<Deck>, Serializable {
 
     @Override
     public Card getFirstCard() {
-        Card firstCard = getCard(0);
-        //this.remove(getCard(0));
-        return firstCard;
+        return getCard(0);
     }
 
     @Override
     public Card getLastCard() {
-        Card lastCard = getCard(this.deck.size()-1);
-        //this.remove(getCard(this.deck.size()-1));
-        return lastCard;
+        return getCard(this.deck.size()-1);
     }
 
     @Override

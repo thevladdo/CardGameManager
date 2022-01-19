@@ -34,7 +34,11 @@ class DeckTest {
      */
     @Test
     void shouldShuffle() {
-        Deck toShuffle = createDeck();
+        DeckConfigFactory factory = new DeckConfigFactory(
+                new GameRules(0,14,
+                        0,54,54,
+                        0,10,new HashMap<>(54)));
+        Deck toShuffle = factory.FrenchDeck();
         ArrayList<Card> toShuffleDeck = new ArrayList<>(toShuffle.getDeckCards());
         assertEquals(toShuffleDeck,toShuffle.getDeckCards());
         toShuffle.shuffle();
@@ -54,16 +58,30 @@ class DeckTest {
     void shouldRemoveObject() {
         Deck testDeck = createDeck();
         assertEquals(3,testDeck.getCardCount());
+        ArrayList<Card> expected = new ArrayList<>(2);
+        expected.add(this.card2);
+        expected.add(this.card1);
         testDeck.remove(this.card3);
         assertEquals(2,testDeck.getCardCount());
+        assertEquals(expected,testDeck.getDeckCards());
+        testDeck.remove(this.card2);
+        testDeck.remove(this.card1);
+        assertEquals(0,testDeck.getCardCount());
     }
 
     @Test
     void shouldRemoveByIndex() {
         Deck testDeck = createDeck();
         assertEquals(3,testDeck.getCardCount());
+        ArrayList<Card> expected = new ArrayList<>(2);
+        expected.add(this.card2);
+        expected.add(this.card1);
         testDeck.remove(2);
         assertEquals(2,testDeck.getCardCount());
+        assertEquals(expected,testDeck.getDeckCards());
+        testDeck.remove(1);
+        testDeck.remove(0);
+        assertEquals(0,testDeck.getCardCount());
     }
 
     @Test

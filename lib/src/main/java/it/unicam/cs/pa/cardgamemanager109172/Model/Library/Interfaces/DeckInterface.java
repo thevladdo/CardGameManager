@@ -2,6 +2,7 @@ package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.function.Predicate;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
 
@@ -39,6 +40,12 @@ public interface DeckInterface {
      * @param index the index if the card that will be removed from the deck
      */
     void remove(int index);
+
+    /**
+     * This method removes a card from the deck that satisfy a certain Predicate
+     * @param p the Predicate used to find the card
+     */
+    void remove(Predicate<Card> p);
 
     /**
      * This method will sort the cards in the deck in ascending order based on their value

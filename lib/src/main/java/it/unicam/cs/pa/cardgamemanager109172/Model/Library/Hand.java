@@ -4,6 +4,7 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.HandInterf
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class Hand extends Deck implements HandInterface {
 
@@ -24,16 +25,20 @@ public class Hand extends Deck implements HandInterface {
         }
     }
 
+    @Override
     public void remove(Card card) {
-        if(this.getCards().size()-1 >= this.rules.getMinHandCount()){
-            this.getCards().remove(card);
-        }
+        remove(Predicate.isEqual(card));
     }
 
+    @Override
     public void remove(int index) {
-        if(this.getCards().size()-1 >= this.rules.getMinHandCount()){
-            this.getCards().remove(index);
-        }
+        remove(card -> (card == getCard(index)));
+    }
+
+    @Override
+    public void remove(Predicate<Card> p) {
+        this.getDeckCards().removeIf(card -> p.test(card) &&
+                this.getDeckCards().size()-1 >= this.rules.getMinHandCount());
     }
 
     @Override
