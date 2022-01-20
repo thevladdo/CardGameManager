@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.pa.cardgamemanager109172.Controller.GameController">
+   <children>
+      <ImageView fitHeight="440.0" fitWidth="619.0" layoutX="-10.0" layoutY="-26.0">
+         <image>
+            <Image url="@Background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="84.0" fitWidth="117.0" layoutX="241.0" layoutY="133.0">
+         <image>
+            <Image url="@Rubamazzetto.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="74.0" fitWidth="102.0" layoutX="93.0" layoutY="143.0">
+         <image>
+            <Image url="@Poker.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="121.0" fitWidth="111.0" layoutX="405.0" layoutY="119.0">
+         <image>
+            <Image url="@Scala40.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="187.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNICAM CARD GAMES" textAlignment="CENTER">
+         <font>
+            <Font name="Product Sans Bold" size="21.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="210.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELEZIONA IL GIOCO DESIDERATO">
+         <font>
+            <Font name="Product Sans Bold" size="11.0" />
+         </font>
+      </Text>
+      <Button fx:id="startGame" layoutX="261.0" layoutY="303.0" mnemonicParsing="false" onAction="#selectGame" style="-fx-background-color: linear-gradient(to top left, #ff7f50, #6a5acd)linear-gradient(to top left, #ff7f50, #6a5acd) linear-gradient(to top left, #ff7f50, #6a5acd)linear-gradient(to top left, #ff7f50, #6a5acd);" text="Gioca" textFill="WHITE">
+         <font>
+            <Font name="Product Sans" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Button>
+      <RadioButton fx:id="poker" layoutX="136.0" layoutY="232.0" mnemonicParsing="false" />
+      <RadioButton fx:id="scala" layoutX="453.0" layoutY="232.0" mnemonicParsing="false" />
+      <RadioButton fx:id="rubamazzetto" layoutX="292.0" layoutY="232.0" mnemonicParsing="false" />
+   </children>
+</Pane>

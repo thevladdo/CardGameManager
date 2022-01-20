@@ -88,12 +88,15 @@ class DeckTest {
     void shouldSortBySuit() {
         Deck testDeck = createDeck();
         Card aces = new Card("Aces","Black",5,this.rules,5);
+        Card joker = new Card("Joker","Black",0,this.rules,15);
         testDeck.add(aces);
+        testDeck.add(joker);
         ArrayList<Card> expected = new ArrayList<>(4);
         expected.add(aces);
         expected.add(card2);
         expected.add(card1);
         expected.add(card3);
+        expected.add(joker);
         testDeck.sortBySuit();
         assertEquals(expected,testDeck.getDeckCards());
     }
