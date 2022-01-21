@@ -41,7 +41,7 @@
             <Font name="Product Sans Bold" size="11.0" />
          </font>
       </Text>
-      <Button fx:id="startGame" layoutX="261.0" layoutY="303.0" mnemonicParsing="false" onAction="#selectGame" style="-fx-background-color: linear-gradient(to top left, #ff7f50, #6a5acd)linear-gradient(to top left, #ff7f50, #6a5acd) linear-gradient(to top left, #ff7f50, #6a5acd)linear-gradient(to top left, #ff7f50, #6a5acd);" text="Gioca" textFill="WHITE">
+      <Button fx:id="startGame" layoutX="261.0" layoutY="303.0" mnemonicParsing="false" onAction="#startGame" style="-fx-background-color: linear-gradient(to top left, #ff7f50, #6a5acd)linear-gradient(to top left, #ff7f50, #6a5acd) linear-gradient(to top left, #ff7f50, #6a5acd)linear-gradient(to top left, #ff7f50, #6a5acd);" text="Gioca" textFill="WHITE">
          <font>
             <Font name="Product Sans" size="18.0" />
          </font>
@@ -49,8 +49,8 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Button>
-      <RadioButton fx:id="poker" layoutX="136.0" layoutY="232.0" mnemonicParsing="false" />
-      <RadioButton fx:id="scala" layoutX="453.0" layoutY="232.0" mnemonicParsing="false" />
-      <RadioButton fx:id="rubamazzetto" layoutX="292.0" layoutY="232.0" mnemonicParsing="false" />
+      <RadioButton fx:id="poker" layoutX="136.0" layoutY="232.0" mnemonicParsing="false" onAction="#selectPoker" textFill="#a40000" />
+      <RadioButton fx:id="scala" layoutX="453.0" layoutY="232.0" mnemonicParsing="false" onAction="#selectScala" textFill="#a40000" />
+      <RadioButton fx:id="rubamazzetto" layoutX="292.0" layoutY="232.0" mnemonicParsing="false" onAction="#selectRubamazzetto" textFill="#a40000" />
    </children>
 </Pane>
