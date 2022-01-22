@@ -77,6 +77,16 @@ class RubamazzettoTest {
         rm.nextTurn();
         rm.nextTurn();
         assertEquals(2,rm.getTurn());
+        rm.getPlayerOne().getPlayerHand().remove(card -> true);
+        rm.getBot().getPlayerHand().remove(card -> true);
+        rm.getTable().getOnTableCards().removeAll( rm.getTable().getOnTableCards());
+        assertEquals(0,rm.getPlayerOne().getPlayerHand().getCards().size());
+        assertEquals(0,rm.getBot().getPlayerHand().getCards().size());
+        assertEquals(0,rm.getTable().getOnTableCards().size());
+        rm.nextTurn();
+        assertEquals(3,rm.getPlayerOne().getPlayerHand().getCards().size());
+        assertEquals(3,rm.getBot().getPlayerHand().getCards().size());
+        assertEquals(4,rm.getTable().getOnTableCards().size());
     }
 
     @Test
@@ -190,14 +200,16 @@ class RubamazzettoTest {
                 1, 10,
                 0, 40, 40,
                 0, 3, weights);
-        Card card = new Card("Swords","-",1,rules,1);
-        Card card2 = new Card("Cups","-",1,rules,1);
-        rm.getTable().addCard(card);
-        rm.getPlayerOne().getPlayerHand().add(card2);
+        Card onTable = new Card("Swords","-",1,rules,1);
+        Card inHand = new Card("Cups","-",1,rules,1);
+        rm.getTable().addCard(onTable);
+        rm.getPlayerOne().getPlayerHand().add(inHand);
 
+        assertEquals(0,rm.getBounchOne().getDeckCards().size());
+        assertEquals(1,rm.getTable().getOnTableCards().size());
         actions.makeMove(rm.getPlayerOne(),0);
         assertEquals(2,rm.getBounchOne().getDeckCards().size());
-        assertEquals(0,rm.getTable().getOnTableCards().size());
+        assertEquals(4,rm.getTable().getOnTableCards().size());
         assertEquals(1,rm.getTurn());
     }
 
@@ -222,7 +234,7 @@ class RubamazzettoTest {
         actions.stealBounch(rm.getPlayerOne());
         assertEquals(2,rm.getBounchOne().getDeckCards().size());
         assertEquals(0,rm.getBounchTwo().getDeckCards().size());
-        assertEquals(0,rm.getPlayerOne().getPlayerHand().getCards().size());
+        assertEquals(3,rm.getPlayerOne().getPlayerHand().getCards().size());
         assertEquals(1,rm.getTurn());
         rm.getBounchOne().getDeckCards().clear();
         assertFalse(actions.stealBounch(rm.getBot()));

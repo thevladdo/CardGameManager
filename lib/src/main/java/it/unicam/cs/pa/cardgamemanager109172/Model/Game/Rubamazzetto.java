@@ -45,7 +45,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
         this.playerOne = new Player(
                 new Hand(rules,new ArrayList<>(1),0), playerName,1);
         this.bot =new Player(
-                new Hand(rules,new ArrayList<>(1),0), "Bot",2);
+                new Hand(rules,new ArrayList<>(1),0), "Game Bot",2);
         ArrayList<Player> players = new ArrayList<>(2);
         players.add(this.playerOne);
         players.add(this.bot);
@@ -74,6 +74,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
     @Override
     public void nextTurn(){
         this.turn++;
+        dealer();
     }
 
     @Override
@@ -208,18 +209,18 @@ public class Rubamazzetto implements RubamazzettoInterface {
          * @param handCardIndex the card selected from the hand
          */
         public void makeMove(Player turner, int handCardIndex){
-            ArrayList<Card> moveCards = checkIfSame(getTable());
+            ArrayList<Card> moveCards = checkIfSame(getTable(),turner.showCard(handCardIndex));
             if (moveCards != null){
                 getPlayerBounch(turner).add(moveCards.get(0));
                 getPlayerBounch(turner).add(moveCards.get(1));
                 getTable().removeCard(moveCards.get(0));
                 turner.getPlayerHand().remove(moveCards.get(1));
                 nextTurn();
-            } else placeOnTable(handCardIndex);
+            } else placeOnTable(turner,handCardIndex);
         }
 
-        private void placeOnTable(int index){
-            getPlayerOne().placeCard(index,getTable());
+        private void placeOnTable(Player turner, int handCardIndex){
+            turner.placeCard(handCardIndex,getTable());
             nextTurn();
         }
 
@@ -245,15 +246,13 @@ public class Rubamazzetto implements RubamazzettoInterface {
             return null;
         }
 
-        private ArrayList<Card> checkIfSame(Table table){
+        private ArrayList<Card> checkIfSame(Table table, Card toCheck){
             ArrayList<Card> toReturn = null;
-            for (Card inHand : getPlayerOne().getPlayerHand().getCards()) {
-                for (Card onTable : table.getOnTableCards()) {
-                    if (inHand.getValue() == onTable.getValue()){
-                        toReturn = new ArrayList<>(2);
-                        toReturn.add(onTable);
-                        toReturn.add(inHand);
-                    }
+            for (Card onTable : table.getOnTableCards()) {
+                if (toCheck.getValue() == onTable.getValue()){
+                    toReturn = new ArrayList<>(2);
+                    toReturn.add(onTable);
+                    toReturn.add(toCheck);
                     return toReturn;
                 }
             }

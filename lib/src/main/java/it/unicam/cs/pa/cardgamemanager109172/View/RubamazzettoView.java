@@ -7,7 +7,7 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Player;
 
 import java.util.ArrayList;
 
-public class GameView {
+public class RubamazzettoView {
 
     public void getInitView(){
         String playerName = GameController.playerName.toUpperCase();
@@ -17,11 +17,25 @@ public class GameView {
                 "*******************************************");
     }
 
-    public void getActualVew(Rubamazzetto rm){
+    public void getActualView(Rubamazzetto rm){
         println("\n* LO STATO ATTUALE DELLE CARTE SUL TAVOLO È:\n");
         printCard(rm.getTable().getOnTableCards());
         println("\n* LE SEGUENTI SONO LE TUE CARTE:\n");
         printCard(rm.getPlayerOne().getPlayerHand().getCards());
+    }
+
+    public void getOnTopBounch(Rubamazzetto rm){
+        if (rm.getBounchTwo().getDeckCards().size() != 0){
+            println("\n* LA CARTA IN CIMA AL MAZZETTO DELL'AVVERSARIO È LA SEGUENTE\n");
+            Card toPrint = rm.getBounchTwo().getCard(rm.getBounchTwo().getCardCount()-1);
+            println(printCardFace(toPrint.getValue(),toPrint.getSuit()));
+        }
+    }
+
+    public void succesfullySteal(Player turner){
+        if (turner.getId() == 0) {
+            println("\n* MAZZETTO DELL'AVVERSARIO RUBATO CON SUCCESSO");
+        } else println("\n* L'AVVERSARIO HA RUBATO IL TUO MAZZETTO !");
     }
 
     public void askNextMove(){
@@ -36,12 +50,41 @@ public class GameView {
                   SEGUITO DAL TASTO INVIO""");
     }
 
-    public void getTurner(Player turner){
-        println("\n* È IL TURNO DI "+turner.getName());
+    public void notStealed(Rubamazzetto rm){
+        println("\n* NON È POSSIBILE RUBARE IL MAZZETTO AVVERSARIO");
+        if (rm.getBounchTwo().getDeckCards().size() == 0){
+            println("  L'AVVERSARIO NON HA UN MAZZETTO !");
+        } else {
+            getOnTopBounch(rm);
+        }
     }
 
-    public void getWinner(Rubamazzetto rm){
-        println("\n\n* IL VINCITORE DI QUESTA PARTITA È "+rm.finishGame());
+    public void selectCard(Rubamazzetto rm){
+        println("""
+                
+                * ORA FARAI UNA MOSSA !
+                  QUALE DELLE TUE CARTE VUOI GIOCARE ?
+                """);
+        int counter = 1;
+        for (Card card : rm.getPlayerOne().getPlayerHand().getCards()) {
+            println("  "+counter+"- "+card.getSuit().toUpperCase()+" "+card.getValue());
+            counter++;
+        }
+        println("\n* DIGITA IL NUMERO IN CORRISPONDENZA ALLA TUA SCELTA\n" +
+                "  SEGUITO DAL TASTO INVIO");
+    }
+
+    public void getTurner(Player turner){
+        println("\n* È IL TURNO DI "+turner.getName().toUpperCase());
+    }
+
+    public void getWinner(String winnerName){
+        println("\n\n* IL VINCITORE DI QUESTA PARTITA È "+winnerName.toUpperCase());
+    }
+
+    public void retryInput(){
+        println("* NESSUNA CORRISPONDENZA CON VALORE INSERITO" +
+                "\n  RIPROVA");
     }
 
     public void sayGoodbye(){
