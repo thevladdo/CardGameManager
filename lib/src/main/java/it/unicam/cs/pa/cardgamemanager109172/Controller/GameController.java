@@ -3,7 +3,6 @@ package it.unicam.cs.pa.cardgamemanager109172.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
@@ -13,8 +12,6 @@ import java.util.Optional;
 
 public class GameController{
 
-    @FXML
-    private Button startGame;
     @FXML
     private RadioButton poker;
     @FXML
@@ -30,12 +27,7 @@ public class GameController{
     private int counter;
 
     public void startGame(ActionEvent event){
-        if (counter<1){
-            stage = (Stage) pane.getScene().getWindow();
-            a.initModality(Modality.APPLICATION_MODAL);
-            a.initOwner(stage);
-            counter++;
-        }
+        checkButtonCounter();
         if ((poker.isSelected() || scala.isSelected())) {
             a.getDialogPane().setContentText("Ci scusiamo per l'inconveniente :(");
             a.getDialogPane().setHeaderText("Gioco disponibile nel prossimo aggiornamento");
@@ -48,11 +40,21 @@ public class GameController{
             dialog.setHeaderText("Ciao, inserisci i seguenti dati per continuare");
             dialog.setContentText("Il mio nome è");
             Optional<String> result = dialog.showAndWait();
-            result.ifPresent(name -> playerName = name);
-            stage.close();
+            if(result.isPresent()){
+                result.ifPresent(name -> playerName = name);
+                stage.close();
+            }
         }
     }
 
+    private void checkButtonCounter(){
+        if (counter<1){
+            stage = (Stage) pane.getScene().getWindow();
+            a.initModality(Modality.APPLICATION_MODAL);
+            a.initOwner(stage);
+            counter++;
+        }
+    }
 
     public void selectPoker(ActionEvent event){
         if(scala.isSelected() || rubamazzetto.isSelected()){
