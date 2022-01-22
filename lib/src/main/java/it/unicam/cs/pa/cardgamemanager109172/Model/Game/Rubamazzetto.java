@@ -4,7 +4,6 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * The "Rubamazzetto", also known as "Rubamazzo" is a card game, a simplified variant of "Scopa".
@@ -62,15 +61,9 @@ public class Rubamazzetto implements RubamazzettoInterface {
 
     @Override
     public String finishGame(){
-        String winner = findWinner();
-        if (cantContinue()) newGame();
+        String winner = null;
+        if (cantContinue()) winner = findWinner();
         return winner;
-    }
-
-    @Override
-    public Player defineStarter(){
-        if (whoStart() == 0) return this.playerOne;
-        return this.bot;
     }
 
     @Override
@@ -133,6 +126,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
         if (this.table.getOnTableCards().size() == 0){
             for (int i = 1; i <= 4; i++) {
                 this.table.addCard(this.deck.getFirstCard());
+                this.deck.remove(this.deck.getFirstCard());
             }
         }
     }
@@ -161,12 +155,6 @@ public class Rubamazzetto implements RubamazzettoInterface {
         this.bot.getPlayerHand().clear();
     }
 
-    private int whoStart(){
-        Random rand = new Random();
-        int upperbound = 2;
-        return rand.nextInt(upperbound);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null) throw new NullPointerException("Object 'o' is Null");
@@ -187,8 +175,6 @@ public class Rubamazzetto implements RubamazzettoInterface {
         return Objects.hash(getTurn(), getDeck(), this.rules, getBounchOne(),
                 getBounchTwo(), getPlayerOne(), getBot(), getTable());
     }
-
-    //TODO separatore di classi
 
 
     /**

@@ -10,10 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class RubamazzettoTest {
 
     private DeckConfigFactory factory;
+    private GameRules rules;
 
     private Rubamazzetto createGame(){
         HashMap<Card,Integer> weights = new HashMap<>(40);
-        GameRules rules = new GameRules(
+        rules = new GameRules(
                 1, 10,
                 0, 40, 40,
                 0, 3, weights);
@@ -40,21 +41,21 @@ class RubamazzettoTest {
     @Test
     void shouldFinishGame() {
         Rubamazzetto rm = createGame();
+        assertNull(rm.finishGame());
         String expected = rm.getPlayerOne().getName();
-        assertEquals("Tie",rm.finishGame());
         for (Card card: rm.getDeck().getDeckCards()) {
             rm.getBounchOne().add(card);
         }
+        rm.getDeck().remove(card1 -> true);
+        rm.getBot().getPlayerHand().remove(card -> true);
+        rm.getPlayerOne().getPlayerHand().remove(card -> true);
         assertEquals(expected,rm.finishGame());
-    }
 
-    @Test
-    void shouldDefineStarter() {
-        Rubamazzetto rm = createGame();
-        Player starter = rm.defineStarter();
-        Player optOne = rm.getPlayerOne();
-        Player optTwo = rm.getBot();
-        assertTrue(starter.equals(optOne) || (starter.equals(optTwo)));
+        rm.getBounchOne().remove(card -> true);
+        rm.getBounchTwo().remove(card -> true);
+        rm.getBounchOne().add(new Card(rules));
+        rm.getBounchTwo().add(new Card(rules));
+        assertEquals("Tie",rm.finishGame());
     }
 
     @Test

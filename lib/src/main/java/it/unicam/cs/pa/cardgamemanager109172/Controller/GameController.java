@@ -1,8 +1,8 @@
 package it.unicam.cs.pa.cardgamemanager109172.Controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
@@ -12,6 +12,8 @@ import java.util.Optional;
 
 public class GameController{
 
+    @FXML
+    public Button startGame;
     @FXML
     private RadioButton poker;
     @FXML
@@ -26,7 +28,7 @@ public class GameController{
     Stage stage;
     private int counter;
 
-    public void startGame(ActionEvent event){
+    public void startGame(){
         checkButtonCounter();
         if ((poker.isSelected() || scala.isSelected())) {
             a.getDialogPane().setContentText("Ci scusiamo per l'inconveniente :(");
@@ -56,7 +58,7 @@ public class GameController{
         }
     }
 
-    public void selectPoker(ActionEvent event){
+    public void selectPoker(){
         if(scala.isSelected() || rubamazzetto.isSelected()){
             scala.setSelected(false);
             rubamazzetto.setSelected(false);
@@ -64,7 +66,7 @@ public class GameController{
         }
     }
 
-    public void selectScala(ActionEvent event){
+    public void selectScala(){
         if(poker.isSelected() || rubamazzetto.isSelected()){
             poker.setSelected(false);
             rubamazzetto.setSelected(false);
@@ -72,7 +74,7 @@ public class GameController{
         }
     }
 
-    public void selectRubamazzetto(ActionEvent event){
+    public void selectRubamazzetto(){
         if(scala.isSelected() || poker.isSelected()){
             scala.setSelected(false);
             poker.setSelected(false);

@@ -20,8 +20,7 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Table;
  * If another player, during his turn, has a card of the same value
  * in his hand as the one on top of the deck of cards taken by another,
  * he can steal the deck and put it next to him.
- * Additions can only be made to take the cards on the table, if the card in hand is of higher value.
- * While to steal the deck it is necessary to have the same value as the top card of the stack.
+ * To steal the deck it is necessary to have the same value as the top card of the stack.
  * The game ends when there are no more cards to deal and the remaining cards on the table
  * are taken by the last player who took a card from the table or stole someone else's deck.
  *
@@ -43,12 +42,6 @@ public interface RubamazzettoInterface {
      * @return the winner name
      */
     String finishGame();
-
-    /**
-     * This method choose who is the starter player of a new game
-     * @return the starter player
-     */
-    Player defineStarter();
 
     /**
      * This method return the actual turn
