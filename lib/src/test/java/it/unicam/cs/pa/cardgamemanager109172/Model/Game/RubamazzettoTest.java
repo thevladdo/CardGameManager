@@ -150,7 +150,7 @@ class RubamazzettoTest {
                 1, 10,
                 0, 40, 40,
                 0, 3, weights);
-        Player expected = new Player(new Hand(rules,new ArrayList<>(1),0), "Bot",2);
+        Player expected = new Player(new Hand(rules,new ArrayList<>(1),0), "Game Bot",2);
         assertEquals(expected,rm.getBot());
     }
 

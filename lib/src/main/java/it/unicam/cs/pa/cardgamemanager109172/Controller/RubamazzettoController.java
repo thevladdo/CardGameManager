@@ -24,7 +24,6 @@ public class RubamazzettoController {
                 rmView.getTurner(p1);
                 rmView.askNextMove();
                 int choice = user.nextInt();
-                user.nextLine();
                 switch (choice) {
                     case 1:
                         if (action.stealBounch(rm.getPlayerOne())) {
@@ -35,7 +34,6 @@ public class RubamazzettoController {
                     case 2:
                         rmView.selectCard(rm);
                         int selectedCardIndex = user.nextInt();
-                        user.nextLine();
                         action.makeMove(p1, selectedCardIndex - 1);
                         break;
                     case 3:

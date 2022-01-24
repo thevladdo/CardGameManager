@@ -34,6 +34,10 @@ dependencies {
     implementation 'com.google.guava:guava:30.1.1-jre'
 }
 
+run {
+    standardInput = System.in;
+}
+
 mainClassName = 'it.unicam.cs.pa.cardgamemanager109172.Main'
 
 tasks.named('test') {
