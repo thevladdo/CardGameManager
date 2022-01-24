@@ -8,11 +8,12 @@ import java.util.Scanner;
 
 public class RubamazzettoController {
 
+    private final Scanner user = new Scanner(System.in);
+    private final Rubamazzetto rm = new Rubamazzetto(GameController.playerName);
+    private final Rubamazzetto.Actions action = rm.new Actions();
+    private final RubamazzettoView rmView = new RubamazzettoView();
+
     public void play(){
-        Scanner user = new Scanner(System.in);
-        Rubamazzetto rm = new Rubamazzetto(GameController.playerName);
-        Rubamazzetto.Actions action = rm.new Actions();
-        RubamazzettoView rmView = new RubamazzettoView();
         rm.newGame();
         rmView.getInitView();
         Player bot = rm.getBot();
@@ -20,38 +21,53 @@ public class RubamazzettoController {
         do{
             rmView.getActualView(rm);
             if(rm.getTurn() % 2 == 0){
-                rmView.getOnTopBounch(rm);
-                rmView.getTurner(p1);
-                rmView.askNextMove();
-                int choice = user.nextInt();
-                switch (choice) {
-                    case 1:
-                        if (action.stealBounch(rm.getPlayerOne())) {
-                            rmView.succesfullySteal(p1);
-                            break;
-                        }
-                        rmView.notStealed(rm);
-                    case 2:
-                        rmView.selectCard(rm);
-                        int selectedCardIndex = user.nextInt();
-                        action.makeMove(p1, selectedCardIndex - 1);
-                        break;
-                    case 3:
-                        user.close();
-                        rmView.sayGoodbye();
-                        System.exit(0);
-                }
-            } else {
-                rmView.getTurner(bot);
-                if(!action.stealBounch(bot)){
-                    Random rand = new Random();
-                    int upperbound = bot.getPlayerHand().getCards().size();
-                    action.makeMove(bot,rand.nextInt(upperbound));
-                } else rmView.succesfullySteal(bot);
-            }
+                doPlayerActions(p1);
+            } else doBotActions(bot);
         } while (rm.finishGame() == null);
         user.close();
         rmView.getWinner(rm.finishGame());
         rmView.sayGoodbye();
+    }
+
+    private void doPlayerActions(Player p1) {
+        rmView.getOnTopBounch(rm);
+        rmView.getTurner(p1);
+        rmView.askNextMove();
+        int choice = checkChoice(3);
+        switch (choice) {
+            case 1:
+                if (action.stealBounch(rm.getPlayerOne())) {
+                    rmView.succesfullySteal(p1);
+                    break;
+                }
+                rmView.notStealed(rm);
+            case 2:
+                rmView.selectCard(rm);
+                int selectedCardIndex = checkChoice(rm.getPlayerOne().getPlayerHand().getCardCount());
+                action.makeMove(p1, selectedCardIndex - 1);
+                break;
+            case 3:
+                user.close();
+                rmView.sayGoodbye();
+                System.exit(0);
+        }
+    }
+
+    private void doBotActions(Player bot){
+        rmView.getTurner(bot);
+        if(!action.stealBounch(bot)){
+            Random rand = new Random();
+            int upperbound = bot.getPlayerHand().getCards().size();
+            action.makeMove(bot,rand.nextInt(upperbound));
+        } else rmView.succesfullySteal(bot);
+    }
+
+    private int checkChoice(int max){
+        int choice = user.nextInt();
+        while (choice < 1 || choice > max ){
+            rmView.retryInput();
+            choice = user.nextInt();
+        }
+        return choice;
     }
 }

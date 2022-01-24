@@ -70,8 +70,10 @@ public class RubamazzettoView {
             println("  "+counter+"- "+card.getSuit().toUpperCase()+" "+card.getValue());
             counter++;
         }
-        println("\n* DIGITA IL NUMERO IN CORRISPONDENZA ALLA TUA SCELTA\n" +
-                "  SEGUITO DAL TASTO INVIO");
+        println("""
+
+                * DIGITA IL NUMERO IN CORRISPONDENZA ALLA TUA SCELTA
+                  SEGUITO DAL TASTO INVIO""");
     }
 
     public void getTurner(Player turner){
