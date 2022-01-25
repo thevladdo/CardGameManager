@@ -4,6 +4,7 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * The "Rubamazzetto", also known as "Rubamazzo" is a card game, a simplified variant of "Scopa".
@@ -212,9 +213,9 @@ public class Rubamazzetto implements RubamazzettoInterface {
             ArrayList<Card> moveCards = checkIfSame(getTable(),turner.showCard(handCardIndex));
             if (moveCards != null){
                 getPlayerBounch(turner).add(moveCards.get(0));
-                getPlayerBounch(turner).add(moveCards.get(1));
+                getPlayerBounch(turner).add(turner.showCard(handCardIndex));
                 getTable().removeCard(moveCards.get(0));
-                turner.getPlayerHand().remove(moveCards.get(1));
+                turner.getPlayerHand().remove(handCardIndex);
                 nextTurn();
             } else placeOnTable(turner,handCardIndex);
         }
@@ -247,16 +248,13 @@ public class Rubamazzetto implements RubamazzettoInterface {
         }
 
         private ArrayList<Card> checkIfSame(Table table, Card toCheck){
-            ArrayList<Card> toReturn = null;
-            for (Card onTable : table.getOnTableCards()) {
-                if (toCheck.getValue() == onTable.getValue()){
-                    toReturn = new ArrayList<>(2);
-                    toReturn.add(onTable);
-                    toReturn.add(toCheck);
-                    return toReturn;
-                }
-            }
-            return null;
+            if(table.getOnTableCards()
+                    .parallelStream()
+                    .noneMatch(card -> card.getValue() == toCheck.getValue())) return null;
+            return table.getOnTableCards()
+                    .parallelStream()
+                    .filter(card -> card.getValue() == toCheck.getValue())
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
     }
 }

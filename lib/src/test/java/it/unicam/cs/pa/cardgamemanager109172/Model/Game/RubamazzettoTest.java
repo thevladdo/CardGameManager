@@ -201,16 +201,26 @@ class RubamazzettoTest {
                 0, 40, 40,
                 0, 3, weights);
         Card onTable = new Card("Swords","-",1,rules,1);
+        Card onTable2 = new Card("Swords","-",5,rules,1);
         Card inHand = new Card("Cups","-",1,rules,1);
         rm.getTable().addCard(onTable);
+        rm.getTable().addCard(onTable2);
         rm.getPlayerOne().getPlayerHand().add(inHand);
 
+        assertEquals(1,rm.getPlayerOne().getPlayerHand().getCardCount());
         assertEquals(0,rm.getBounchOne().getDeckCards().size());
-        assertEquals(1,rm.getTable().getOnTableCards().size());
+        assertEquals(2,rm.getTable().getOnTableCards().size());
         actions.makeMove(rm.getPlayerOne(),0);
+        assertEquals(3,rm.getPlayerOne().getPlayerHand().getCardCount());
         assertEquals(2,rm.getBounchOne().getDeckCards().size());
-        assertEquals(4,rm.getTable().getOnTableCards().size());
+        assertEquals(1,rm.getTable().getOnTableCards().size());
         assertEquals(1,rm.getTurn());
+
+        rm.getTable().getOnTableCards().removeAll(rm.getTable().getOnTableCards());
+        assertEquals(0,rm.getTable().getOnTableCards().size());
+        actions.makeMove(rm.getPlayerOne(),0);
+        assertEquals(2,rm.getPlayerOne().getPlayerHand().getCardCount());
+        assertEquals(1,rm.getTable().getOnTableCards().size());
     }
 
     @Test
