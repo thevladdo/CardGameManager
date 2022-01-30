@@ -1,5 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.GameRulesInterface;
 import java.util.ArrayList;
 
 /**
@@ -8,14 +10,14 @@ import java.util.ArrayList;
  */
 public class DeckConfigFactory {
 
-    private final GameRules rules;
+    private final GameRulesInterface rules;
 
-    public DeckConfigFactory(GameRules rules){
+    public DeckConfigFactory(GameRulesInterface rules){
         this.rules = rules;
     }
 
     public Deck ItalianDeck(){
-        ArrayList<Card> deckArray = new ArrayList<>(40);
+        ArrayList<CardInterface> deckArray = new ArrayList<>(40);
         deckArray.add(new Card("Swords","-",1,rules,1));
         deckArray.add(new Card("Cups","-",1,rules,1));
         deckArray.add(new Card("Coins","-",1,rules,1));
@@ -71,7 +73,7 @@ public class DeckConfigFactory {
 
     public Deck FrenchDeck(){
 
-        ArrayList<Card> deckArray = new ArrayList<>(52);
+        ArrayList<CardInterface> deckArray = new ArrayList<>(52);
         deckArray.add(new Card("Heart Ace","Red",1,rules,1));
         deckArray.add(new Card("Diamonds Ace","Red",1,rules,1));
         deckArray.add(new Card("Clubs Ace","Black",1,rules,1));

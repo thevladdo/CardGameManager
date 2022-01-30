@@ -1,8 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Game;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Deck;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Player;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Table;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.*;
 
 /**
  * This interface will be implemented by "Rubamazzetto" class which will represent a card game.
@@ -20,8 +18,7 @@ import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Table;
  * If another player, during his turn, has a card of the same value
  * in his hand as the one on top of the deck of cards taken by another,
  * he can steal the deck and put it next to him.
- * Additions can only be made to take the cards on the table, if the card in hand is of higher value.
- * While to steal the deck it is necessary to have the same value as the top card of the stack.
+ * To steal the deck it is necessary to have the same value as the top card of the stack.
  * The game ends when there are no more cards to deal and the remaining cards on the table
  * are taken by the last player who took a card from the table or stole someone else's deck.
  *
@@ -45,12 +42,6 @@ public interface RubamazzettoInterface {
     String finishGame();
 
     /**
-     * This method choose who is the starter player of a new game
-     * @return the starter player
-     */
-    Player defineStarter();
-
-    /**
      * This method return the actual turn
      * @return the actual turn number
      */
@@ -65,42 +56,42 @@ public interface RubamazzettoInterface {
      * This method return the actual deck
      * @return the actual deck
      */
-    Deck getDeck();
+    DeckInterface getDeck();
 
     /**
      * This method return the actual bounch of cards earned by first player
      * @return the actual bounch of cards
      */
-    Deck getBounchOne();
+    DeckInterface getBounchOne();
 
     /**
      * This method return the actual bounch of cards earned by second player
      * @return the actual bounch of cards
      */
-    Deck getBounchTwo();
+    DeckInterface getBounchTwo();
 
     /**
      * This method return the bounch of card of the specified player
      * @param player the player
      * @return his bounch of cards
      */
-    Deck getPlayerBounch(Player player);
+    DeckInterface getPlayerBounch(PlayerInterface player);
 
     /**
-     * This method return the first {@link Player}
+     * This method return the first {@link PlayerInterface}
      * @return the first player
      */
-    Player getPlayerOne();
+    PlayerInterface getPlayerOne();
 
     /**
      * This method return the bot player
      * @return the bot player
      */
-    Player getBot();
+    PlayerInterface getBot();
 
     /**
-     * This method return the {@link Table}
+     * This method return the {@link TableInterface}
      * @return the table
      */
-    Table getTable();
+    TableInterface getTable();
 }

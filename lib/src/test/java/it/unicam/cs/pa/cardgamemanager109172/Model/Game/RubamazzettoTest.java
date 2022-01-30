@@ -1,6 +1,8 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Game;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.PlayerInterface;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,10 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class RubamazzettoTest {
 
     private DeckConfigFactory factory;
+    private GameRules rules;
 
     private Rubamazzetto createGame(){
-        HashMap<Card,Integer> weights = new HashMap<>(40);
-        GameRules rules = new GameRules(
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
+        rules = new GameRules(
                 1, 10,
                 0, 40, 40,
                 0, 3, weights);
@@ -40,21 +43,21 @@ class RubamazzettoTest {
     @Test
     void shouldFinishGame() {
         Rubamazzetto rm = createGame();
+        assertNull(rm.finishGame());
         String expected = rm.getPlayerOne().getName();
-        assertEquals("Tie",rm.finishGame());
-        for (Card card: rm.getDeck().getDeckCards()) {
+        for (CardInterface card: rm.getDeck().getDeckCards()) {
             rm.getBounchOne().add(card);
         }
+        rm.getDeck().remove(card1 -> true);
+        rm.getBot().getPlayerHand().remove(card -> true);
+        rm.getPlayerOne().getPlayerHand().remove(card -> true);
         assertEquals(expected,rm.finishGame());
-    }
 
-    @Test
-    void shouldDefineStarter() {
-        Rubamazzetto rm = createGame();
-        Player starter = rm.defineStarter();
-        Player optOne = rm.getPlayerOne();
-        Player optTwo = rm.getBot();
-        assertTrue(starter.equals(optOne) || (starter.equals(optTwo)));
+        rm.getBounchOne().remove(card -> true);
+        rm.getBounchTwo().remove(card -> true);
+        rm.getBounchOne().add(new Card(rules));
+        rm.getBounchTwo().add(new Card(rules));
+        assertEquals("Tie",rm.finishGame());
     }
 
     @Test
@@ -76,6 +79,16 @@ class RubamazzettoTest {
         rm.nextTurn();
         rm.nextTurn();
         assertEquals(2,rm.getTurn());
+        rm.getPlayerOne().getPlayerHand().remove(card -> true);
+        rm.getBot().getPlayerHand().remove(card -> true);
+        rm.getTable().getOnTableCards().removeAll( rm.getTable().getOnTableCards());
+        assertEquals(0,rm.getPlayerOne().getPlayerHand().getCards().size());
+        assertEquals(0,rm.getBot().getPlayerHand().getCards().size());
+        assertEquals(0,rm.getTable().getOnTableCards().size());
+        rm.nextTurn();
+        assertEquals(3,rm.getPlayerOne().getPlayerHand().getCards().size());
+        assertEquals(3,rm.getBot().getPlayerHand().getCards().size());
+        assertEquals(4,rm.getTable().getOnTableCards().size());
     }
 
     @Test
@@ -88,7 +101,7 @@ class RubamazzettoTest {
     @Test
     void shouldGetBounchOne() {
         Rubamazzetto rm = createGame();
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -100,7 +113,7 @@ class RubamazzettoTest {
     @Test
     void shouldGetBounchTwo() {
         Rubamazzetto rm = createGame();
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -122,7 +135,7 @@ class RubamazzettoTest {
     @Test
     void shouldGetPlayerOne() {
         Rubamazzetto rm = createGame();
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -134,19 +147,19 @@ class RubamazzettoTest {
     @Test
     void shouldGetBot() {
         Rubamazzetto rm = createGame();
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
                 0, 3, weights);
-        Player expected = new Player(new Hand(rules,new ArrayList<>(1),0), "Bot",2);
+        Player expected = new Player(new Hand(rules,new ArrayList<>(1),0), "Game Bot",2);
         assertEquals(expected,rm.getBot());
     }
 
     @Test
     void shouldGetTable() {
         Rubamazzetto rm = createGame();
-        ArrayList<Player> players = new ArrayList<>(2);
+        ArrayList<PlayerInterface> players = new ArrayList<>(2);
         players.add(rm.getPlayerOne());
         players.add(rm.getBot());
         Table expected = new Table(new ArrayList<>(4),players);
@@ -184,20 +197,32 @@ class RubamazzettoTest {
         Rubamazzetto rm = createGame();
         Rubamazzetto.Actions actions = rm.new Actions();
 
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
                 0, 3, weights);
-        Card card = new Card("Swords","-",1,rules,1);
-        Card card2 = new Card("Cups","-",1,rules,1);
-        rm.getTable().addCard(card);
-        rm.getPlayerOne().getPlayerHand().add(card2);
+        Card onTable = new Card("Swords","-",1,rules,1);
+        Card onTable2 = new Card("Swords","-",5,rules,1);
+        Card inHand = new Card("Cups","-",1,rules,1);
+        rm.getTable().addCard(onTable);
+        rm.getTable().addCard(onTable2);
+        rm.getPlayerOne().getPlayerHand().add(inHand);
 
+        assertEquals(1,rm.getPlayerOne().getPlayerHand().getCardCount());
+        assertEquals(0,rm.getBounchOne().getDeckCards().size());
+        assertEquals(2,rm.getTable().getOnTableCards().size());
         actions.makeMove(rm.getPlayerOne(),0);
+        assertEquals(3,rm.getPlayerOne().getPlayerHand().getCardCount());
         assertEquals(2,rm.getBounchOne().getDeckCards().size());
-        assertEquals(0,rm.getTable().getOnTableCards().size());
+        assertEquals(1,rm.getTable().getOnTableCards().size());
         assertEquals(1,rm.getTurn());
+
+        rm.getTable().getOnTableCards().removeAll(rm.getTable().getOnTableCards());
+        assertEquals(0,rm.getTable().getOnTableCards().size());
+        actions.makeMove(rm.getPlayerOne(),0);
+        assertEquals(2,rm.getPlayerOne().getPlayerHand().getCardCount());
+        assertEquals(1,rm.getTable().getOnTableCards().size());
     }
 
     @Test
@@ -205,7 +230,7 @@ class RubamazzettoTest {
         Rubamazzetto rm = createGame();
         Rubamazzetto.Actions actions = rm.new Actions();
 
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -221,7 +246,7 @@ class RubamazzettoTest {
         actions.stealBounch(rm.getPlayerOne());
         assertEquals(2,rm.getBounchOne().getDeckCards().size());
         assertEquals(0,rm.getBounchTwo().getDeckCards().size());
-        assertEquals(0,rm.getPlayerOne().getPlayerHand().getCards().size());
+        assertEquals(3,rm.getPlayerOne().getPlayerHand().getCards().size());
         assertEquals(1,rm.getTurn());
         rm.getBounchOne().getDeckCards().clear();
         assertFalse(actions.stealBounch(rm.getBot()));

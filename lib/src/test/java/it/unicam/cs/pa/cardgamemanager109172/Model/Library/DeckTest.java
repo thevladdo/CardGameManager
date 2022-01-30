@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +13,7 @@ class DeckTest {
     private GameRules rules;
 
     private Deck createDeck(){
-        Map<Card, Integer> map = new HashMap<>(3);
+        Map<CardInterface, Integer> map = new HashMap<>(3);
         rules = new GameRules(
                 0, 20,
                 0, 20,0,
@@ -20,7 +21,7 @@ class DeckTest {
         card1 = new Card("Hearts","Red",5, rules,5);
         card2 = new Card("Hearts","Red",6, rules,6);
         card3 = new Card("Hearts","Red",11, rules,11);
-        ArrayList<Card> deckCards = new ArrayList<>(3);
+        ArrayList<CardInterface> deckCards = new ArrayList<>(3);
         deckCards.add(card2);
         deckCards.add(card1);
         deckCards.add(card3);
@@ -34,8 +35,12 @@ class DeckTest {
      */
     @Test
     void shouldShuffle() {
-        Deck toShuffle = createDeck();
-        ArrayList<Card> toShuffleDeck = new ArrayList<>(toShuffle.getDeckCards());
+        DeckConfigFactory factory = new DeckConfigFactory(
+                new GameRules(0,14,
+                        0,54,54,
+                        0,10,new HashMap<>(54)));
+        Deck toShuffle = factory.FrenchDeck();
+        ArrayList<CardInterface> toShuffleDeck = new ArrayList<>(toShuffle.getDeckCards());
         assertEquals(toShuffleDeck,toShuffle.getDeckCards());
         toShuffle.shuffle();
         assertNotEquals(toShuffleDeck,toShuffle.getDeckCards());
@@ -54,28 +59,45 @@ class DeckTest {
     void shouldRemoveObject() {
         Deck testDeck = createDeck();
         assertEquals(3,testDeck.getCardCount());
+        ArrayList<Card> expected = new ArrayList<>(2);
+        expected.add(this.card2);
+        expected.add(this.card1);
         testDeck.remove(this.card3);
         assertEquals(2,testDeck.getCardCount());
+        assertEquals(expected,testDeck.getDeckCards());
+        testDeck.remove(this.card2);
+        testDeck.remove(this.card1);
+        assertEquals(0,testDeck.getCardCount());
     }
 
     @Test
     void shouldRemoveByIndex() {
         Deck testDeck = createDeck();
         assertEquals(3,testDeck.getCardCount());
+        ArrayList<Card> expected = new ArrayList<>(2);
+        expected.add(this.card2);
+        expected.add(this.card1);
         testDeck.remove(2);
         assertEquals(2,testDeck.getCardCount());
+        assertEquals(expected,testDeck.getDeckCards());
+        testDeck.remove(1);
+        testDeck.remove(0);
+        assertEquals(0,testDeck.getCardCount());
     }
 
     @Test
     void shouldSortBySuit() {
         Deck testDeck = createDeck();
         Card aces = new Card("Aces","Black",5,this.rules,5);
+        Card joker = new Card("Joker","Black",0,this.rules,15);
         testDeck.add(aces);
+        testDeck.add(joker);
         ArrayList<Card> expected = new ArrayList<>(4);
         expected.add(aces);
         expected.add(card2);
         expected.add(card1);
         expected.add(card3);
+        expected.add(joker);
         testDeck.sortBySuit();
         assertEquals(expected,testDeck.getDeckCards());
     }
@@ -120,6 +142,9 @@ class DeckTest {
         Deck testDeck = createDeck();
         Card expected = new Card("Hearts","Red",6, rules,6);
         assertEquals(expected,testDeck.getFirstCard());
+        testDeck.remove(card -> true);
+        assertEquals(0,testDeck.getCardCount());
+        assertNull(testDeck.getFirstCard());
     }
 
     @Test
@@ -156,7 +181,7 @@ class DeckTest {
     void testHashCode() {
         Deck firstDeck = createDeck();
         Deck sameDeck = createDeck();
-        ArrayList<Card> secondDeckCards = new ArrayList<>(3);
+        ArrayList<CardInterface> secondDeckCards = new ArrayList<>(3);
         secondDeckCards.add(new Card(this.rules));
         secondDeckCards.add(new Card(this.rules));
         secondDeckCards.add(new Card(this.rules));
@@ -195,7 +220,7 @@ class DeckTest {
     void shouldCompareTo() {
         Deck testDeck = createDeck();
         Deck sameDeck = createDeck();
-        ArrayList<Card> otherDeckCards = new ArrayList<>(3);
+        ArrayList<CardInterface> otherDeckCards = new ArrayList<>(3);
         otherDeckCards.add(new Card("Heart","Red",6,rules,5));
         otherDeckCards.add(new Card("Heart","Red",2,rules,5));
         otherDeckCards.add(new Card("Heart","Red",5,rules,5));

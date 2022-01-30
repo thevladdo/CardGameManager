@@ -2,17 +2,16 @@ package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.GameRules;
+import java.util.function.Predicate;
 
 /**
  * This interface will be implemented by the "Deck" class which will represent a deck of a generic game.
  * The constructor of the class that will implement this interface will have as argument an object of
- * {@link GameRules} to manage the maximum and minimum number of cards that a deck can have.
+ * {@link GameRulesInterface} to manage the maximum and minimum number of cards that a deck can have.
  * The constructor of the class that will implement this interface will have as argument an
- * {@link ArrayList<Card>} to avoid privacy leak.
+ * {@link ArrayList<CardInterface>} to avoid privacy leak.
  */
-public interface DeckInterface {
+public interface DeckInterface extends Comparable<DeckInterface>{
 
     /**
      * This method randomly mix the order of the cards in the deck.
@@ -26,19 +25,25 @@ public interface DeckInterface {
      * This method adds a card to the deck
      * @param card the card that will be added to the deck
      */
-    void add(Card card);
+    void add(CardInterface card);
 
     /**
      * This method removes a card from the deck
      * @param card the card that will be removed from the deck
      */
-    void remove(Card card);
+    void remove(CardInterface card);
 
     /**
      * This method removes a card from the deck
      * @param index the index if the card that will be removed from the deck
      */
     void remove(int index);
+
+    /**
+     * This method removes a card from the deck that satisfy a certain Predicate
+     * @param p the Predicate used to find the card
+     */
+    void remove(Predicate<CardInterface> p);
 
     /**
      * This method will sort the cards in the deck in ascending order based on their value
@@ -66,23 +71,23 @@ public interface DeckInterface {
      * @param index location of the card
      * @return the card selected
      */
-    Card getCard(int index);
+    CardInterface getCard(int index);
 
     /**
      * This method returns the first card of the deck
      * @return the first card of the deck
      */
-    Card getFirstCard();
+    CardInterface getFirstCard();
 
     /**
      * This method returns the last card of the deck
      * @return the last card of the deck
      */
-    Card getLastCard();
+    CardInterface getLastCard();
 
     /**
      * This method return the actual deck
      * @return the actual cards in the deck
      */
-    ArrayList<Card> getDeckCards();
+    ArrayList<CardInterface> getDeckCards();
 }

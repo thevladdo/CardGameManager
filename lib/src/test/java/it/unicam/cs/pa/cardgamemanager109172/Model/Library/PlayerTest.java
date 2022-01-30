@@ -1,5 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.PlayerInterface;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +18,7 @@ class PlayerTest {
     private GameRules rules;
 
     private Player createPlayer(){
-        Map<Card, Integer> map = new HashMap<>(3);
+        Map<CardInterface, Integer> map = new HashMap<>(3);
         rules = new GameRules(
                 0,15,
                 0,52,1,
@@ -26,12 +28,12 @@ class PlayerTest {
         card2 = new Card("Aces","Black",1, rules,14);
         card3 = new Card("Aces","Red",1, rules,1);
 
-        ArrayList<Card> handCards = new ArrayList<>(2);
+        ArrayList<CardInterface> handCards = new ArrayList<>(2);
         handCards.add(card1);
         handCards.add(card2);
         hand = new Hand(rules,handCards,2);
 
-        ArrayList<Card> deckCards = new ArrayList<>(1);
+        ArrayList<CardInterface> deckCards = new ArrayList<>(1);
         deckCards.add(card3);
         deck = new Deck(rules,deckCards,1);
 
@@ -41,7 +43,7 @@ class PlayerTest {
     @Test
     void drawCard(){
         Player player = createPlayer();
-        Card drawed = deck.getCard(0);
+        CardInterface drawed = deck.getCard(0);
         assertEquals(drawed,card3);
         player.drawCard(deck);
         assertEquals(0,deck.getDeckCards().size());
@@ -51,8 +53,8 @@ class PlayerTest {
     @Test
     void placeCard() {
         Player player = createPlayer();
-        ArrayList<Card> tableCards = new ArrayList<>(0);
-        ArrayList<Player> players = new ArrayList<>(1);
+        ArrayList<CardInterface> tableCards = new ArrayList<>(0);
+        ArrayList<PlayerInterface> players = new ArrayList<>(1);
         players.add(player);
         Table table = new Table(tableCards,players);
         assertEquals(2,player.getPlayerHand().getCards().size());
@@ -124,7 +126,7 @@ class PlayerTest {
     @Test
     void getHand() {
         Player player = createPlayer();
-        ArrayList<Card> handCards = new ArrayList<>(2);
+        ArrayList<CardInterface> handCards = new ArrayList<>(2);
         handCards.add(card1);
         handCards.add(card2);
         Hand expectedHand = new Hand(rules,handCards,2);
@@ -150,7 +152,7 @@ class PlayerTest {
     void testHashCode() {
         Player player = createPlayer();
         Player samePlayer = createPlayer();
-        ArrayList<Card> cards = new ArrayList<>(3);
+        ArrayList<CardInterface> cards = new ArrayList<>(3);
         cards.add(new Card(this.rules));
         cards.add(new Card(this.rules));
         cards.add(new Card(this.rules));

@@ -1,5 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.GameRulesInterface;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameRulesTest {
 
-    private Map<Card, Integer> map;
+    private Map<CardInterface, Integer> map;
 
     private GameRules createRules(){
         this.map = new HashMap<>(1);
@@ -120,7 +122,7 @@ class GameRulesTest {
     @Test
     void shouldCheckIfDeckIsInLimit() {
         GameRules rules = createRules();
-        ArrayList<Card> deckCards = new ArrayList<>(1);
+        ArrayList<CardInterface> deckCards = new ArrayList<>(1);
         deckCards.add(new Card("Joker","Red",15,rules,15));
         deckCards.add(new Card("Queen","Black",12,rules,12));
         Deck deck = new Deck(rules,deckCards,2);
@@ -162,7 +164,7 @@ class GameRulesTest {
         GameRules rules = createRules();
         Card card = new Card("Joker","Red",15,rules,15);
         Card card2 = new Card("Aces","Red",1,rules,14);
-        ArrayList<Card> handCards = new ArrayList<>(2);
+        ArrayList<CardInterface> handCards = new ArrayList<>(2);
         handCards.add(card);
         handCards.add(card2);
         Hand hand = new Hand(rules,handCards,2);
@@ -213,7 +215,7 @@ class GameRulesTest {
     @Test
     void shouldClone() {
         GameRules rules = createRules();
-        GameRules cloned = rules.clone();
+        GameRulesInterface cloned = rules.clone();
         assertEquals(rules,cloned);
         rules.setDeckMin(5);
         assertNotEquals(rules,cloned);

@@ -1,10 +1,13 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Game;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.PlayerInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.TableInterface;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * The "Rubamazzetto", also known as "Rubamazzo" is a card game, a simplified variant of "Scopa".
@@ -34,7 +37,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
 
     public Rubamazzetto(String playerName){
         this.turn = 0;
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         this.rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -46,8 +49,8 @@ public class Rubamazzetto implements RubamazzettoInterface {
         this.playerOne = new Player(
                 new Hand(rules,new ArrayList<>(1),0), playerName,1);
         this.bot =new Player(
-                new Hand(rules,new ArrayList<>(1),0), "Bot",2);
-        ArrayList<Player> players = new ArrayList<>(2);
+                new Hand(rules,new ArrayList<>(1),0), "Game Bot",2);
+        ArrayList<PlayerInterface> players = new ArrayList<>(2);
         players.add(this.playerOne);
         players.add(this.bot);
         this.table = new Table(new ArrayList<>(4),players);
@@ -62,15 +65,9 @@ public class Rubamazzetto implements RubamazzettoInterface {
 
     @Override
     public String finishGame(){
-        String winner = findWinner();
-        if (cantContinue()) newGame();
+        String winner = null;
+        if (cantContinue()) winner = findWinner();
         return winner;
-    }
-
-    @Override
-    public Player defineStarter(){
-        if (whoStart() == 0) return this.playerOne;
-        return this.bot;
     }
 
     @Override
@@ -81,6 +78,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
     @Override
     public void nextTurn(){
         this.turn++;
+        dealer();
     }
 
     @Override
@@ -99,7 +97,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
     }
 
     @Override
-    public Deck getPlayerBounch(Player player){
+    public Deck getPlayerBounch(PlayerInterface player){
         return switch (player.getId()){
             case 1 -> getBounchOne();
             case 2 -> getBounchTwo();
@@ -123,16 +121,17 @@ public class Rubamazzetto implements RubamazzettoInterface {
 
     private void dealer(){
         if (this.getPlayerOne().getPlayerHand().getCards().size() == 0 &&
-                this.getBot().getPlayerHand().getCards().size() == 0){
-            for (Player player : this.table.getPlayers()) {
+                this.getBot().getPlayerHand().getCards().size() == 0 && this.deck.getCardCount() != 0){
+            for (PlayerInterface player : this.table.getPlayers()) {
                 for (int i = 1; i <= 3; i++) {
                     player.drawCard(this.deck);
                 }
             }
         }
-        if (this.table.getOnTableCards().size() == 0){
+        if (this.table.getOnTableCards().size() == 0 && this.deck.getCardCount() != 0){
             for (int i = 1; i <= 4; i++) {
                 this.table.addCard(this.deck.getFirstCard());
+                this.deck.remove(this.deck.getFirstCard());
             }
         }
     }
@@ -161,12 +160,6 @@ public class Rubamazzetto implements RubamazzettoInterface {
         this.bot.getPlayerHand().clear();
     }
 
-    private int whoStart(){
-        Random rand = new Random();
-        int upperbound = 2;
-        return rand.nextInt(upperbound);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null) throw new NullPointerException("Object 'o' is Null");
@@ -188,8 +181,6 @@ public class Rubamazzetto implements RubamazzettoInterface {
                 getBounchTwo(), getPlayerOne(), getBot(), getTable());
     }
 
-    //TODO separatore di classi
-
 
     /**
      * This inner class encompasses the actions the game can have.
@@ -202,7 +193,7 @@ public class Rubamazzetto implements RubamazzettoInterface {
          * @return true if the bounch was stolen, false otherwise
          */
         public boolean stealBounch(Player turner){
-            Card handCard = checkOtherBunch(turner);
+            CardInterface handCard = checkOtherBunch(turner);
             if (handCard != null){
                 switch (turner.getId()) {
                     case 1 -> unifyBounch(getBounchTwo(),getBounchOne(), handCard);
@@ -222,36 +213,36 @@ public class Rubamazzetto implements RubamazzettoInterface {
          * @param handCardIndex the card selected from the hand
          */
         public void makeMove(Player turner, int handCardIndex){
-            ArrayList<Card> moveCards = checkIfSame(getTable());
+            ArrayList<CardInterface> moveCards = checkIfSame(getTable(),turner.showCard(handCardIndex));
             if (moveCards != null){
                 getPlayerBounch(turner).add(moveCards.get(0));
-                getPlayerBounch(turner).add(moveCards.get(1));
+                getPlayerBounch(turner).add(turner.showCard(handCardIndex));
                 getTable().removeCard(moveCards.get(0));
-                turner.getPlayerHand().remove(moveCards.get(1));
+                turner.getPlayerHand().remove(handCardIndex);
                 nextTurn();
-            } else placeOnTable(handCardIndex);
+            } else placeOnTable(turner,handCardIndex);
         }
 
-        private void placeOnTable(int index){
-            getPlayerOne().placeCard(index,getTable());
+        private void placeOnTable(Player turner, int handCardIndex){
+            turner.placeCard(handCardIndex,getTable());
             nextTurn();
         }
 
-        private void unifyBounch(Deck toMerge, Deck merged, Card last){
+        private void unifyBounch(Deck toMerge, Deck merged, CardInterface last){
             merged.getDeckCards().addAll(toMerge.getDeckCards());
             toMerge.getDeckCards().removeAll(toMerge.getDeckCards());
             merged.add(last);
         }
 
-        private Card checkOtherBunch(Player turner){
+        private CardInterface checkOtherBunch(Player turner){
             switch (turner.getId()){
                 case 1 :
-                    for (Card inHand : turner.getPlayerHand().getCards()) {
+                    for (CardInterface inHand : turner.getPlayerHand().getCards()) {
                         if (getBounchTwo().getDeckCards().size() != 0 &&
                                 inHand.getValue() == getBounchTwo().getLastCard().getValue()) return inHand;
                     }
                 case 2 :
-                    for (Card inHand : turner.getPlayerHand().getCards()) {
+                    for (CardInterface inHand : turner.getPlayerHand().getCards()) {
                         if (getBounchOne().getDeckCards().size() != 0 &&
                                 inHand.getValue() == getBounchOne().getLastCard().getValue()) return inHand;
                     }
@@ -259,19 +250,14 @@ public class Rubamazzetto implements RubamazzettoInterface {
             return null;
         }
 
-        private ArrayList<Card> checkIfSame(Table table){
-            ArrayList<Card> toReturn = null;
-            for (Card inHand : getPlayerOne().getPlayerHand().getCards()) {
-                for (Card onTable : table.getOnTableCards()) {
-                    if (inHand.getValue() == onTable.getValue()){
-                        toReturn = new ArrayList<>(2);
-                        toReturn.add(onTable);
-                        toReturn.add(inHand);
-                    }
-                    return toReturn;
-                }
-            }
-            return null;
+        private ArrayList<CardInterface> checkIfSame(TableInterface table, CardInterface toCheck){
+            if(table.getOnTableCards()
+                    .parallelStream()
+                    .noneMatch(card -> card.getValue() == toCheck.getValue())) return null;
+            return table.getOnTableCards()
+                    .parallelStream()
+                    .filter(card -> card.getValue() == toCheck.getValue())
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
     }
 }

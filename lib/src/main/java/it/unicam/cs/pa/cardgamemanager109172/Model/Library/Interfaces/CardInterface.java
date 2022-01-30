@@ -1,5 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
+import java.io.Serializable;
+
 /**
  * This interface will be implemented by "Card" class which will represent a generic card.
  * The constructor of the class that extended this interface will create the Card with
@@ -7,7 +9,7 @@ package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
  * The constructor of this class will have as argument an object of type {@link GameRulesInterface}
  * that will be used to know what will be the minimum and maximum value of a card and to set a weight.
  */
-public interface CardInterface {
+public interface CardInterface extends Comparable<CardInterface>, Serializable {
 
     /**
      * Method for getting the card suit
