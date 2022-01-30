@@ -1,33 +1,30 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
-import java.util.ArrayList;
-
 /**
  * This interface will be implemented by "Player" class which will represent a player or a bot.
  * The constructor of the class that will implement this interface will have as argument an
- * {@link Hand} to avoid privacy leak.
+ * {@link HandInterface} to avoid privacy leak.
  */
 public interface PlayerInterface {
 
     /**
      * This method draws a card from the deck and adds it to the player's hand.
      */
-    void drawCard(Deck deck);
+    void drawCard(DeckInterface deck);
 
     /**
      * This method places a card from the hand down on the table and removes it in the player's hand.
      * @param position the position in the hand of the card that will be placed
      * @param table the table where the card will be placed
      */
-    void placeCard(int position, Table table);
+    void placeCard(int position, TableInterface table);
 
     /**
      * This method show a card from the hand without discarding or placing it on the table
      * @param position the position in the hand of the card that will be showed
      * @return the card
      */
-    Card showCard(int position);
+    CardInterface showCard(int position);
 
     /**
      * This method set the Name of the player
@@ -74,5 +71,5 @@ public interface PlayerInterface {
      * This method get the hand of the player
      * @return the Hand
      */
-    Hand getPlayerHand();
+    HandInterface getPlayerHand();
 }

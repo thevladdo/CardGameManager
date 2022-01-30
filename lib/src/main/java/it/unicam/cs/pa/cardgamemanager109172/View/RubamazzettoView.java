@@ -2,9 +2,8 @@ package it.unicam.cs.pa.cardgamemanager109172.View;
 
 import it.unicam.cs.pa.cardgamemanager109172.Controller.GameController;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Game.Rubamazzetto;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Player;
-
 import java.util.ArrayList;
 
 public class RubamazzettoView {
@@ -27,7 +26,7 @@ public class RubamazzettoView {
     public void getOnTopBounch(Rubamazzetto rm){
         if (rm.getBounchTwo().getDeckCards().size() != 0){
             println("\n* LA CARTA IN CIMA AL MAZZETTO DELL'AVVERSARIO È LA SEGUENTE\n");
-            Card toPrint = rm.getBounchTwo().getCard(rm.getBounchTwo().getCardCount()-1);
+            CardInterface toPrint = rm.getBounchTwo().getCard(rm.getBounchTwo().getCardCount()-1);
             println(printCardFace(toPrint.getValue(),toPrint.getSuit()));
         }
     }
@@ -50,6 +49,10 @@ public class RubamazzettoView {
                   SEGUITO DAL TASTO INVIO""");
     }
 
+    public void inputExceptionMessage(){
+        println("\n* PER FAVORE INSERISCI UN VALORE NUMERICO");
+    }
+
     public void notStealed(Rubamazzetto rm){
         println("\n* NON È POSSIBILE RUBARE IL MAZZETTO AVVERSARIO");
         if (rm.getBounchTwo().getDeckCards().size() == 0){
@@ -66,7 +69,7 @@ public class RubamazzettoView {
                   QUALE DELLE TUE CARTE VUOI GIOCARE ?
                 """);
         int counter = 1;
-        for (Card card : rm.getPlayerOne().getPlayerHand().getCards()) {
+        for (CardInterface card : rm.getPlayerOne().getPlayerHand().getCards()) {
             println("  "+counter+"- "+card.getSuit().toUpperCase()+" "+card.getValue());
             counter++;
         }
@@ -97,8 +100,8 @@ public class RubamazzettoView {
                 * ALLA PROSSIMA!""");
     }
 
-    private static void printCard(ArrayList<Card> toPrint){
-        for (Card card : toPrint ) {
+    private static void printCard(ArrayList<CardInterface> toPrint){
+        for (CardInterface card : toPrint ) {
             println(printCardFace(card.getValue(), card.getSuit()));
         }
     }

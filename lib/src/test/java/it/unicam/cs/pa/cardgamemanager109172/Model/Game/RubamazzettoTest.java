@@ -1,6 +1,8 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Game;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.*;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.PlayerInterface;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ class RubamazzettoTest {
     private GameRules rules;
 
     private Rubamazzetto createGame(){
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -43,7 +45,7 @@ class RubamazzettoTest {
         Rubamazzetto rm = createGame();
         assertNull(rm.finishGame());
         String expected = rm.getPlayerOne().getName();
-        for (Card card: rm.getDeck().getDeckCards()) {
+        for (CardInterface card: rm.getDeck().getDeckCards()) {
             rm.getBounchOne().add(card);
         }
         rm.getDeck().remove(card1 -> true);
@@ -99,7 +101,7 @@ class RubamazzettoTest {
     @Test
     void shouldGetBounchOne() {
         Rubamazzetto rm = createGame();
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -111,7 +113,7 @@ class RubamazzettoTest {
     @Test
     void shouldGetBounchTwo() {
         Rubamazzetto rm = createGame();
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -133,7 +135,7 @@ class RubamazzettoTest {
     @Test
     void shouldGetPlayerOne() {
         Rubamazzetto rm = createGame();
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -145,7 +147,7 @@ class RubamazzettoTest {
     @Test
     void shouldGetBot() {
         Rubamazzetto rm = createGame();
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -157,7 +159,7 @@ class RubamazzettoTest {
     @Test
     void shouldGetTable() {
         Rubamazzetto rm = createGame();
-        ArrayList<Player> players = new ArrayList<>(2);
+        ArrayList<PlayerInterface> players = new ArrayList<>(2);
         players.add(rm.getPlayerOne());
         players.add(rm.getBot());
         Table expected = new Table(new ArrayList<>(4),players);
@@ -195,7 +197,7 @@ class RubamazzettoTest {
         Rubamazzetto rm = createGame();
         Rubamazzetto.Actions actions = rm.new Actions();
 
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,
@@ -228,7 +230,7 @@ class RubamazzettoTest {
         Rubamazzetto rm = createGame();
         Rubamazzetto.Actions actions = rm.new Actions();
 
-        HashMap<Card,Integer> weights = new HashMap<>(40);
+        HashMap<CardInterface,Integer> weights = new HashMap<>(40);
         GameRules rules = new GameRules(
                 1, 10,
                 0, 40, 40,

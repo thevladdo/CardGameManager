@@ -1,5 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.PlayerInterface;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,16 +17,16 @@ class TableTest {
     private Card card1;
     private Card card2;
     private Card card3;
-    private ArrayList<Card> tableCards;
-    private ArrayList<Player> players;
+    private ArrayList<CardInterface> tableCards;
+    private ArrayList<PlayerInterface> players;
 
     private Table createTable(){
-        Map<Card,Integer> map = new HashMap<>(0);
+        Map<CardInterface,Integer> map = new HashMap<>(0);
         GameRules rules = new GameRules(0, 14, 0, 52, 2, 0, 2, map);
         card1 = new Card("Hearts","Red",5, rules,5);
         card2 = new Card("Aces","Black",1, rules,14);
         card3 = new Card("Aces","Red",1, rules,1);
-        ArrayList<Card> handCards = new ArrayList<>(1);
+        ArrayList<CardInterface> handCards = new ArrayList<>(1);
         handCards.add(card2);
         hand1 = new Hand(rules, handCards,1);
         tableCards = new ArrayList<>(1);
@@ -57,7 +59,7 @@ class TableTest {
     void shouldRemoveCard() {
         Table table = createTable();
         table.addCard(card3);
-        Card expected = table.getOnTableCards().get(1);
+        CardInterface expected = table.getOnTableCards().get(1);
         table.removeCard(card1);
         assertEquals(expected,table.getOnTableCards().get(0));
     }

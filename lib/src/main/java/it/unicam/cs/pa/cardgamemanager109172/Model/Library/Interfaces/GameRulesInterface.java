@@ -1,9 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Deck;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Hand;
-
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -11,7 +8,7 @@ import java.util.Map;
  * It contains all the behavior concerning the rules.
  * The constructor will create a Map to associate a card with a weight value.
  */
-public interface GameRulesInterface {
+public interface GameRulesInterface extends Cloneable, Serializable{
 
     /**
      * This method assigns a weight to each card of the deck in a Map with card as key and the weight as value.
@@ -20,20 +17,20 @@ public interface GameRulesInterface {
      * @param card the card that will have assigned a weight in the deck
      * @param weight the weight
      */
-    void setCardWeight(Card card, int weight);
+    void setCardWeight(CardInterface card, int weight);
 
     /**
      * This method shows the weight a card suit has and will be user
      * @param card the card whose weight will show
      * @return the weight of the card or null if the suit isn't present in the Map
      */
-    Integer getCardWeight(Card card);
+    Integer getCardWeight(CardInterface card);
 
     /**
      * This method shows the weight all cards
      * @return a collection with the weight of the cards
      */
-    Map<Card,Integer> getCardWeight();
+    Map<CardInterface,Integer> getCardWeight();
 
     /**
      * This method set the minimum assignable value of a card
@@ -62,7 +59,7 @@ public interface GameRulesInterface {
      * @param card the card controlled
      * @return true if the card is created according the game rules, false otherwise.
      */
-    boolean isCardInLimit(Card card);
+    boolean isCardInLimit(CardInterface card);
 
     /**
      * This method set the minimum number of cards in the deck
@@ -106,7 +103,7 @@ public interface GameRulesInterface {
      * @param deck the deck controlled
      * @return true if the deck is created according the game rules, false otherwise.
      */
-    boolean isDeckInLimit(Deck deck);
+    boolean isDeckInLimit(DeckInterface deck);
 
     /**
      * This method set the minimum number of cards a player must have in their hand
@@ -138,5 +135,11 @@ public interface GameRulesInterface {
      * @param hand the hand controlled
      * @return true if the hand is created according the game rules, false otherwise.
      */
-    boolean isHandInLimit(Hand hand);
+    boolean isHandInLimit(HandInterface hand);
+
+    /**
+     * This method return a deep copy of the object
+     * @return the deep copy
+     */
+    GameRulesInterface clone();
 }

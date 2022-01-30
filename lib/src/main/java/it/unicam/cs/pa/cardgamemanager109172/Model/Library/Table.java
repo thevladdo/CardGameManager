@@ -1,5 +1,7 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.PlayerInterface;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.TableInterface;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -9,57 +11,57 @@ import java.util.Objects;
  */
 public class Table implements TableInterface {
 
-    private final ArrayList<Card> tableCards;
-    private final ArrayList<Card> discarded;
-    private final ArrayList<Player> players;
+    private final ArrayList<CardInterface> tableCards;
+    private final ArrayList<CardInterface> discarded;
+    private final ArrayList<PlayerInterface> players;
 
     public Table(){
         this(new ArrayList<>(0),new ArrayList<>(0));
     }
 
-    public Table(ArrayList<Card> tableCards){
-        this(new ArrayList<>(tableCards),new ArrayList<>(0));
+    public Table(ArrayList<CardInterface> tableCards){
+        this(new ArrayList<>(tableCards), new ArrayList<>(0));
     }
 
-    public Table(ArrayList<Card> tableCards, ArrayList<Player> players){
+    public Table(ArrayList<CardInterface> tableCards, ArrayList<PlayerInterface> players){
         this.tableCards = new ArrayList<>(tableCards);
         this.discarded = new ArrayList<>(0);
         this.players = new ArrayList<>(players);
     }
 
     @Override
-    public ArrayList<Card> getOnTableCards() {
+    public ArrayList<CardInterface> getOnTableCards() {
         return this.tableCards;
     }
 
     @Override
-    public void addCard(Card card) {
+    public void addCard(CardInterface card) {
         this.tableCards.add(card);
     }
 
     @Override
-    public void removeCard(Card card) {
+    public void removeCard(CardInterface card) {
         this.discarded.add(card);
         this.tableCards.remove(card);
     }
 
     @Override
-    public ArrayList<Card> getDiscardedCards() {
+    public ArrayList<CardInterface> getDiscardedCards() {
         return this.discarded;
     }
 
     @Override
-    public ArrayList<Player> getPlayers() {
+    public ArrayList<PlayerInterface> getPlayers() {
         return this.players;
     }
 
     @Override
-    public void addPlayer(Player player) {
+    public void addPlayer(PlayerInterface player) {
         this.players.add(player);
     }
 
     @Override
-    public void removePlayer(Player player) {
+    public void removePlayer(PlayerInterface player) {
         this.players.remove(player);
     }
 
@@ -69,7 +71,7 @@ public class Table implements TableInterface {
     }
 
     @Override
-    public Player getPlayer(int position) {
+    public PlayerInterface getPlayer(int position) {
         return this.players.get(position);
     }
 

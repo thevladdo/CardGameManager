@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ class HandTest {
     private GameRules rules;
 
     private Hand createHand(){
-        Map<Card, Integer> map = new HashMap<>(3);
+        Map<CardInterface, Integer> map = new HashMap<>(3);
         rules = new GameRules(
                 0,15,
                 0,52,0,
@@ -22,7 +23,7 @@ class HandTest {
         card1 = new Card("Hearts","Red",5, rules,5);
         card2 = new Card("Aces","Black",1, rules,14);
         card3 = new Card("Aces","Red",1, rules,1);
-        ArrayList<Card> cards = new ArrayList<>(2);
+        ArrayList<CardInterface> cards = new ArrayList<>(2);
         cards.add(card1);
         cards.add(card2);
         return new Hand(rules,cards,2);
@@ -110,7 +111,7 @@ class HandTest {
         Hand firstHand = createHand();
         Object o = new Object();
         Hand sameHand = createHand();
-        ArrayList<Card> cards = new ArrayList<>(3);
+        ArrayList<CardInterface> cards = new ArrayList<>(3);
         cards.add(new Card(this.rules));
         cards.add(new Card(this.rules));
         cards.add(new Card(this.rules));
@@ -128,7 +129,7 @@ class HandTest {
     void testHashCode() {
         Hand firstHand = createHand();
         Hand sameHand = createHand();
-        ArrayList<Card> cards = new ArrayList<>(3);
+        ArrayList<CardInterface> cards = new ArrayList<>(3);
         cards.add(new Card(this.rules));
         cards.add(new Card(this.rules));
         cards.add(new Card(this.rules));

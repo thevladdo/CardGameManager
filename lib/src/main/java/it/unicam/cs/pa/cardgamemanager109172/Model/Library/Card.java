@@ -1,25 +1,25 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
-import java.io.Serializable;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.GameRulesInterface;
 import java.util.Objects;
 
 /**
  * This class implements {@link CardInterface} and will represent a generic card.
  * The constructor of this class will create the Card with the attributes "Suit","Values" and "Color"
  * that will never change during the game.
- * The constructor of this class will have as argument an object of type {@link GameRules}
+ * The constructor of this class will have as argument an object of type {@link GameRulesInterface}
  * that will be used to know what will be the minimum and maximum value of a card and to set a weight.
  */
-public class Card implements CardInterface, Comparable<Card>, Serializable {
+public class Card implements CardInterface{
 
-    private final GameRules rules;
+    private final GameRulesInterface rules;
     private final String suit;
     private final String color;
     private final int value;
     private final int weight;
 
-    public Card(GameRules gameRules){
+    public Card(GameRulesInterface gameRules){
         this.rules = gameRules;
         this.suit = "";
         this.color = "";
@@ -28,7 +28,7 @@ public class Card implements CardInterface, Comparable<Card>, Serializable {
         this.rules.setCardWeight(this,this.weight);
     }
 
-    public Card(String suit, String color, int value, GameRules gameRules, int weight){
+    public Card(String suit, String color, int value, GameRulesInterface gameRules, int weight){
         this.rules = gameRules;
         if(this.rules.getMinCardValue() <= value && this.rules.getMaxCardValue() >= value){
             this.value = value;
@@ -86,8 +86,9 @@ public class Card implements CardInterface, Comparable<Card>, Serializable {
                 "\nWeight = " + this.weight;
     }
 
+
     @Override
-    public int compareTo(Card otherCard) {
+    public int compareTo(CardInterface otherCard) {
         return Integer.compare(this.getValue(), otherCard.getValue());
     }
 }

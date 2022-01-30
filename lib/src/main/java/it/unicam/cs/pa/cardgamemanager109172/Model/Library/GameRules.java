@@ -1,7 +1,9 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.DeckInterface;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.GameRulesInterface;
-import java.io.Serializable;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.HandInterface;
 import java.util.Map;
 import java.util.Objects;
 
@@ -10,9 +12,9 @@ import java.util.Objects;
  * It contains all the behavior concerning the rules.
  * The constructor will create a Map to associate a card with a weight value.
  */
-public class GameRules implements GameRulesInterface,Cloneable ,Serializable {
+public class GameRules implements GameRulesInterface{
 
-    private final Map<Card, Integer> cardWeight;
+    private final Map<CardInterface, Integer> cardWeight;
     private int minCardValue;
     private int maxCardValue;
     private int deckMin;
@@ -32,7 +34,7 @@ public class GameRules implements GameRulesInterface,Cloneable ,Serializable {
             int minCardValue, int maxCardValue,
             int deckMin, int deckMax, int deckStarter,
             int minHand, int maxHand,
-            Map<Card, Integer> map)
+            Map<CardInterface, Integer> map)
     {
         this.cardWeight = map;
         this.minCardValue = minCardValue;
@@ -45,18 +47,18 @@ public class GameRules implements GameRulesInterface,Cloneable ,Serializable {
     }
 
     @Override
-    public void setCardWeight(Card card, int weight) {
+    public void setCardWeight(CardInterface card, int weight) {
         if(card == null) throw new NullPointerException("Card object must be not null");
         this.cardWeight.put(card,weight);
     }
 
     @Override
-    public Integer getCardWeight(Card card) {
+    public Integer getCardWeight(CardInterface card) {
         return this.cardWeight.get(card);
     }
 
     @Override
-    public Map<Card, Integer> getCardWeight() {
+    public Map<CardInterface, Integer> getCardWeight() {
         return this.cardWeight;
     }
 
@@ -81,7 +83,7 @@ public class GameRules implements GameRulesInterface,Cloneable ,Serializable {
     }
 
     @Override
-    public boolean isCardInLimit(Card card) {
+    public boolean isCardInLimit(CardInterface card) {
         int cardValue = card.getValue();
         return (cardValue >= this.getMinCardValue()) && (cardValue <= this.getMaxCardValue());
     }
@@ -117,7 +119,7 @@ public class GameRules implements GameRulesInterface,Cloneable ,Serializable {
     }
 
     @Override
-    public boolean isDeckInLimit(Deck deck) {
+    public boolean isDeckInLimit(DeckInterface deck) {
         int cardCount = deck.getCardCount();
         return (cardCount >= this.getDeckMin()) && (cardCount <= this.getDeckMax());
     }
@@ -143,7 +145,7 @@ public class GameRules implements GameRulesInterface,Cloneable ,Serializable {
     }
 
     @Override
-    public boolean isHandInLimit(Hand hand) {
+    public boolean isHandInLimit(HandInterface hand) {
         int cardCount = hand.getCardCount();
         return (cardCount >= this.getMinHandCount()) && (cardCount <= this.getMaxHandCount());
     }
@@ -185,9 +187,9 @@ public class GameRules implements GameRulesInterface,Cloneable ,Serializable {
     }
 
     @Override
-    public GameRules clone() {
+    public GameRulesInterface clone() {
         try {
-            GameRules clone = (GameRules) super.clone();
+            GameRulesInterface clone = (GameRulesInterface) super.clone();
             clone.setMinCardValue(this.getMinCardValue());
             clone.setMaxCardValue(this.getMaxCardValue());
             clone.setDeckMin(this.getDeckMin());
@@ -200,4 +202,5 @@ public class GameRules implements GameRulesInterface,Cloneable ,Serializable {
             throw new AssertionError();
         }
     }
+
 }

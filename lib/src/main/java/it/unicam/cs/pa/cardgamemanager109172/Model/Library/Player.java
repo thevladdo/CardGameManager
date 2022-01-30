@@ -1,7 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.PlayerInterface;
-
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.*;
 import java.util.Objects;
 
 /**
@@ -9,7 +8,7 @@ import java.util.Objects;
  */
 public class Player implements PlayerInterface {
 
-    private final Hand playerHand;
+    private final HandInterface playerHand;
     private String name;
     private int id;
     private int points;
@@ -18,7 +17,7 @@ public class Player implements PlayerInterface {
         this(new Hand(),"",0);
     }
 
-    public Player(Hand hand, String name, int id){
+    public Player(HandInterface hand, String name, int id){
         this.playerHand = hand;
         this.name = name;
         this.id = id;
@@ -26,20 +25,20 @@ public class Player implements PlayerInterface {
     }
 
     @Override
-    public void drawCard(Deck deck) {
-        Card drawnCard = deck.getCard(deck.getDeckCards().size()-1);
+    public void drawCard(DeckInterface deck) {
+        CardInterface drawnCard = deck.getCard(deck.getDeckCards().size()-1);
         deck.remove(deck.getDeckCards().size()-1);
         this.playerHand.add(drawnCard);
     }
 
     @Override
-    public void placeCard(int handPosition, Table table) {
+    public void placeCard(int handPosition, TableInterface table) {
         table.addCard(showCard(handPosition));
         this.playerHand.remove(handPosition);
     }
 
     @Override
-    public Card showCard(int handPosition) {
+    public CardInterface showCard(int handPosition) {
         return this.playerHand.getCard(handPosition);
     }
 
@@ -79,7 +78,7 @@ public class Player implements PlayerInterface {
     }
 
     @Override
-    public Hand getPlayerHand() {
+    public HandInterface getPlayerHand() {
         return this.playerHand;
     }
 

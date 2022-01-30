@@ -2,13 +2,10 @@ package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
 import java.util.ArrayList;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Card;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Player;
-
 /**
  * This interface will be implemented by the "Table" class which will represent the table in a generic card game.
- * The constructor of the class that will implement this interface will have as argument an {@link ArrayList<Player>}
- * to avoid privacy leak.
+ * The constructor of the class that will implement this interface will have as argument an
+ * {@link ArrayList<PlayerInterface>} to avoid privacy leak.
  */
 public interface TableInterface {
 
@@ -16,46 +13,46 @@ public interface TableInterface {
      * This method show the cards on the table
      * @return the cards on the table
      */
-    ArrayList<Card> getOnTableCards();
+    ArrayList<CardInterface> getOnTableCards();
 
     /**
      * This method add a card on the table
      * @param card the card that will be added
      */
-    void addCard(Card card);
+    void addCard(CardInterface card);
 
     /**
      * This method remove a card on the table
      * @param card the card that will be removed
      */
-    void removeCard(Card card);
+    void removeCard(CardInterface card);
 
     /**
      * This method show the discarded cards from the table
      * @return the cards discarded from the table
      */
-    ArrayList<Card> getDiscardedCards();
+    ArrayList<CardInterface> getDiscardedCards();
 
     /**
      * This method show a list of players that are playing at this moment
      * @return a list of players
      */
-    ArrayList<Player> getPlayers();
+    ArrayList<PlayerInterface> getPlayers();
 
     /**
-     * This method add a {@link Player} at the table
+     * This method add a {@link PlayerInterface} at the table
      * @param player the player that will be added
      */
-    void addPlayer(Player player);
+    void addPlayer(PlayerInterface player);
 
     /**
-     * This method remove a {@link Player} from the table
+     * This method remove a {@link PlayerInterface} from the table
      * @param player the player that will be removed
      */
-    void removePlayer(Player player);
+    void removePlayer(PlayerInterface player);
 
     /**
-     * This method remove a {@link Player} from the table
+     * This method remove a {@link PlayerInterface} from the table
      * @param position the player's position that will be removed
      */
     void removePlayer(int position);
@@ -65,5 +62,5 @@ public interface TableInterface {
      * @param position the position of player
      * @return the player
      */
-    Player getPlayer(int position);
+    PlayerInterface getPlayer(int position);
 }

@@ -1,8 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Game;
 
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Deck;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Player;
-import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Table;
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.*;
 
 /**
  * This interface will be implemented by "Rubamazzetto" class which will represent a card game.
@@ -58,42 +56,42 @@ public interface RubamazzettoInterface {
      * This method return the actual deck
      * @return the actual deck
      */
-    Deck getDeck();
+    DeckInterface getDeck();
 
     /**
      * This method return the actual bounch of cards earned by first player
      * @return the actual bounch of cards
      */
-    Deck getBounchOne();
+    DeckInterface getBounchOne();
 
     /**
      * This method return the actual bounch of cards earned by second player
      * @return the actual bounch of cards
      */
-    Deck getBounchTwo();
+    DeckInterface getBounchTwo();
 
     /**
      * This method return the bounch of card of the specified player
      * @param player the player
      * @return his bounch of cards
      */
-    Deck getPlayerBounch(Player player);
+    DeckInterface getPlayerBounch(PlayerInterface player);
 
     /**
-     * This method return the first {@link Player}
+     * This method return the first {@link PlayerInterface}
      * @return the first player
      */
-    Player getPlayerOne();
+    PlayerInterface getPlayerOne();
 
     /**
      * This method return the bot player
      * @return the bot player
      */
-    Player getBot();
+    PlayerInterface getBot();
 
     /**
-     * This method return the {@link Table}
+     * This method return the {@link TableInterface}
      * @return the table
      */
-    Table getTable();
+    TableInterface getTable();
 }

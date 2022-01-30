@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library;
 
+import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces.CardInterface;
 import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CardTest {
 
     private Card initCard(String suit, String name, int value, int weight){
-        Map<Card, Integer> map = new HashMap<>(1);
+        Map<CardInterface, Integer> map = new HashMap<>(1);
         GameRules rules = new GameRules(
                 0, 20,
                 0, 20,0,

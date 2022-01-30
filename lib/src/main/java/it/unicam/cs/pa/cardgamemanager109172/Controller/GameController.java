@@ -24,10 +24,15 @@ public class GameController{
     private Pane pane;
 
     Alert a = new Alert(Alert.AlertType.WARNING);
-    public static String playerName;
     Stage stage;
+    public static String playerName;
     private int counter;
 
+    /**
+     * This method has the responsibility to do actions when "Play" button is pressed.
+     * If the selected game isn't already implemented show a warning message.
+     * If the selected game is implemented close the Game Selector and starts the game from terminal.
+     */
     public void startGame(){
         checkButtonCounter();
         if ((poker.isSelected() || scala.isSelected())) {
@@ -37,10 +42,10 @@ public class GameController{
             counter++;
         } else if (rubamazzetto.isSelected()){
             Stage stage = (Stage) pane.getScene().getWindow();
-            TextInputDialog dialog = new TextInputDialog("walter");
+            TextInputDialog dialog = new TextInputDialog("Eddie");
             dialog.setTitle("UNICAM CARD GAME");
             dialog.setHeaderText("Ciao, inserisci i seguenti dati per continuare");
-            dialog.setContentText("Il mio nome è");
+            dialog.setContentText("Il mio nome \u00E8");
             Optional<String> result = dialog.showAndWait();
             if(result.isPresent()){
                 result.ifPresent(name -> playerName = name);
@@ -81,5 +86,4 @@ public class GameController{
             rubamazzetto.setSelected(true);
         }
     }
-
 }

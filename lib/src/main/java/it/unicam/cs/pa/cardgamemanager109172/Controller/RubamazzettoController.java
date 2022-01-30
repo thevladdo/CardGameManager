@@ -3,6 +3,7 @@ package it.unicam.cs.pa.cardgamemanager109172.Controller;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Game.Rubamazzetto;
 import it.unicam.cs.pa.cardgamemanager109172.Model.Library.Player;
 import it.unicam.cs.pa.cardgamemanager109172.View.RubamazzettoView;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,6 +14,10 @@ public class RubamazzettoController {
     private final Rubamazzetto.Actions action = rm.new Actions();
     private final RubamazzettoView rmView = new RubamazzettoView();
 
+    /**
+     * This method starts the implemented game {@link Rubamazzetto} with the ideated business logic.
+     * Ask the player for his strategies and do the adversary bot movements.
+     */
     public void play(){
         rm.newGame();
         rmView.getInitView();
@@ -63,10 +68,21 @@ public class RubamazzettoController {
     }
 
     private int checkChoice(int max){
-        int choice = user.nextInt();
+        int choice = 0;
+        try{
+            choice = user.nextInt();
+        } catch (InputMismatchException ie) {
+            user.nextLine();
+            rmView.inputExceptionMessage();
+        }
         while (choice < 1 || choice > max ){
             rmView.retryInput();
-            choice = user.nextInt();
+            try{
+                choice = user.nextInt();
+            } catch (InputMismatchException ie) {
+                user.nextLine();
+                rmView.inputExceptionMessage();
+            }
         }
         return choice;
     }
