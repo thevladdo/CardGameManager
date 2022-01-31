@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.cardgamemanager109172.Model.Library.Interfaces;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.Predicate;
@@ -11,7 +12,7 @@ import java.util.function.Predicate;
  * The constructor of the class that will implement this interface will have as argument an
  * {@link ArrayList<CardInterface>} to avoid privacy leak.
  */
-public interface DeckInterface extends Comparable<DeckInterface>{
+public interface DeckInterface extends Comparable<DeckInterface>, Serializable {
 
     /**
      * This method randomly mix the order of the cards in the deck.

@@ -17,6 +17,7 @@ public class DeckConfigFactory {
     }
 
     public Deck ItalianDeck(){
+
         ArrayList<CardInterface> deckArray = new ArrayList<>(40);
         deckArray.add(new Card("Swords","-",1,rules,1));
         deckArray.add(new Card("Cups","-",1,rules,1));
