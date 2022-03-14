@@ -29,3 +29,7 @@ The use of the library's classes and interfaces is visible in the *"Rubamazzetto
 The whole project was also organized according to the standards of the MVC pattern.
 
 A further brief description of the responsibilities listed above can be found in the javadocs accompanying the source code.
+
+<p align="center">
+  <img width="599" alt="Schermata 2022-03-14 alle 10 51 52" src="https://user-images.githubusercontent.com/56829605/158148159-a73d8416-9e00-466f-bbeb-fcd0a034c655.png">
+</p>
